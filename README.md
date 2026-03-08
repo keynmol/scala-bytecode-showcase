@@ -17,3 +17,5 @@ This is an sbt project.
 
 Run `sbt projects` to see what projects are available.
 For example, to rebuild the snapshots for 3.3.7 you can run `snippets3_3_7/test` – you can also build individual specs by using `snippets3_3_7/testOnly`.
+
+Most of the code is produced by Claude Opus, with manual touch ups. As such, the actual bytecode processing code is rather hairy and will require manual hardening going forward.
