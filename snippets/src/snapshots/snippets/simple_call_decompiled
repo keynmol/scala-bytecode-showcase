@@ -1,0 +1,61 @@
+================================================================================
+// Snippet: simple_call
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def greet(name: String): String =
+        s"Hello, $name!"
+
+@Snapshot
+      def run: String =
+        greet("World")
+
+================================================================================
+// Definition: simple_call$package (decompiled)
+================================================================================
+
+import compiler.iface.Snapshot;
+import simple_call.package.;
+
+public final class simple_call$package {
+   @Snapshot
+   public static String greet(String var0) {
+      return .MODULE$.greet(var0);
+   }
+
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}
+
+================================================================================
+// Definition: simple_call$package$ (decompiled)
+================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class simple_call$package$ implements Serializable {
+   public static final simple_call$package$ MODULE$ = new simple_call$package$();
+
+   private simple_call$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(simple_call$package$.class);
+   }
+
+   @Snapshot
+   public String greet(final String name) {
+      return "Hello, " + name + "!";
+   }
+
+   @Snapshot
+   public String run() {
+      return this.greet("World");
+   }
+}

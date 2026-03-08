@@ -1,0 +1,67 @@
+================================================================================
+// Snippet: curried
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def multiply(a: Int)(b: Int): Int =
+        a * b
+
+@Snapshot
+      def run: Int =
+        val double = multiply(2)
+        val triple = multiply(3)
+        double(5) + triple(4)
+
+================================================================================
+// Definition: curried$package (decompiled)
+================================================================================
+
+import compiler.iface.Snapshot;
+import curried.package.;
+
+public final class curried$package {
+   @Snapshot
+   public static int multiply(int var0, int var1) {
+      return .MODULE$.multiply(var0, var1);
+   }
+
+   @Snapshot
+   public static int run() {
+      return .MODULE$.run();
+   }
+}
+
+================================================================================
+// Definition: curried$package$ (decompiled)
+================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Function1;
+import scala.runtime.ModuleSerializationProxy;
+import scala.runtime.java8.JFunction1.mcII.sp;
+
+public final class curried$package$ implements Serializable {
+   public static final curried$package$ MODULE$ = new curried$package$();
+
+   private curried$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(curried$package$.class);
+   }
+
+   @Snapshot
+   public int multiply(final int a, final int b) {
+      return a * b;
+   }
+
+   @Snapshot
+   public int run() {
+      Function1 double = (sp)b -> MODULE$.multiply(2, b);
+      Function1 triple = (sp)b -> MODULE$.multiply(3, b);
+      return double.apply$mcII$sp(5) + triple.apply$mcII$sp(4);
+   }
+}

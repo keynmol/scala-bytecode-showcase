@@ -1,0 +1,135 @@
+================================================================================
+// Snippet: default_params
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def configure(host: String, port: Int = 8080, secure: Boolean = false): String =
+        val protocol = if secure then "https" else "http"
+        s"$protocol://$host:$port"
+
+@Snapshot
+      def run: String =
+        val a = configure("localhost")
+        val b = configure("example.com", 443, true)
+        val c = configure("api.server", secure = true)
+        s"$a, $b, $c"
+
+================================================================================
+// Definition: default_params$package (javap)
+================================================================================
+
+Compiled from "default_params.scala"
+public final class default_params$package {
+  public static java.lang.String configure(java.lang.String, int, boolean);
+    Code:
+       0: getstatic     #14                 // Field default_params$package$.MODULE$:Ldefault_params$package$;
+       3: aload_0
+       4: iload_1
+       5: iload_2
+       6: invokevirtual #16                 // Method default_params$package$.configure:(Ljava/lang/String;IZ)Ljava/lang/String;
+       9: areturn
+
+  public static java.lang.String run();
+    Code:
+       0: getstatic     #14                 // Field default_params$package$.MODULE$:Ldefault_params$package$;
+       3: invokevirtual #20                 // Method default_params$package$.run:()Ljava/lang/String;
+       6: areturn
+
+  public static int configure$default$2();
+    Code:
+       0: getstatic     #14                 // Field default_params$package$.MODULE$:Ldefault_params$package$;
+       3: invokevirtual #24                 // Method default_params$package$.configure$default$2:()I
+       6: ireturn
+
+  public static boolean configure$default$3();
+    Code:
+       0: getstatic     #14                 // Field default_params$package$.MODULE$:Ldefault_params$package$;
+       3: invokevirtual #28                 // Method default_params$package$.configure$default$3:()Z
+       6: ireturn
+}
+
+================================================================================
+// Definition: default_params$package$ (javap)
+================================================================================
+
+Compiled from "default_params.scala"
+public final class default_params$package$ implements java.io.Serializable {
+  public static final default_params$package$ MODULE$;
+
+  private default_params$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #18                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class default_params$package$
+       3: dup
+       4: invokespecial #21                 // Method "<init>":()V
+       7: putstatic     #23                 // Field MODULE$:Ldefault_params$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #27                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class default_params$package$
+       6: invokespecial #30                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public java.lang.String configure(java.lang.String, int, boolean);
+    Code:
+       0: iload_3
+       1: ifeq          9
+       4: ldc           #38                 // String https
+       6: goto          11
+       9: ldc           #40                 // String http
+      11: astore        4
+      13: aload         4
+      15: aload_1
+      16: iload_2
+      17: invokedynamic #52,  0             // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;I)Ljava/lang/String;
+      22: areturn
+
+  public int configure$default$2();
+    Code:
+       0: sipush        8080
+       3: ireturn
+
+  public boolean configure$default$3();
+    Code:
+       0: iconst_0
+       1: ireturn
+
+  public java.lang.String run();
+    Code:
+       0: aload_0
+       1: ldc           #66                 // String localhost
+       3: aload_0
+       4: invokevirtual #68                 // Method configure$default$2:()I
+       7: aload_0
+       8: invokevirtual #70                 // Method configure$default$3:()Z
+      11: invokevirtual #72                 // Method configure:(Ljava/lang/String;IZ)Ljava/lang/String;
+      14: astore_1
+      15: aload_0
+      16: ldc           #74                 // String example.com
+      18: sipush        443
+      21: iconst_1
+      22: invokevirtual #72                 // Method configure:(Ljava/lang/String;IZ)Ljava/lang/String;
+      25: astore_2
+      26: aload_0
+      27: ldc           #76                 // String api.server
+      29: aload_0
+      30: invokevirtual #68                 // Method configure$default$2:()I
+      33: iconst_1
+      34: invokevirtual #72                 // Method configure:(Ljava/lang/String;IZ)Ljava/lang/String;
+      37: astore_3
+      38: aload_1
+      39: aload_2
+      40: aload_3
+      41: invokedynamic #81,  0             // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      46: areturn
+}
