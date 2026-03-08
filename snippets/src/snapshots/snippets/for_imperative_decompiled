@@ -1,0 +1,85 @@
+/*
+================================================================================
+Snippet: for_imperative
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def printAll(xs: List[Int]): List[String] =
+        var results = List.empty[String]
+        for x <- xs do
+          results = results :+ s"Processing $x"
+        results
+
+@Snapshot
+      def run: List[String] =
+        printAll(List(1, 2, 3))
+
+*/
+
+// ================================================================================
+// Definition: for_imperative$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import for_imperative.package.;
+import scala.collection.immutable.List;
+
+public final class for_imperative$package {
+   @Snapshot
+   public static List<String> printAll(List<Object> var0) {
+      return .MODULE$.printAll(var0);
+   }
+
+   @Snapshot
+   public static List<String> run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: for_imperative$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.collection.immutable.List;
+import scala.collection.immutable..colon.colon;
+import scala.package.;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+import scala.runtime.ObjectRef;
+import scala.runtime.java8.JFunction1.mcVI.sp;
+
+public final class for_imperative$package$ implements Serializable {
+   public static final for_imperative$package$ MODULE$ = new for_imperative$package$();
+
+   private for_imperative$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(for_imperative$package$.class);
+   }
+
+   @Snapshot
+   public List<String> printAll(final List<Object> xs) {
+      ObjectRef results = ObjectRef.create(.MODULE$.List().empty());
+      xs.foreach((sp)x -> results.elem = (List)((List)results.elem).$colon$plus("Processing " + x));
+      return (List<String>)results.elem;
+   }
+
+   @Snapshot
+   public List<String> run() {
+      return this.printAll(
+         (List<Object>)(
+            (Object)(
+               new colon(
+                  BoxesRunTime.boxToInteger(1),
+                  new colon(BoxesRunTime.boxToInteger(2), new colon(BoxesRunTime.boxToInteger(3), scala.collection.immutable.Nil..MODULE$))
+               )
+            )
+         )
+      );
+   }
+}

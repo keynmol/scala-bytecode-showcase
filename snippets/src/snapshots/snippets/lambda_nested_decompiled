@@ -1,0 +1,74 @@
+/*
+================================================================================
+Snippet: lambda_nested
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def curry(f: (Int, Int) => Int): Int => Int => Int =
+        x => y => f(x, y)
+
+@Snapshot
+      def run: Int =
+        val curriedAdd = curry((a, b) => a + b)
+        val add3 = curriedAdd(3)
+        add3(7)
+
+*/
+
+// ================================================================================
+// Definition: lambda_nested$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Function1;
+import scala.Function2;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+import scala.runtime.java8.JFunction2.mcIII.sp;
+
+public final class lambda_nested$package$ implements Serializable {
+   public static final lambda_nested$package$ MODULE$ = new lambda_nested$package$();
+
+   private lambda_nested$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(lambda_nested$package$.class);
+   }
+
+   @Snapshot
+   public Function1<Object, Function1<Object, Object>> curry(final Function2<Object, Object, Object> f) {
+      return x -> curry$$anonfun$1(f, BoxesRunTime.unboxToInt(x));
+   }
+
+   @Snapshot
+   public int run() {
+      Function1 curriedAdd = this.curry((sp)(a, b) -> a + b);
+      Function1 add3 = (Function1)curriedAdd.apply(BoxesRunTime.boxToInteger(3));
+      return add3.apply$mcII$sp(7);
+   }
+}
+
+// ================================================================================
+// Definition: lambda_nested$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import lambda_nested.package.;
+import scala.Function1;
+import scala.Function2;
+
+public final class lambda_nested$package {
+   @Snapshot
+   public static Function1<Object, Function1<Object, Object>> curry(Function2<Object, Object, Object> var0) {
+      return .MODULE$.curry(var0);
+   }
+
+   @Snapshot
+   public static int run() {
+      return .MODULE$.run();
+   }
+}

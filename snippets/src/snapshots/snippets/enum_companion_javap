@@ -1,0 +1,392 @@
+================================================================================
+// Snippet: enum_companion
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      enum Status:
+        case Active, Inactive, Pending
+
+@Snapshot
+      object Status:
+        def fromString(s: String): Status =
+          s.toLowerCase match
+            case "active" | "on" => Active
+            case "inactive" | "off" => Inactive
+            case _ => Pending
+
+@Snapshot
+      def run: String =
+        List("active", "off", "unknown")
+          .map(Status.fromString)
+          .mkString(", ")
+
+================================================================================
+// Definition: enum_companion$package$ (javap)
+================================================================================
+
+Compiled from "enum_companion.scala"
+public final class enum_companion$package$ implements java.io.Serializable {
+  public static final enum_companion$package$ MODULE$;
+
+  private enum_companion$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #18                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class enum_companion$package$
+       3: dup
+       4: invokespecial #21                 // Method "<init>":()V
+       7: putstatic     #23                 // Field MODULE$:Lenum_companion$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #27                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class enum_companion$package$
+       6: invokespecial #30                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public java.lang.String run();
+    Code:
+       0: new           #35                 // class scala/collection/immutable/$colon$colon
+       3: dup
+       4: ldc           #37                 // String active
+       6: new           #35                 // class scala/collection/immutable/$colon$colon
+       9: dup
+      10: ldc           #39                 // String off
+      12: new           #35                 // class scala/collection/immutable/$colon$colon
+      15: dup
+      16: ldc           #41                 // String unknown
+      18: getstatic     #46                 // Field scala/collection/immutable/Nil$.MODULE$:Lscala/collection/immutable/Nil$;
+      21: invokespecial #49                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      24: invokespecial #49                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      27: invokespecial #49                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      30: checkcast     #4                  // class java/lang/Object
+      33: checkcast     #51                 // class scala/collection/immutable/List
+      36: invokedynamic #72,  0             // InvokeDynamic #0:apply:()Lscala/Function1;
+      41: invokevirtual #76                 // Method scala/collection/immutable/List.map:(Lscala/Function1;)Lscala/collection/immutable/List;
+      44: ldc           #78                 // String ,
+      46: invokevirtual #82                 // Method scala/collection/immutable/List.mkString:(Ljava/lang/String;)Ljava/lang/String;
+      49: areturn
+
+  private static final Status run$$anonfun$1(java.lang.String);
+    Code:
+       0: getstatic     #88                 // Field Status$.MODULE$:LStatus$;
+       3: aload_0
+       4: invokevirtual #91                 // Method Status$.fromString:(Ljava/lang/String;)LStatus;
+       7: areturn
+
+  private static java.lang.Object $deserializeLambda$(java.lang.invoke.SerializedLambda);
+    Code:
+       0: aload_0
+       1: invokedynamic #104,  0            // InvokeDynamic #1:lambdaDeserialize:(Ljava/lang/invoke/SerializedLambda;)Ljava/lang/Object;
+       6: areturn
+}
+
+================================================================================
+// Definition: enum_companion$package (javap)
+================================================================================
+
+Compiled from "enum_companion.scala"
+public final class enum_companion$package {
+  public static java.lang.String run();
+    Code:
+       0: getstatic     #14                 // Field enum_companion$package$.MODULE$:Lenum_companion$package$;
+       3: invokevirtual #16                 // Method enum_companion$package$.run:()Ljava/lang/String;
+       6: areturn
+}
+
+================================================================================
+// Definition: Status (javap)
+================================================================================
+
+Compiled from "enum_companion.scala"
+public abstract class Status implements scala.Product,scala.reflect.Enum {
+  public static Status fromOrdinal(int);
+    Code:
+       0: getstatic     #18                 // Field Status$.MODULE$:LStatus$;
+       3: iload_0
+       4: invokevirtual #20                 // Method Status$.fromOrdinal:(I)LStatus;
+       7: areturn
+
+  public static Status fromString(java.lang.String);
+    Code:
+       0: getstatic     #18                 // Field Status$.MODULE$:LStatus$;
+       3: aload_0
+       4: invokevirtual #24                 // Method Status$.fromString:(Ljava/lang/String;)LStatus;
+       7: areturn
+
+  public static Status valueOf(java.lang.String);
+    Code:
+       0: getstatic     #18                 // Field Status$.MODULE$:LStatus$;
+       3: aload_0
+       4: invokevirtual #27                 // Method Status$.valueOf:(Ljava/lang/String;)LStatus;
+       7: areturn
+
+  public static Status[] values();
+    Code:
+       0: getstatic     #18                 // Field Status$.MODULE$:LStatus$;
+       3: invokevirtual #31                 // Method Status$.values:()[LStatus;
+       6: areturn
+
+  public Status();
+    Code:
+       0: aload_0
+       1: invokespecial #35                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public scala.collection.Iterator<java.lang.Object> productIterator();
+    Code:
+       0: aload_0
+       1: invokestatic  #44                 // InterfaceMethod scala/Product.productIterator$:(Lscala/Product;)Lscala/collection/Iterator;
+       4: areturn
+
+  public java.lang.String productPrefix();
+    Code:
+       0: aload_0
+       1: invokestatic  #50                 // InterfaceMethod scala/Product.productPrefix$:(Lscala/Product;)Ljava/lang/String;
+       4: areturn
+
+  public java.lang.String productElementName(int);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: invokestatic  #57                 // InterfaceMethod scala/Product.productElementName$:(Lscala/Product;I)Ljava/lang/String;
+       5: areturn
+
+  public scala.collection.Iterator<java.lang.String> productElementNames();
+    Code:
+       0: aload_0
+       1: invokestatic  #63                 // InterfaceMethod scala/Product.productElementNames$:(Lscala/Product;)Lscala/collection/Iterator;
+       4: areturn
+}
+
+================================================================================
+// Definition: Status$ (javap)
+================================================================================
+
+Compiled from "enum_companion.scala"
+public final class Status$ implements scala.deriving.Mirror$Sum,java.io.Serializable {
+  public static final Status Active;
+
+  public static final Status Inactive;
+
+  public static final Status Pending;
+
+  private static final Status[] $values;
+
+  public static final Status$ MODULE$;
+
+  private Status$();
+    Code:
+       0: aload_0
+       1: invokespecial #32                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class Status$
+       3: dup
+       4: invokespecial #35                 // Method "<init>":()V
+       7: putstatic     #37                 // Field MODULE$:LStatus$;
+      10: getstatic     #37                 // Field MODULE$:LStatus$;
+      13: iconst_0
+      14: ldc           #38                 // String Active
+      16: invokespecial #42                 // Method $new:(ILjava/lang/String;)LStatus;
+      19: putstatic     #44                 // Field Active:LStatus;
+      22: getstatic     #37                 // Field MODULE$:LStatus$;
+      25: iconst_1
+      26: ldc           #45                 // String Inactive
+      28: invokespecial #42                 // Method $new:(ILjava/lang/String;)LStatus;
+      31: putstatic     #47                 // Field Inactive:LStatus;
+      34: getstatic     #37                 // Field MODULE$:LStatus$;
+      37: iconst_2
+      38: ldc           #48                 // String Pending
+      40: invokespecial #42                 // Method $new:(ILjava/lang/String;)LStatus;
+      43: putstatic     #50                 // Field Pending:LStatus;
+      46: iconst_3
+      47: anewarray     #52                 // class Status
+      50: dup
+      51: iconst_0
+      52: getstatic     #37                 // Field MODULE$:LStatus$;
+      55: pop
+      56: getstatic     #44                 // Field Active:LStatus;
+      59: aastore
+      60: dup
+      61: iconst_1
+      62: getstatic     #37                 // Field MODULE$:LStatus$;
+      65: pop
+      66: getstatic     #47                 // Field Inactive:LStatus;
+      69: aastore
+      70: dup
+      71: iconst_2
+      72: getstatic     #37                 // Field MODULE$:LStatus$;
+      75: pop
+      76: getstatic     #50                 // Field Pending:LStatus;
+      79: aastore
+      80: checkcast     #53                 // class "[LStatus;"
+      83: putstatic     #55                 // Field $values:[LStatus;
+      86: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #59                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class Status$
+       6: invokespecial #62                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public Status[] values();
+    Code:
+       0: getstatic     #55                 // Field $values:[LStatus;
+       3: invokevirtual #67                 // Method "[LStatus;".clone:()Ljava/lang/Object;
+       6: checkcast     #53                 // class "[LStatus;"
+       9: areturn
+
+  public Status valueOf(java.lang.String);
+    Code:
+       0: aload_1
+       1: astore_2
+       2: aload_2
+       3: ifnonnull     10
+       6: iconst_0
+       7: goto          14
+      10: aload_2
+      11: invokevirtual #76                 // Method java/lang/String.hashCode:()I
+      14: lookupswitch  { // 3
+              89309323: 48
+             982065527: 66
+            1955883814: 84
+               default: 102
+          }
+      48: ldc           #45                 // String Inactive
+      50: aload_2
+      51: invokevirtual #80                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      54: ifeq          63
+      57: aload_0
+      58: pop
+      59: getstatic     #47                 // Field Inactive:LStatus;
+      62: areturn
+      63: goto          102
+      66: ldc           #48                 // String Pending
+      68: aload_2
+      69: invokevirtual #80                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      72: ifeq          81
+      75: aload_0
+      76: pop
+      77: getstatic     #50                 // Field Pending:LStatus;
+      80: areturn
+      81: goto          102
+      84: ldc           #38                 // String Active
+      86: aload_2
+      87: invokevirtual #80                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      90: ifeq          99
+      93: aload_0
+      94: pop
+      95: getstatic     #44                 // Field Active:LStatus;
+      98: areturn
+      99: goto          102
+     102: new           #82                 // class java/lang/IllegalArgumentException
+     105: dup
+     106: aload_1
+     107: invokedynamic #94,  0             // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     112: invokespecial #97                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+     115: athrow
+
+  private Status $new(int, java.lang.String);
+    Code:
+       0: new           #12                 // class Status$$anon$1
+       3: dup
+       4: aload_2
+       5: iload_1
+       6: invokespecial #102                // Method Status$$anon$1."<init>":(Ljava/lang/String;I)V
+       9: areturn
+
+  public Status fromOrdinal(int);
+    Code:
+       0: getstatic     #55                 // Field $values:[LStatus;
+       3: iload_1
+       4: aaload
+       5: goto          32
+       8: pop
+       9: new           #110                // class java/util/NoSuchElementException
+      12: dup
+      13: iload_1
+      14: invokestatic  #116                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      17: invokevirtual #122                // Method java/lang/Integer.toString:()Ljava/lang/String;
+      20: invokedynamic #125,  0            // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      25: invokespecial #126                // Method java/util/NoSuchElementException."<init>":(Ljava/lang/String;)V
+      28: athrow
+      29: nop
+      30: nop
+      31: athrow
+      32: areturn
+    Exception table:
+       from    to  target type
+           0     5     8   Class java/lang/Throwable
+
+  public Status fromString(java.lang.String);
+    Code:
+       0: aload_1
+       1: invokevirtual #131                // Method java/lang/String.toLowerCase:()Ljava/lang/String;
+       4: astore_2
+       5: aload_2
+       6: ifnonnull     13
+       9: iconst_0
+      10: goto          17
+      13: aload_2
+      14: invokevirtual #76                 // Method java/lang/String.hashCode:()I
+      17: lookupswitch  { // 4
+           -1422950650: 60
+                  3551: 72
+                109935: 84
+              24665195: 96
+               default: 116
+          }
+      60: ldc           #133                // String active
+      62: aload_2
+      63: invokevirtual #80                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      66: ifne          108
+      69: goto          116
+      72: ldc           #135                // String on
+      74: aload_2
+      75: invokevirtual #80                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      78: ifne          108
+      81: goto          116
+      84: ldc           #137                // String off
+      86: aload_2
+      87: invokevirtual #80                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      90: ifne          112
+      93: goto          116
+      96: ldc           #139                // String inactive
+      98: aload_2
+      99: invokevirtual #80                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+     102: ifne          112
+     105: goto          116
+     108: getstatic     #44                 // Field Active:LStatus;
+     111: areturn
+     112: getstatic     #47                 // Field Inactive:LStatus;
+     115: areturn
+     116: getstatic     #50                 // Field Pending:LStatus;
+     119: areturn
+
+  public int ordinal(Status);
+    Code:
+       0: aload_1
+       1: invokevirtual #143                // Method Status.ordinal:()I
+       4: ireturn
+
+  public int ordinal(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #52                 // class Status
+       5: invokevirtual #147                // Method ordinal:(LStatus;)I
+       8: ireturn
+}

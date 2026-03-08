@@ -1,0 +1,137 @@
+================================================================================
+// Snippet: for_nested
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def pairs(xs: List[Int], ys: List[String]): List[(Int, String)] =
+        for
+          x <- xs
+          y <- ys
+        yield (x, y)
+
+@Snapshot
+      def run: List[(Int, String)] =
+        pairs(List(1, 2), List("a", "b"))
+
+================================================================================
+// Definition: for_nested$package$ (javap)
+================================================================================
+
+Compiled from "for_nested.scala"
+public final class for_nested$package$ implements java.io.Serializable {
+  public static final for_nested$package$ MODULE$;
+
+  private for_nested$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #18                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class for_nested$package$
+       3: dup
+       4: invokespecial #21                 // Method "<init>":()V
+       7: putstatic     #23                 // Field MODULE$:Lfor_nested$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #27                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class for_nested$package$
+       6: invokespecial #30                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public scala.collection.immutable.List<scala.Tuple2<java.lang.Object, java.lang.String>> pairs(scala.collection.immutable.List<java.lang.Object>, scala.collection.immutable.List<java.lang.String>);
+    Code:
+       0: aload_1
+       1: aload_2
+       2: invokedynamic #58,  0             // InvokeDynamic #0:apply:(Lscala/collection/immutable/List;)Lscala/Function1;
+       7: invokevirtual #64                 // Method scala/collection/immutable/List.flatMap:(Lscala/Function1;)Lscala/collection/immutable/List;
+      10: areturn
+
+  public scala.collection.immutable.List<scala.Tuple2<java.lang.Object, java.lang.String>> run();
+    Code:
+       0: aload_0
+       1: new           #70                 // class scala/collection/immutable/$colon$colon
+       4: dup
+       5: iconst_1
+       6: invokestatic  #76                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+       9: new           #70                 // class scala/collection/immutable/$colon$colon
+      12: dup
+      13: iconst_2
+      14: invokestatic  #76                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      17: getstatic     #81                 // Field scala/collection/immutable/Nil$.MODULE$:Lscala/collection/immutable/Nil$;
+      20: invokespecial #84                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      23: invokespecial #84                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      26: checkcast     #4                  // class java/lang/Object
+      29: checkcast     #60                 // class scala/collection/immutable/List
+      32: new           #70                 // class scala/collection/immutable/$colon$colon
+      35: dup
+      36: ldc           #86                 // String a
+      38: new           #70                 // class scala/collection/immutable/$colon$colon
+      41: dup
+      42: ldc           #88                 // String b
+      44: getstatic     #81                 // Field scala/collection/immutable/Nil$.MODULE$:Lscala/collection/immutable/Nil$;
+      47: invokespecial #84                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      50: invokespecial #84                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      53: checkcast     #4                  // class java/lang/Object
+      56: checkcast     #60                 // class scala/collection/immutable/List
+      59: invokevirtual #90                 // Method pairs:(Lscala/collection/immutable/List;Lscala/collection/immutable/List;)Lscala/collection/immutable/List;
+      62: areturn
+
+  private static final scala.Tuple2 pairs$$anonfun$1$$anonfun$1(int, java.lang.String);
+    Code:
+       0: getstatic     #99                 // Field scala/Tuple2$.MODULE$:Lscala/Tuple2$;
+       3: iload_0
+       4: invokestatic  #76                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+       7: aload_1
+       8: invokevirtual #102                // Method scala/Tuple2$.apply:(Ljava/lang/Object;Ljava/lang/Object;)Lscala/Tuple2;
+      11: areturn
+
+  private static final scala.collection.IterableOnce pairs$$anonfun$1(scala.collection.immutable.List, int);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: invokedynamic #116,  0            // InvokeDynamic #1:apply:(I)Lscala/Function1;
+       7: invokevirtual #119                // Method scala/collection/immutable/List.map:(Lscala/Function1;)Lscala/collection/immutable/List;
+      10: areturn
+
+  private static scala.collection.IterableOnce pairs$$anonfun$adapted$1(scala.collection.immutable.List, java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokestatic  #124                // Method scala/runtime/BoxesRunTime.unboxToInt:(Ljava/lang/Object;)I
+       5: invokestatic  #126                // Method pairs$$anonfun$1:(Lscala/collection/immutable/List;I)Lscala/collection/IterableOnce;
+       8: areturn
+
+  private static java.lang.Object $deserializeLambda$(java.lang.invoke.SerializedLambda);
+    Code:
+       0: aload_0
+       1: invokedynamic #139,  0            // InvokeDynamic #2:lambdaDeserialize:(Ljava/lang/invoke/SerializedLambda;)Ljava/lang/Object;
+       6: areturn
+}
+
+================================================================================
+// Definition: for_nested$package (javap)
+================================================================================
+
+Compiled from "for_nested.scala"
+public final class for_nested$package {
+  public static scala.collection.immutable.List<scala.Tuple2<java.lang.Object, java.lang.String>> pairs(scala.collection.immutable.List<java.lang.Object>, scala.collection.immutable.List<java.lang.String>);
+    Code:
+       0: getstatic     #15                 // Field for_nested$package$.MODULE$:Lfor_nested$package$;
+       3: aload_0
+       4: aload_1
+       5: invokevirtual #17                 // Method for_nested$package$.pairs:(Lscala/collection/immutable/List;Lscala/collection/immutable/List;)Lscala/collection/immutable/List;
+       8: areturn
+
+  public static scala.collection.immutable.List<scala.Tuple2<java.lang.Object, java.lang.String>> run();
+    Code:
+       0: getstatic     #15                 // Field for_nested$package$.MODULE$:Lfor_nested$package$;
+       3: invokevirtual #22                 // Method for_nested$package$.run:()Lscala/collection/immutable/List;
+       6: areturn
+}

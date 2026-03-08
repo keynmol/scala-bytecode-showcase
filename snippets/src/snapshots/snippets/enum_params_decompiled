@@ -1,0 +1,121 @@
+/*
+================================================================================
+Snippet: enum_params
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      enum Planet(val mass: Double, val radius: Double):
+        case Mercury extends Planet(3.3e23, 2.4e6)
+        case Earth extends Planet(6.0e24, 6.4e6)
+        case Jupiter extends Planet(1.9e27, 7.1e7)
+
+        def surfaceGravity: Double =
+          val G = 6.67e-11
+          G * mass / (radius * radius)
+
+@Snapshot
+      def run: String =
+        Planet.values.map(p => s"${p}: g=${p.surfaceGravity}").mkString("; ")
+
+*/
+
+// ================================================================================
+// Definition: enum_params$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Predef.;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class enum_params$package$ implements Serializable {
+   public static final enum_params$package$ MODULE$ = new enum_params$package$();
+
+   private enum_params$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(enum_params$package$.class);
+   }
+
+   @Snapshot
+   public String run() {
+       var10000 = .MODULE$;
+      Object var1 = .MODULE$.refArrayOps(Planet..MODULE$.values());
+      return var10000.wrapRefArray(
+            (Object[])scala.collection.ArrayOps..MODULE$
+               .map$extension(var1, p -> p + ": g=" + p.surfaceGravity(), scala.reflect.ClassTag..MODULE$.apply(String.class))
+         )
+         .mkString("; ");
+   }
+}
+
+// ================================================================================
+// Definition: Planet (decompiled)
+// ================================================================================
+
+import Planet.;
+import compiler.iface.Snapshot;
+import scala.Product;
+import scala.collection.Iterator;
+import scala.reflect.Enum;
+
+@Snapshot
+public enum Planet implements Product, Enum {
+   private final double mass;
+   private final double radius;
+
+   public static Planet fromOrdinal(int var0) {
+      return .MODULE$.fromOrdinal(var0);
+   }
+
+   public Planet() {
+      this.mass = mass;
+      this.radius = radius;
+   }
+
+   public Iterator<Object> productIterator() {
+      return Product.productIterator$(this);
+   }
+
+   public String productPrefix() {
+      return Product.productPrefix$(this);
+   }
+
+   public String productElementName(final int n) {
+      return Product.productElementName$(this, n);
+   }
+
+   public Iterator<String> productElementNames() {
+      return Product.productElementNames$(this);
+   }
+
+   public double mass() {
+      return this.mass;
+   }
+
+   public double radius() {
+      return this.radius;
+   }
+
+   public double surfaceGravity() {
+      double G = 6.67E-11;
+      return G * this.mass() / (this.radius() * this.radius());
+   }
+}
+
+// ================================================================================
+// Definition: enum_params$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import enum_params.package.;
+
+public final class enum_params$package {
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}

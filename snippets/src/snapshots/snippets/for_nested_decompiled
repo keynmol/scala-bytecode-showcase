@@ -1,0 +1,77 @@
+/*
+================================================================================
+Snippet: for_nested
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def pairs(xs: List[Int], ys: List[String]): List[(Int, String)] =
+        for
+          x <- xs
+          y <- ys
+        yield (x, y)
+
+@Snapshot
+      def run: List[(Int, String)] =
+        pairs(List(1, 2), List("a", "b"))
+
+*/
+
+// ================================================================================
+// Definition: for_nested$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Tuple2;
+import scala.collection.immutable.List;
+import scala.collection.immutable..colon.colon;
+import scala.collection.immutable.Nil.;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class for_nested$package$ implements Serializable {
+   public static final for_nested$package$ MODULE$ = new for_nested$package$();
+
+   private for_nested$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(for_nested$package$.class);
+   }
+
+   @Snapshot
+   public List<Tuple2<Object, String>> pairs(final List<Object> xs, final List<String> ys) {
+      return xs.flatMap(x -> pairs$$anonfun$1(ys, BoxesRunTime.unboxToInt(x)));
+   }
+
+   @Snapshot
+   public List<Tuple2<Object, String>> run() {
+      return this.pairs(
+         (List<Object>)((Object)(new colon(BoxesRunTime.boxToInteger(1), new colon(BoxesRunTime.boxToInteger(2), .MODULE$)))),
+         (List<String>)((Object)(new colon("a", new colon("b", .MODULE$))))
+      );
+   }
+}
+
+// ================================================================================
+// Definition: for_nested$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import for_nested.package.;
+import scala.Tuple2;
+import scala.collection.immutable.List;
+
+public final class for_nested$package {
+   @Snapshot
+   public static List<Tuple2<Object, String>> pairs(List<Object> var0, List<String> var1) {
+      return .MODULE$.pairs(var0, var1);
+   }
+
+   @Snapshot
+   public static List<Tuple2<Object, String>> run() {
+      return .MODULE$.run();
+   }
+}

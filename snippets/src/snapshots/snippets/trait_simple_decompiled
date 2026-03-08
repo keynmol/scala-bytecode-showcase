@@ -1,0 +1,84 @@
+/*
+================================================================================
+Snippet: trait_simple
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      trait Greeter:
+        def greet(name: String): String
+
+@Snapshot
+      class FriendlyGreeter extends Greeter:
+        def greet(name: String): String = s"Hello, $name!"
+
+@Snapshot
+      def run: String =
+        val g: Greeter = FriendlyGreeter()
+        g.greet("World")
+
+*/
+
+// ================================================================================
+// Definition: trait_simple$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class trait_simple$package$ implements Serializable {
+   public static final trait_simple$package$ MODULE$ = new trait_simple$package$();
+
+   private trait_simple$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(trait_simple$package$.class);
+   }
+
+   @Snapshot
+   public String run() {
+      Greeter g = new FriendlyGreeter();
+      return g.greet("World");
+   }
+}
+
+// ================================================================================
+// Definition: Greeter (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+
+@Snapshot
+public interface Greeter {
+   String greet(final String name);
+}
+
+// ================================================================================
+// Definition: FriendlyGreeter (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+
+@Snapshot
+public class FriendlyGreeter implements Greeter {
+   public String greet(final String name) {
+      return "Hello, " + name + "!";
+   }
+}
+
+// ================================================================================
+// Definition: trait_simple$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import trait_simple.package.;
+
+public final class trait_simple$package {
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}

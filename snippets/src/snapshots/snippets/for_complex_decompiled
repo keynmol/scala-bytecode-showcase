@@ -1,0 +1,75 @@
+/*
+================================================================================
+Snippet: for_complex
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def pythagorean(n: Int): List[(Int, Int, Int)] =
+        for
+          a <- (1 to n).toList
+          b <- (a to n).toList
+          c <- (b to n).toList
+          if a * a + b * b == c * c
+        yield (a, b, c)
+
+@Snapshot
+      def run: List[(Int, Int, Int)] =
+        pythagorean(15)
+
+*/
+
+// ================================================================================
+// Definition: for_complex$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Tuple3;
+import scala.collection.immutable.List;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+import scala.runtime.RichInt.;
+
+public final class for_complex$package$ implements Serializable {
+   public static final for_complex$package$ MODULE$ = new for_complex$package$();
+
+   private for_complex$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(for_complex$package$.class);
+   }
+
+   @Snapshot
+   public List<Tuple3<Object, Object, Object>> pythagorean(final int n) {
+      return .MODULE$.to$extension(scala.Predef..MODULE$.intWrapper(1), n).toList().flatMap(a -> pythagorean$$anonfun$1(n, BoxesRunTime.unboxToInt(a)));
+   }
+
+   @Snapshot
+   public List<Tuple3<Object, Object, Object>> run() {
+      return this.pythagorean(15);
+   }
+}
+
+// ================================================================================
+// Definition: for_complex$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import for_complex.package.;
+import scala.Tuple3;
+import scala.collection.immutable.List;
+
+public final class for_complex$package {
+   @Snapshot
+   public static List<Tuple3<Object, Object, Object>> pythagorean(int var0) {
+      return .MODULE$.pythagorean(var0);
+   }
+
+   @Snapshot
+   public static List<Tuple3<Object, Object, Object>> run() {
+      return .MODULE$.run();
+   }
+}

@@ -1,0 +1,71 @@
+/*
+================================================================================
+Snippet: lambda_partial
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def add(a: Int, b: Int, c: Int): Int =
+        a + b + c
+
+@Snapshot
+      def run: Int =
+        val addFive = add(5, _, _)
+        val addFiveAndTen = addFive(10, _)
+        addFiveAndTen(3)
+
+*/
+
+// ================================================================================
+// Definition: lambda_partial$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import lambda_partial.package.;
+
+public final class lambda_partial$package {
+   @Snapshot
+   public static int add(int var0, int var1, int var2) {
+      return .MODULE$.add(var0, var1, var2);
+   }
+
+   @Snapshot
+   public static int run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: lambda_partial$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Function1;
+import scala.Function2;
+import scala.runtime.ModuleSerializationProxy;
+import scala.runtime.java8.JFunction2.mcIII.sp;
+
+public final class lambda_partial$package$ implements Serializable {
+   public static final lambda_partial$package$ MODULE$ = new lambda_partial$package$();
+
+   private lambda_partial$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(lambda_partial$package$.class);
+   }
+
+   @Snapshot
+   public int add(final int a, final int b, final int c) {
+      return a + b + c;
+   }
+
+   @Snapshot
+   public int run() {
+      Function2 addFive = (sp)(_$1, _$2) -> MODULE$.add(5, _$1, _$2);
+      Function1 addFiveAndTen = (scala.runtime.java8.JFunction1.mcII.sp)_$3 -> addFive.apply$mcIII$sp(10, _$3);
+      return addFiveAndTen.apply$mcII$sp(3);
+   }
+}

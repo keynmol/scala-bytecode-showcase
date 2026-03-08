@@ -1,0 +1,130 @@
+/*
+================================================================================
+Snippet: enum_trait
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      trait Describable:
+        def description: String
+
+@Snapshot
+      enum LogLevel extends Describable:
+        case Debug, Info, Warn, Error
+
+        def description: String = this match
+          case Debug => "Detailed debugging information"
+          case Info => "General information"
+          case Warn => "Warning message"
+          case Error => "Error condition"
+
+@Snapshot
+      def run: String =
+        LogLevel.Warn.description
+
+*/
+
+// ================================================================================
+// Definition: Describable (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+
+@Snapshot
+public interface Describable {
+   String description();
+}
+
+// ================================================================================
+// Definition: enum_trait$package$ (decompiled)
+// ================================================================================
+
+import LogLevel.;
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class enum_trait$package$ implements Serializable {
+   public static final enum_trait$package$ MODULE$ = new enum_trait$package$();
+
+   private enum_trait$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(enum_trait$package$.class);
+   }
+
+   @Snapshot
+   public String run() {
+      return .Warn.description();
+   }
+}
+
+// ================================================================================
+// Definition: enum_trait$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import enum_trait.package.;
+
+public final class enum_trait$package {
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: LogLevel (decompiled)
+// ================================================================================
+
+import LogLevel.;
+import compiler.iface.Snapshot;
+import scala.MatchError;
+import scala.Product;
+import scala.collection.Iterator;
+import scala.reflect.Enum;
+
+@Snapshot
+public enum LogLevel implements Describable, Product, Enum {
+   public static LogLevel fromOrdinal(int var0) {
+      return .MODULE$.fromOrdinal(var0);
+   }
+
+   public Iterator<Object> productIterator() {
+      return Product.productIterator$(this);
+   }
+
+   public String productPrefix() {
+      return Product.productPrefix$(this);
+   }
+
+   public String productElementName(final int n) {
+      return Product.productElementName$(this, n);
+   }
+
+   public Iterator<String> productElementNames() {
+      return Product.productElementNames$(this);
+   }
+
+   public String description() {
+      if (.Debug == null ? this != null : !.Debug.equals(this)) {
+         if (.Info == null ? this != null : !.Info.equals(this)) {
+            if (.Warn == null ? this != null : !.Warn.equals(this)) {
+               if (.Error == null ? this != null : !.Error.equals(this)) {
+                  throw new MatchError(this);
+               } else {
+                  return "Error condition";
+               }
+            } else {
+               return "Warning message";
+            }
+         } else {
+            return "General information";
+         }
+      } else {
+         return "Detailed debugging information";
+      }
+   }
+}

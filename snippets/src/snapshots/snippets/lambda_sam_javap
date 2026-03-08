@@ -1,0 +1,100 @@
+================================================================================
+// Snippet: lambda_sam
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      trait Transformer:
+        def transform(x: Int): Int
+
+@Snapshot
+      def applyTransformer(t: Transformer, x: Int): Int =
+        t.transform(x)
+
+@Snapshot
+      def run: Int =
+        applyTransformer(x => x * 3, 7)
+
+================================================================================
+// Definition: Transformer (javap)
+================================================================================
+
+Compiled from "lambda_sam.scala"
+public interface Transformer {
+  public abstract int transform(int);
+}
+
+================================================================================
+// Definition: lambda_sam$package$ (javap)
+================================================================================
+
+Compiled from "lambda_sam.scala"
+public final class lambda_sam$package$ implements java.io.Serializable {
+  public static final lambda_sam$package$ MODULE$;
+
+  private lambda_sam$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #18                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class lambda_sam$package$
+       3: dup
+       4: invokespecial #21                 // Method "<init>":()V
+       7: putstatic     #23                 // Field MODULE$:Llambda_sam$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #27                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class lambda_sam$package$
+       6: invokespecial #30                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public int applyTransformer(Transformer, int);
+    Code:
+       0: aload_1
+       1: iload_2
+       2: invokeinterface #41,  2           // InterfaceMethod Transformer.transform:(I)I
+       7: ireturn
+
+  public int run();
+    Code:
+       0: aload_0
+       1: invokedynamic #60,  0             // InvokeDynamic #0:transform:()LTransformer;
+       6: bipush        7
+       8: invokevirtual #62                 // Method applyTransformer:(LTransformer;I)I
+      11: ireturn
+
+  private static final int run$$anonfun$1(int);
+    Code:
+       0: iload_0
+       1: iconst_3
+       2: imul
+       3: ireturn
+}
+
+================================================================================
+// Definition: lambda_sam$package (javap)
+================================================================================
+
+Compiled from "lambda_sam.scala"
+public final class lambda_sam$package {
+  public static int applyTransformer(Transformer, int);
+    Code:
+       0: getstatic     #14                 // Field lambda_sam$package$.MODULE$:Llambda_sam$package$;
+       3: aload_0
+       4: iload_1
+       5: invokevirtual #16                 // Method lambda_sam$package$.applyTransformer:(LTransformer;I)I
+       8: ireturn
+
+  public static int run();
+    Code:
+       0: getstatic     #14                 // Field lambda_sam$package$.MODULE$:Llambda_sam$package$;
+       3: invokevirtual #20                 // Method lambda_sam$package$.run:()I
+       6: ireturn
+}

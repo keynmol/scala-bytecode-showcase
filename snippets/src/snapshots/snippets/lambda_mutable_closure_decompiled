@@ -1,0 +1,89 @@
+/*
+================================================================================
+Snippet: lambda_mutable_closure
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def makeCounter(): () => Int =
+        var count = 0
+        () => {
+          count += 1
+          count
+        }
+
+@Snapshot
+      def run: List[Int] =
+        val counter = makeCounter()
+        List(counter(), counter(), counter())
+
+*/
+
+// ================================================================================
+// Definition: lambda_mutable_closure$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import lambda_mutable_closure.package.;
+import scala.Function0;
+import scala.collection.immutable.List;
+
+public final class lambda_mutable_closure$package {
+   @Snapshot
+   public static Function0<Object> makeCounter() {
+      return .MODULE$.makeCounter();
+   }
+
+   @Snapshot
+   public static List<Object> run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: lambda_mutable_closure$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Function0;
+import scala.collection.immutable.List;
+import scala.collection.immutable..colon.colon;
+import scala.collection.immutable.Nil.;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.IntRef;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class lambda_mutable_closure$package$ implements Serializable {
+   public static final lambda_mutable_closure$package$ MODULE$ = new lambda_mutable_closure$package$();
+
+   private lambda_mutable_closure$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(lambda_mutable_closure$package$.class);
+   }
+
+   @Snapshot
+   public Function0<Object> makeCounter() {
+      IntRef count = IntRef.create(0);
+      return () -> {
+         count.elem++;
+         return count.elem;
+      };
+   }
+
+   @Snapshot
+   public List<Object> run() {
+      Function0 counter = this.makeCounter();
+      return (List<Object>)(
+         (Object)(
+            new colon(
+               BoxesRunTime.boxToInteger(counter.apply$mcI$sp()),
+               new colon(BoxesRunTime.boxToInteger(counter.apply$mcI$sp()), new colon(BoxesRunTime.boxToInteger(counter.apply$mcI$sp()), .MODULE$))
+            )
+         )
+      );
+   }
+}

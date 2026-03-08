@@ -1,0 +1,104 @@
+================================================================================
+// Snippet: lambda_closure
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def makeAdder(n: Int): Int => Int =
+        x => x + n
+
+@Snapshot
+      def run: Int =
+        val add5 = makeAdder(5)
+        val add10 = makeAdder(10)
+        add5(3) + add10(3)
+
+================================================================================
+// Definition: lambda_closure$package$ (javap)
+================================================================================
+
+Compiled from "lambda_closure.scala"
+public final class lambda_closure$package$ implements java.io.Serializable {
+  public static final lambda_closure$package$ MODULE$;
+
+  private lambda_closure$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #18                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class lambda_closure$package$
+       3: dup
+       4: invokespecial #21                 // Method "<init>":()V
+       7: putstatic     #23                 // Field MODULE$:Llambda_closure$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #27                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class lambda_closure$package$
+       6: invokespecial #30                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public scala.Function1<java.lang.Object, java.lang.Object> makeAdder(int);
+    Code:
+       0: iload_1
+       1: invokedynamic #54,  0             // InvokeDynamic #0:apply$mcII$sp:(I)Lscala/runtime/java8/JFunction1$mcII$sp;
+       6: areturn
+
+  public int run();
+    Code:
+       0: aload_0
+       1: iconst_5
+       2: invokevirtual #59                 // Method makeAdder:(I)Lscala/Function1;
+       5: astore_1
+       6: aload_0
+       7: bipush        10
+       9: invokevirtual #59                 // Method makeAdder:(I)Lscala/Function1;
+      12: astore_2
+      13: aload_1
+      14: iconst_3
+      15: invokeinterface #63,  2           // InterfaceMethod scala/Function1.apply$mcII$sp:(I)I
+      20: aload_2
+      21: iconst_3
+      22: invokeinterface #63,  2           // InterfaceMethod scala/Function1.apply$mcII$sp:(I)I
+      27: iadd
+      28: ireturn
+
+  private static final int makeAdder$$anonfun$1(int, int);
+    Code:
+       0: iload_1
+       1: iload_0
+       2: iadd
+       3: ireturn
+
+  private static java.lang.Object $deserializeLambda$(java.lang.invoke.SerializedLambda);
+    Code:
+       0: aload_0
+       1: invokedynamic #80,  0             // InvokeDynamic #1:lambdaDeserialize:(Ljava/lang/invoke/SerializedLambda;)Ljava/lang/Object;
+       6: areturn
+}
+
+================================================================================
+// Definition: lambda_closure$package (javap)
+================================================================================
+
+Compiled from "lambda_closure.scala"
+public final class lambda_closure$package {
+  public static scala.Function1<java.lang.Object, java.lang.Object> makeAdder(int);
+    Code:
+       0: getstatic     #15                 // Field lambda_closure$package$.MODULE$:Llambda_closure$package$;
+       3: iload_0
+       4: invokevirtual #17                 // Method lambda_closure$package$.makeAdder:(I)Lscala/Function1;
+       7: areturn
+
+  public static int run();
+    Code:
+       0: getstatic     #15                 // Field lambda_closure$package$.MODULE$:Llambda_closure$package$;
+       3: invokevirtual #21                 // Method lambda_closure$package$.run:()I
+       6: ireturn
+}

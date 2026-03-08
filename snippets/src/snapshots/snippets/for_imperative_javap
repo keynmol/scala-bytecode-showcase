@@ -1,0 +1,126 @@
+================================================================================
+// Snippet: for_imperative
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def printAll(xs: List[Int]): List[String] =
+        var results = List.empty[String]
+        for x <- xs do
+          results = results :+ s"Processing $x"
+        results
+
+@Snapshot
+      def run: List[String] =
+        printAll(List(1, 2, 3))
+
+================================================================================
+// Definition: for_imperative$package (javap)
+================================================================================
+
+Compiled from "for_imperative.scala"
+public final class for_imperative$package {
+  public static scala.collection.immutable.List<java.lang.String> printAll(scala.collection.immutable.List<java.lang.Object>);
+    Code:
+       0: getstatic     #15                 // Field for_imperative$package$.MODULE$:Lfor_imperative$package$;
+       3: aload_0
+       4: invokevirtual #17                 // Method for_imperative$package$.printAll:(Lscala/collection/immutable/List;)Lscala/collection/immutable/List;
+       7: areturn
+
+  public static scala.collection.immutable.List<java.lang.String> run();
+    Code:
+       0: getstatic     #15                 // Field for_imperative$package$.MODULE$:Lfor_imperative$package$;
+       3: invokevirtual #22                 // Method for_imperative$package$.run:()Lscala/collection/immutable/List;
+       6: areturn
+}
+
+================================================================================
+// Definition: for_imperative$package$ (javap)
+================================================================================
+
+Compiled from "for_imperative.scala"
+public final class for_imperative$package$ implements java.io.Serializable {
+  public static final for_imperative$package$ MODULE$;
+
+  private for_imperative$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #18                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class for_imperative$package$
+       3: dup
+       4: invokespecial #21                 // Method "<init>":()V
+       7: putstatic     #23                 // Field MODULE$:Lfor_imperative$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #27                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class for_imperative$package$
+       6: invokespecial #30                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public scala.collection.immutable.List<java.lang.String> printAll(scala.collection.immutable.List<java.lang.Object>);
+    Code:
+       0: getstatic     #40                 // Field scala/package$.MODULE$:Lscala/package$;
+       3: invokevirtual #44                 // Method scala/package$.List:()Lscala/collection/immutable/List$;
+       6: invokevirtual #50                 // Method scala/collection/immutable/List$.empty:()Lscala/collection/immutable/List;
+       9: invokestatic  #56                 // Method scala/runtime/ObjectRef.create:(Ljava/lang/Object;)Lscala/runtime/ObjectRef;
+      12: astore_2
+      13: aload_1
+      14: aload_2
+      15: invokedynamic #75,  0             // InvokeDynamic #0:apply$mcVI$sp:(Lscala/runtime/ObjectRef;)Lscala/runtime/java8/JFunction1$mcVI$sp;
+      20: invokevirtual #81                 // Method scala/collection/immutable/List.foreach:(Lscala/Function1;)V
+      23: aload_2
+      24: getfield      #85                 // Field scala/runtime/ObjectRef.elem:Ljava/lang/Object;
+      27: checkcast     #77                 // class scala/collection/immutable/List
+      30: areturn
+
+  public scala.collection.immutable.List<java.lang.String> run();
+    Code:
+       0: aload_0
+       1: new           #92                 // class scala/collection/immutable/$colon$colon
+       4: dup
+       5: iconst_1
+       6: invokestatic  #98                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+       9: new           #92                 // class scala/collection/immutable/$colon$colon
+      12: dup
+      13: iconst_2
+      14: invokestatic  #98                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      17: new           #92                 // class scala/collection/immutable/$colon$colon
+      20: dup
+      21: iconst_3
+      22: invokestatic  #98                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      25: getstatic     #103                // Field scala/collection/immutable/Nil$.MODULE$:Lscala/collection/immutable/Nil$;
+      28: invokespecial #106                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      31: invokespecial #106                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      34: invokespecial #106                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      37: checkcast     #4                  // class java/lang/Object
+      40: checkcast     #77                 // class scala/collection/immutable/List
+      43: invokevirtual #108                // Method printAll:(Lscala/collection/immutable/List;)Lscala/collection/immutable/List;
+      46: areturn
+
+  private static final void printAll$$anonfun$1(scala.runtime.ObjectRef, int);
+    Code:
+       0: aload_0
+       1: aload_0
+       2: getfield      #85                 // Field scala/runtime/ObjectRef.elem:Ljava/lang/Object;
+       5: checkcast     #77                 // class scala/collection/immutable/List
+       8: iload_1
+       9: invokedynamic #122,  0            // InvokeDynamic #1:makeConcatWithConstants:(I)Ljava/lang/String;
+      14: invokevirtual #126                // Method scala/collection/immutable/List.$colon$plus:(Ljava/lang/Object;)Ljava/lang/Object;
+      17: checkcast     #77                 // class scala/collection/immutable/List
+      20: putfield      #85                 // Field scala/runtime/ObjectRef.elem:Ljava/lang/Object;
+      23: return
+
+  private static java.lang.Object $deserializeLambda$(java.lang.invoke.SerializedLambda);
+    Code:
+       0: aload_0
+       1: invokedynamic #139,  0            // InvokeDynamic #2:lambdaDeserialize:(Ljava/lang/invoke/SerializedLambda;)Ljava/lang/Object;
+       6: areturn
+}

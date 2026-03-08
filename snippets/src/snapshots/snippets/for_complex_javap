@@ -1,0 +1,187 @@
+================================================================================
+// Snippet: for_complex
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def pythagorean(n: Int): List[(Int, Int, Int)] =
+        for
+          a <- (1 to n).toList
+          b <- (a to n).toList
+          c <- (b to n).toList
+          if a * a + b * b == c * c
+        yield (a, b, c)
+
+@Snapshot
+      def run: List[(Int, Int, Int)] =
+        pythagorean(15)
+
+================================================================================
+// Definition: for_complex$package$ (javap)
+================================================================================
+
+Compiled from "for_complex.scala"
+public final class for_complex$package$ implements java.io.Serializable {
+  public static final for_complex$package$ MODULE$;
+
+  private for_complex$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #23                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class for_complex$package$
+       3: dup
+       4: invokespecial #26                 // Method "<init>":()V
+       7: putstatic     #28                 // Field MODULE$:Lfor_complex$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #32                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class for_complex$package$
+       6: invokespecial #35                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public scala.collection.immutable.List<scala.Tuple3<java.lang.Object, java.lang.Object, java.lang.Object>> pythagorean(int);
+    Code:
+       0: getstatic     #45                 // Field scala/runtime/RichInt$.MODULE$:Lscala/runtime/RichInt$;
+       3: getstatic     #50                 // Field scala/Predef$.MODULE$:Lscala/Predef$;
+       6: iconst_1
+       7: invokevirtual #54                 // Method scala/Predef$.intWrapper:(I)I
+      10: iload_1
+      11: invokevirtual #58                 // Method scala/runtime/RichInt$.to$extension:(II)Lscala/collection/immutable/Range$Inclusive;
+      14: invokevirtual #62                 // Method scala/collection/immutable/Range$Inclusive.toList:()Lscala/collection/immutable/List;
+      17: iload_1
+      18: invokedynamic #84,  0             // InvokeDynamic #0:apply:(I)Lscala/Function1;
+      23: invokevirtual #90                 // Method scala/collection/immutable/List.flatMap:(Lscala/Function1;)Lscala/collection/immutable/List;
+      26: areturn
+
+  public scala.collection.immutable.List<scala.Tuple3<java.lang.Object, java.lang.Object, java.lang.Object>> run();
+    Code:
+       0: aload_0
+       1: bipush        15
+       3: invokevirtual #95                 // Method pythagorean:(I)Lscala/collection/immutable/List;
+       6: areturn
+
+  private static final boolean pythagorean$$anonfun$1$$anonfun$1$$anonfun$1(int, int, int);
+    Code:
+       0: iload_0
+       1: iload_0
+       2: imul
+       3: iload_1
+       4: iload_1
+       5: imul
+       6: iadd
+       7: iload_2
+       8: iload_2
+       9: imul
+      10: if_icmpne     17
+      13: iconst_1
+      14: goto          18
+      17: iconst_0
+      18: ireturn
+
+  private static final scala.Tuple3 pythagorean$$anonfun$1$$anonfun$1$$anonfun$2(int, int, int);
+    Code:
+       0: getstatic     #109                // Field scala/Tuple3$.MODULE$:Lscala/Tuple3$;
+       3: iload_0
+       4: invokestatic  #115                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+       7: iload_1
+       8: invokestatic  #115                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      11: iload_2
+      12: invokestatic  #115                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      15: invokevirtual #118                // Method scala/Tuple3$.apply:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lscala/Tuple3;
+      18: areturn
+
+  private static scala.Tuple3 pythagorean$$anonfun$1$$anonfun$1$$anonfun$adapted$1(int, int, java.lang.Object);
+    Code:
+       0: iload_0
+       1: iload_1
+       2: aload_2
+       3: invokestatic  #126                // Method scala/runtime/BoxesRunTime.unboxToInt:(Ljava/lang/Object;)I
+       6: invokestatic  #128                // Method pythagorean$$anonfun$1$$anonfun$1$$anonfun$2:(III)Lscala/Tuple3;
+       9: areturn
+
+  private static final scala.collection.IterableOnce pythagorean$$anonfun$1$$anonfun$1(int, int, int);
+    Code:
+       0: getstatic     #45                 // Field scala/runtime/RichInt$.MODULE$:Lscala/runtime/RichInt$;
+       3: getstatic     #50                 // Field scala/Predef$.MODULE$:Lscala/Predef$;
+       6: iload_2
+       7: invokevirtual #54                 // Method scala/Predef$.intWrapper:(I)I
+      10: iload_0
+      11: invokevirtual #58                 // Method scala/runtime/RichInt$.to$extension:(II)Lscala/collection/immutable/Range$Inclusive;
+      14: invokevirtual #62                 // Method scala/collection/immutable/Range$Inclusive.toList:()Lscala/collection/immutable/List;
+      17: iload_1
+      18: iload_2
+      19: invokedynamic #143,  0            // InvokeDynamic #1:apply$mcZI$sp:(II)Lscala/runtime/java8/JFunction1$mcZI$sp;
+      24: invokevirtual #147                // Method scala/collection/immutable/List.withFilter:(Lscala/Function1;)Lscala/collection/WithFilter;
+      27: iload_1
+      28: iload_2
+      29: invokedynamic #155,  0            // InvokeDynamic #2:apply:(II)Lscala/Function1;
+      34: invokevirtual #161                // Method scala/collection/WithFilter.map:(Lscala/Function1;)Ljava/lang/Object;
+      37: checkcast     #163                // class scala/collection/IterableOnce
+      40: areturn
+
+  private static scala.collection.IterableOnce pythagorean$$anonfun$1$$anonfun$adapted$1(int, int, java.lang.Object);
+    Code:
+       0: iload_0
+       1: iload_1
+       2: aload_2
+       3: invokestatic  #126                // Method scala/runtime/BoxesRunTime.unboxToInt:(Ljava/lang/Object;)I
+       6: invokestatic  #169                // Method pythagorean$$anonfun$1$$anonfun$1:(III)Lscala/collection/IterableOnce;
+       9: areturn
+
+  private static final scala.collection.IterableOnce pythagorean$$anonfun$1(int, int);
+    Code:
+       0: getstatic     #45                 // Field scala/runtime/RichInt$.MODULE$:Lscala/runtime/RichInt$;
+       3: getstatic     #50                 // Field scala/Predef$.MODULE$:Lscala/Predef$;
+       6: iload_1
+       7: invokevirtual #54                 // Method scala/Predef$.intWrapper:(I)I
+      10: iload_0
+      11: invokevirtual #58                 // Method scala/runtime/RichInt$.to$extension:(II)Lscala/collection/immutable/Range$Inclusive;
+      14: invokevirtual #62                 // Method scala/collection/immutable/Range$Inclusive.toList:()Lscala/collection/immutable/List;
+      17: iload_0
+      18: iload_1
+      19: invokedynamic #177,  0            // InvokeDynamic #3:apply:(II)Lscala/Function1;
+      24: invokevirtual #90                 // Method scala/collection/immutable/List.flatMap:(Lscala/Function1;)Lscala/collection/immutable/List;
+      27: areturn
+
+  private static scala.collection.IterableOnce pythagorean$$anonfun$adapted$1(int, java.lang.Object);
+    Code:
+       0: iload_0
+       1: aload_1
+       2: invokestatic  #126                // Method scala/runtime/BoxesRunTime.unboxToInt:(Ljava/lang/Object;)I
+       5: invokestatic  #180                // Method pythagorean$$anonfun$1:(II)Lscala/collection/IterableOnce;
+       8: areturn
+
+  private static java.lang.Object $deserializeLambda$(java.lang.invoke.SerializedLambda);
+    Code:
+       0: aload_0
+       1: invokedynamic #192,  0            // InvokeDynamic #4:lambdaDeserialize:(Ljava/lang/invoke/SerializedLambda;)Ljava/lang/Object;
+       6: areturn
+}
+
+================================================================================
+// Definition: for_complex$package (javap)
+================================================================================
+
+Compiled from "for_complex.scala"
+public final class for_complex$package {
+  public static scala.collection.immutable.List<scala.Tuple3<java.lang.Object, java.lang.Object, java.lang.Object>> pythagorean(int);
+    Code:
+       0: getstatic     #15                 // Field for_complex$package$.MODULE$:Lfor_complex$package$;
+       3: iload_0
+       4: invokevirtual #17                 // Method for_complex$package$.pythagorean:(I)Lscala/collection/immutable/List;
+       7: areturn
+
+  public static scala.collection.immutable.List<scala.Tuple3<java.lang.Object, java.lang.Object, java.lang.Object>> run();
+    Code:
+       0: getstatic     #15                 // Field for_complex$package$.MODULE$:Lfor_complex$package$;
+       3: invokevirtual #22                 // Method for_complex$package$.run:()Lscala/collection/immutable/List;
+       6: areturn
+}

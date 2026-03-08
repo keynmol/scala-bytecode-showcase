@@ -1,0 +1,120 @@
+================================================================================
+// Snippet: trait_mixed_methods
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      trait Formatter:
+        def prefix: String
+        def format(msg: String): String = s"$prefix: $msg"
+
+@Snapshot
+      class ErrorFormatter extends Formatter:
+        def prefix: String = "ERROR"
+
+@Snapshot
+      def run: String =
+        ErrorFormatter().format("Something went wrong")
+
+================================================================================
+// Definition: trait_mixed_methods$package (javap)
+================================================================================
+
+Compiled from "trait_mixed_methods.scala"
+public final class trait_mixed_methods$package {
+  public static java.lang.String run();
+    Code:
+       0: getstatic     #14                 // Field trait_mixed_methods$package$.MODULE$:Ltrait_mixed_methods$package$;
+       3: invokevirtual #16                 // Method trait_mixed_methods$package$.run:()Ljava/lang/String;
+       6: areturn
+}
+
+================================================================================
+// Definition: Formatter (javap)
+================================================================================
+
+Compiled from "trait_mixed_methods.scala"
+public interface Formatter {
+  public abstract java.lang.String prefix();
+
+  public static java.lang.String format$(Formatter, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #21                 // InterfaceMethod format:(Ljava/lang/String;)Ljava/lang/String;
+       5: areturn
+
+  public default java.lang.String format(java.lang.String);
+    Code:
+       0: aload_0
+       1: invokeinterface #25,  1           // InterfaceMethod prefix:()Ljava/lang/String;
+       6: aload_1
+       7: invokedynamic #37,  0             // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      12: areturn
+}
+
+================================================================================
+// Definition: ErrorFormatter (javap)
+================================================================================
+
+Compiled from "trait_mixed_methods.scala"
+public class ErrorFormatter implements Formatter {
+  public ErrorFormatter();
+    Code:
+       0: aload_0
+       1: invokespecial #12                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public java.lang.String format(java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokestatic  #21                 // InterfaceMethod Formatter.format$:(LFormatter;Ljava/lang/String;)Ljava/lang/String;
+       5: areturn
+
+  public java.lang.String prefix();
+    Code:
+       0: ldc           #26                 // String ERROR
+       2: areturn
+}
+
+================================================================================
+// Definition: trait_mixed_methods$package$ (javap)
+================================================================================
+
+Compiled from "trait_mixed_methods.scala"
+public final class trait_mixed_methods$package$ implements java.io.Serializable {
+  public static final trait_mixed_methods$package$ MODULE$;
+
+  private trait_mixed_methods$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class trait_mixed_methods$package$
+       3: dup
+       4: invokespecial #16                 // Method "<init>":()V
+       7: putstatic     #18                 // Field MODULE$:Ltrait_mixed_methods$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #22                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class trait_mixed_methods$package$
+       6: invokespecial #25                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public java.lang.String run();
+    Code:
+       0: new           #30                 // class ErrorFormatter
+       3: dup
+       4: invokespecial #31                 // Method ErrorFormatter."<init>":()V
+       7: ldc           #33                 // String Something went wrong
+       9: invokevirtual #37                 // Method ErrorFormatter.format:(Ljava/lang/String;)Ljava/lang/String;
+      12: areturn
+}

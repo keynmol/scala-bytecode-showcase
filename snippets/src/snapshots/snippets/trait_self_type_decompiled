@@ -1,0 +1,114 @@
+/*
+================================================================================
+Snippet: trait_self_type
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      trait Persistence:
+        def save(data: String): String = s"Saved: $data"
+
+@Snapshot
+      trait UserService:
+        this: Persistence =>
+        def createUser(name: String): String =
+          save(s"User($name)")
+
+@Snapshot
+      class UserServiceImpl extends UserService with Persistence
+
+@Snapshot
+      def run: String =
+        UserServiceImpl().createUser("Alice")
+
+*/
+
+// ================================================================================
+// Definition: UserService (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+
+@Snapshot
+public interface UserService {
+   static String createUser$(final UserService $this, final String name) {
+      return $this.createUser(name);
+   }
+
+   default String createUser(final String name) {
+      return ((Persistence)this).save("User(" + name + ")");
+   }
+}
+
+// ================================================================================
+// Definition: Persistence (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+
+@Snapshot
+public interface Persistence {
+   static String save$(final Persistence $this, final String data) {
+      return $this.save(data);
+   }
+
+   default String save(final String data) {
+      return "Saved: " + data;
+   }
+}
+
+// ================================================================================
+// Definition: UserServiceImpl (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+
+@Snapshot
+public class UserServiceImpl implements UserService, Persistence {
+   public String createUser(final String name) {
+      return UserService.createUser$(this, name);
+   }
+
+   public String save(final String data) {
+      return Persistence.save$(this, data);
+   }
+}
+
+// ================================================================================
+// Definition: trait_self_type$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import trait_self_type.package.;
+
+public final class trait_self_type$package {
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: trait_self_type$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class trait_self_type$package$ implements Serializable {
+   public static final trait_self_type$package$ MODULE$ = new trait_self_type$package$();
+
+   private trait_self_type$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(trait_self_type$package$.class);
+   }
+
+   @Snapshot
+   public String run() {
+      return new UserServiceImpl().createUser("Alice");
+   }
+}

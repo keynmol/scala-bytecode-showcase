@@ -1,0 +1,147 @@
+================================================================================
+// Snippet: trait_mixin
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      trait Swimmer:
+        def swim: String = "swimming"
+
+@Snapshot
+      trait Flyer:
+        def fly: String = "flying"
+
+@Snapshot
+      class Duck extends Swimmer with Flyer:
+        def quack: String = "quack"
+
+@Snapshot
+      def run: String =
+        val duck = Duck()
+        s"${duck.swim}, ${duck.fly}, ${duck.quack}"
+
+================================================================================
+// Definition: trait_mixin$package$ (javap)
+================================================================================
+
+Compiled from "trait_mixin.scala"
+public final class trait_mixin$package$ implements java.io.Serializable {
+  public static final trait_mixin$package$ MODULE$;
+
+  private trait_mixin$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #18                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class trait_mixin$package$
+       3: dup
+       4: invokespecial #21                 // Method "<init>":()V
+       7: putstatic     #23                 // Field MODULE$:Ltrait_mixin$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #27                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class trait_mixin$package$
+       6: invokespecial #30                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public java.lang.String run();
+    Code:
+       0: new           #35                 // class Duck
+       3: dup
+       4: invokespecial #36                 // Method Duck."<init>":()V
+       7: astore_1
+       8: aload_1
+       9: invokevirtual #39                 // Method Duck.swim:()Ljava/lang/String;
+      12: aload_1
+      13: invokevirtual #42                 // Method Duck.fly:()Ljava/lang/String;
+      16: aload_1
+      17: invokevirtual #45                 // Method Duck.quack:()Ljava/lang/String;
+      20: invokedynamic #57,  0             // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      25: areturn
+}
+
+================================================================================
+// Definition: Duck (javap)
+================================================================================
+
+Compiled from "trait_mixin.scala"
+public class Duck implements Swimmer,Flyer {
+  public Duck();
+    Code:
+       0: aload_0
+       1: invokespecial #14                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public java.lang.String swim();
+    Code:
+       0: aload_0
+       1: invokestatic  #22                 // InterfaceMethod Swimmer.swim$:(LSwimmer;)Ljava/lang/String;
+       4: areturn
+
+  public java.lang.String fly();
+    Code:
+       0: aload_0
+       1: invokestatic  #27                 // InterfaceMethod Flyer.fly$:(LFlyer;)Ljava/lang/String;
+       4: areturn
+
+  public java.lang.String quack();
+    Code:
+       0: ldc           #29                 // String quack
+       2: areturn
+}
+
+================================================================================
+// Definition: Swimmer (javap)
+================================================================================
+
+Compiled from "trait_mixin.scala"
+public interface Swimmer {
+  public static java.lang.String swim$(Swimmer);
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // InterfaceMethod swim:()Ljava/lang/String;
+       4: areturn
+
+  public default java.lang.String swim();
+    Code:
+       0: ldc           #16                 // String swimming
+       2: areturn
+}
+
+================================================================================
+// Definition: trait_mixin$package (javap)
+================================================================================
+
+Compiled from "trait_mixin.scala"
+public final class trait_mixin$package {
+  public static java.lang.String run();
+    Code:
+       0: getstatic     #14                 // Field trait_mixin$package$.MODULE$:Ltrait_mixin$package$;
+       3: invokevirtual #16                 // Method trait_mixin$package$.run:()Ljava/lang/String;
+       6: areturn
+}
+
+================================================================================
+// Definition: Flyer (javap)
+================================================================================
+
+Compiled from "trait_mixin.scala"
+public interface Flyer {
+  public static java.lang.String fly$(Flyer);
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // InterfaceMethod fly:()Ljava/lang/String;
+       4: areturn
+
+  public default java.lang.String fly();
+    Code:
+       0: ldc           #16                 // String flying
+       2: areturn
+}

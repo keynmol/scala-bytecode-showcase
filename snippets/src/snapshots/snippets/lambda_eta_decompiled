@@ -1,0 +1,90 @@
+/*
+================================================================================
+Snippet: lambda_eta
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def double(x: Int): Int = x * 2
+
+@Snapshot
+      def applyToList(xs: List[Int], f: Int => Int): List[Int] =
+        xs.map(f)
+
+@Snapshot
+      def run: List[Int] =
+        applyToList(List(1, 2, 3), double)
+
+*/
+
+// ================================================================================
+// Definition: lambda_eta$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Function1;
+import scala.collection.immutable.List;
+import scala.collection.immutable..colon.colon;
+import scala.collection.immutable.Nil.;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+import scala.runtime.java8.JFunction1.mcII.sp;
+
+public final class lambda_eta$package$ implements Serializable {
+   public static final lambda_eta$package$ MODULE$ = new lambda_eta$package$();
+
+   private lambda_eta$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(lambda_eta$package$.class);
+   }
+
+   @Snapshot
+   public int double(final int x) {
+      return x * 2;
+   }
+
+   @Snapshot
+   public List<Object> applyToList(final List<Object> xs, final Function1<Object, Object> f) {
+      return xs.map(f);
+   }
+
+   @Snapshot
+   public List<Object> run() {
+      return this.applyToList(
+         (List<Object>)(
+            (Object)(new colon(BoxesRunTime.boxToInteger(1), new colon(BoxesRunTime.boxToInteger(2), new colon(BoxesRunTime.boxToInteger(3), .MODULE$))))
+         ),
+         (sp)x -> MODULE$.double(x)
+      );
+   }
+}
+
+// ================================================================================
+// Definition: lambda_eta$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import lambda_eta.package.;
+import scala.Function1;
+import scala.collection.immutable.List;
+
+public final class lambda_eta$package {
+   @Snapshot
+   public static List<Object> applyToList(List<Object> var0, Function1<Object, Object> var1) {
+      return .MODULE$.applyToList(var0, var1);
+   }
+
+   @Snapshot
+   public static int double(int var0) {
+      return .MODULE$.double(var0);
+   }
+
+   @Snapshot
+   public static List<Object> run() {
+      return .MODULE$.run();
+   }
+}

@@ -1,0 +1,272 @@
+================================================================================
+// Snippet: enum_methods
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      enum Direction:
+        case North, East, South, West
+
+        def opposite: Direction = this match
+          case North => South
+          case South => North
+          case East => West
+          case West => East
+
+        def turnRight: Direction = this match
+          case North => East
+          case East => South
+          case South => West
+          case West => North
+
+@Snapshot
+      def run: String =
+        val d = Direction.North
+        s"$d opposite=${d.opposite} right=${d.turnRight}"
+
+================================================================================
+// Definition: enum_methods$package$ (javap)
+================================================================================
+
+Compiled from "enum_methods.scala"
+public final class enum_methods$package$ implements java.io.Serializable {
+  public static final enum_methods$package$ MODULE$;
+
+  private enum_methods$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #18                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class enum_methods$package$
+       3: dup
+       4: invokespecial #21                 // Method "<init>":()V
+       7: putstatic     #23                 // Field MODULE$:Lenum_methods$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #27                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class enum_methods$package$
+       6: invokespecial #30                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public java.lang.String run();
+    Code:
+       0: getstatic     #39                 // Field Direction$.North:LDirection;
+       3: astore_1
+       4: aload_1
+       5: aload_1
+       6: invokevirtual #45                 // Method Direction.opposite:()LDirection;
+       9: aload_1
+      10: invokevirtual #48                 // Method Direction.turnRight:()LDirection;
+      13: invokedynamic #60,  0             // InvokeDynamic #0:makeConcatWithConstants:(LDirection;LDirection;LDirection;)Ljava/lang/String;
+      18: areturn
+}
+
+================================================================================
+// Definition: enum_methods$package (javap)
+================================================================================
+
+Compiled from "enum_methods.scala"
+public final class enum_methods$package {
+  public static java.lang.String run();
+    Code:
+       0: getstatic     #14                 // Field enum_methods$package$.MODULE$:Lenum_methods$package$;
+       3: invokevirtual #16                 // Method enum_methods$package$.run:()Ljava/lang/String;
+       6: areturn
+}
+
+================================================================================
+// Definition: Direction (javap)
+================================================================================
+
+Compiled from "enum_methods.scala"
+public abstract class Direction implements scala.Product,scala.reflect.Enum {
+  public static Direction fromOrdinal(int);
+    Code:
+       0: getstatic     #18                 // Field Direction$.MODULE$:LDirection$;
+       3: iload_0
+       4: invokevirtual #20                 // Method Direction$.fromOrdinal:(I)LDirection;
+       7: areturn
+
+  public static Direction valueOf(java.lang.String);
+    Code:
+       0: getstatic     #18                 // Field Direction$.MODULE$:LDirection$;
+       3: aload_0
+       4: invokevirtual #24                 // Method Direction$.valueOf:(Ljava/lang/String;)LDirection;
+       7: areturn
+
+  public static Direction[] values();
+    Code:
+       0: getstatic     #18                 // Field Direction$.MODULE$:LDirection$;
+       3: invokevirtual #28                 // Method Direction$.values:()[LDirection;
+       6: areturn
+
+  public Direction();
+    Code:
+       0: aload_0
+       1: invokespecial #32                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public scala.collection.Iterator<java.lang.Object> productIterator();
+    Code:
+       0: aload_0
+       1: invokestatic  #41                 // InterfaceMethod scala/Product.productIterator$:(Lscala/Product;)Lscala/collection/Iterator;
+       4: areturn
+
+  public java.lang.String productPrefix();
+    Code:
+       0: aload_0
+       1: invokestatic  #47                 // InterfaceMethod scala/Product.productPrefix$:(Lscala/Product;)Ljava/lang/String;
+       4: areturn
+
+  public java.lang.String productElementName(int);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: invokestatic  #54                 // InterfaceMethod scala/Product.productElementName$:(Lscala/Product;I)Ljava/lang/String;
+       5: areturn
+
+  public scala.collection.Iterator<java.lang.String> productElementNames();
+    Code:
+       0: aload_0
+       1: invokestatic  #60                 // InterfaceMethod scala/Product.productElementNames$:(Lscala/Product;)Lscala/collection/Iterator;
+       4: areturn
+
+  public Direction opposite();
+    Code:
+       0: aload_0
+       1: astore_1
+       2: getstatic     #65                 // Field Direction$.North:LDirection;
+       5: aload_1
+       6: astore_2
+       7: dup
+       8: ifnonnull     19
+      11: pop
+      12: aload_2
+      13: ifnull        26
+      16: goto          30
+      19: aload_2
+      20: invokevirtual #69                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      23: ifeq          30
+      26: getstatic     #72                 // Field Direction$.South:LDirection;
+      29: areturn
+      30: getstatic     #72                 // Field Direction$.South:LDirection;
+      33: aload_1
+      34: astore_3
+      35: dup
+      36: ifnonnull     47
+      39: pop
+      40: aload_3
+      41: ifnull        54
+      44: goto          58
+      47: aload_3
+      48: invokevirtual #69                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      51: ifeq          58
+      54: getstatic     #65                 // Field Direction$.North:LDirection;
+      57: areturn
+      58: getstatic     #75                 // Field Direction$.East:LDirection;
+      61: aload_1
+      62: astore        4
+      64: dup
+      65: ifnonnull     77
+      68: pop
+      69: aload         4
+      71: ifnull        85
+      74: goto          89
+      77: aload         4
+      79: invokevirtual #69                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      82: ifeq          89
+      85: getstatic     #78                 // Field Direction$.West:LDirection;
+      88: areturn
+      89: getstatic     #78                 // Field Direction$.West:LDirection;
+      92: aload_1
+      93: astore        5
+      95: dup
+      96: ifnonnull     108
+      99: pop
+     100: aload         5
+     102: ifnull        116
+     105: goto          120
+     108: aload         5
+     110: invokevirtual #69                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+     113: ifeq          120
+     116: getstatic     #75                 // Field Direction$.East:LDirection;
+     119: areturn
+     120: new           #80                 // class scala/MatchError
+     123: dup
+     124: aload_1
+     125: invokespecial #83                 // Method scala/MatchError."<init>":(Ljava/lang/Object;)V
+     128: athrow
+
+  public Direction turnRight();
+    Code:
+       0: aload_0
+       1: astore_1
+       2: getstatic     #65                 // Field Direction$.North:LDirection;
+       5: aload_1
+       6: astore_2
+       7: dup
+       8: ifnonnull     19
+      11: pop
+      12: aload_2
+      13: ifnull        26
+      16: goto          30
+      19: aload_2
+      20: invokevirtual #69                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      23: ifeq          30
+      26: getstatic     #75                 // Field Direction$.East:LDirection;
+      29: areturn
+      30: getstatic     #75                 // Field Direction$.East:LDirection;
+      33: aload_1
+      34: astore_3
+      35: dup
+      36: ifnonnull     47
+      39: pop
+      40: aload_3
+      41: ifnull        54
+      44: goto          58
+      47: aload_3
+      48: invokevirtual #69                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      51: ifeq          58
+      54: getstatic     #72                 // Field Direction$.South:LDirection;
+      57: areturn
+      58: getstatic     #72                 // Field Direction$.South:LDirection;
+      61: aload_1
+      62: astore        4
+      64: dup
+      65: ifnonnull     77
+      68: pop
+      69: aload         4
+      71: ifnull        85
+      74: goto          89
+      77: aload         4
+      79: invokevirtual #69                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      82: ifeq          89
+      85: getstatic     #78                 // Field Direction$.West:LDirection;
+      88: areturn
+      89: getstatic     #78                 // Field Direction$.West:LDirection;
+      92: aload_1
+      93: astore        5
+      95: dup
+      96: ifnonnull     108
+      99: pop
+     100: aload         5
+     102: ifnull        116
+     105: goto          120
+     108: aload         5
+     110: invokevirtual #69                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+     113: ifeq          120
+     116: getstatic     #65                 // Field Direction$.North:LDirection;
+     119: areturn
+     120: new           #80                 // class scala/MatchError
+     123: dup
+     124: aload_1
+     125: invokespecial #83                 // Method scala/MatchError."<init>":(Ljava/lang/Object;)V
+     128: athrow
+}

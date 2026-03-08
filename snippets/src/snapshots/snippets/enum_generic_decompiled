@@ -1,0 +1,118 @@
+/*
+================================================================================
+Snippet: enum_generic
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      enum Option[+T]:
+        case Some(value: T)
+        case None
+
+@Snapshot
+      def getOrElse[T](opt: Option[T], default: T): T =
+        opt match
+          case Option.Some(v) => v
+          case Option.None => default
+
+@Snapshot
+      def run: String =
+        val a = getOrElse(Option.Some("hello"), "default")
+        val b = getOrElse(Option.None, "fallback")
+        s"$a, $b"
+
+*/
+
+// ================================================================================
+// Definition: Option (decompiled)
+// ================================================================================
+
+import Option.;
+import compiler.iface.Snapshot;
+import scala.Product;
+import scala.collection.Iterator;
+import scala.reflect.Enum;
+
+@Snapshot
+public enum Option<T> implements Enum,  {
+   public static Option<?> fromOrdinal(int var0) {
+      return .MODULE$.fromOrdinal(var0);
+   }
+
+   public Iterator<Object> productIterator() {
+      return Product.productIterator$(this);
+   }
+
+   public String productPrefix() {
+      return Product.productPrefix$(this);
+   }
+
+   public String productElementName(final int n) {
+      return Product.productElementName$(this, n);
+   }
+
+   public Iterator<String> productElementNames() {
+      return Product.productElementNames$(this);
+   }
+}
+
+// ================================================================================
+// Definition: enum_generic$package$ (decompiled)
+// ================================================================================
+
+import Option.Some;
+import Option.Some.;
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.MatchError;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class enum_generic$package$ implements Serializable {
+   public static final enum_generic$package$ MODULE$ = new enum_generic$package$();
+
+   private enum_generic$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(enum_generic$package$.class);
+   }
+
+   @Snapshot
+   public <T> T getOrElse(final Option<T> opt, final T default) {
+      if (opt instanceof Some var4) {
+         Some var5 = .MODULE$.unapply(var4);
+         return (T)var5._1();
+      } else if (Option..None == null ? opt != null : !Option..None.equals(opt)) {
+         throw new MatchError(opt);
+      } else {
+         return (T)default;
+      }
+   }
+
+   @Snapshot
+   public String run() {
+      String a = this.getOrElse(.MODULE$.apply("hello"), "default");
+      String b = this.getOrElse(Option..None, "fallback");
+      return a + ", " + b;
+   }
+}
+
+// ================================================================================
+// Definition: enum_generic$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import enum_generic.package.;
+
+public final class enum_generic$package {
+   @Snapshot
+   public static <T> T getOrElse(Option<T> var0, T var1) {
+      return (T).MODULE$.getOrElse(var0, var1);
+   }
+
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}

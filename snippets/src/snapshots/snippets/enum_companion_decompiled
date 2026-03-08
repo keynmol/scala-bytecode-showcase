@@ -1,0 +1,201 @@
+/*
+================================================================================
+Snippet: enum_companion
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      enum Status:
+        case Active, Inactive, Pending
+
+@Snapshot
+      object Status:
+        def fromString(s: String): Status =
+          s.toLowerCase match
+            case "active" | "on" => Active
+            case "inactive" | "off" => Inactive
+            case _ => Pending
+
+@Snapshot
+      def run: String =
+        List("active", "off", "unknown")
+          .map(Status.fromString)
+          .mkString(", ")
+
+*/
+
+// ================================================================================
+// Definition: enum_companion$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.collection.immutable.List;
+import scala.collection.immutable..colon.colon;
+import scala.collection.immutable.Nil.;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class enum_companion$package$ implements Serializable {
+   public static final enum_companion$package$ MODULE$ = new enum_companion$package$();
+
+   private enum_companion$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(enum_companion$package$.class);
+   }
+
+   @Snapshot
+   public String run() {
+      return ((List)(new colon("active", new colon("off", new colon("unknown", .MODULE$))))).map(s -> Status..MODULE$.fromString(s)).mkString(", ");
+   }
+}
+
+// ================================================================================
+// Definition: enum_companion$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import enum_companion.package.;
+
+public final class enum_companion$package {
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: Status (decompiled)
+// ================================================================================
+
+import Status.;
+import compiler.iface.Snapshot;
+import scala.Product;
+import scala.collection.Iterator;
+import scala.reflect.Enum;
+
+@Snapshot
+public enum Status implements Product, Enum {
+   public static Status fromOrdinal(int var0) {
+      return .MODULE$.fromOrdinal(var0);
+   }
+
+   public static Status fromString(String var0) {
+      return .MODULE$.fromString(var0);
+   }
+
+   public Iterator<Object> productIterator() {
+      return Product.productIterator$(this);
+   }
+
+   public String productPrefix() {
+      return Product.productPrefix$(this);
+   }
+
+   public String productElementName(final int n) {
+      return Product.productElementName$(this, n);
+   }
+
+   public Iterator<String> productElementNames() {
+      return Product.productElementNames$(this);
+   }
+}
+
+// ================================================================================
+// Definition: Status$ (decompiled)
+// ================================================================================
+
+import Status..anon.1;
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import java.util.NoSuchElementException;
+import scala.deriving.Mirror.Sum;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+
+@Snapshot
+public final class Status$ implements Sum, Serializable {
+   Active = Status$.MODULE$.$new(0, "Active"),
+   Inactive = Status$.MODULE$.$new(1, "Inactive"),
+   Pending = Status$.MODULE$.$new(2, "Pending");
+
+   private static final Status[] $values = new Status[]{Active, Inactive, Pending};
+   public static final Status$ MODULE$ = new Status$();
+
+   private Status$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(Status$.class);
+   }
+
+   public Status[] values() {
+      return (Status[])$values.clone();
+   }
+
+   public Status valueOf(final String $name) {
+      switch ($name == null ? 0 : $name.hashCode()) {
+         case 89309323:
+            if ("Inactive".equals($name)) {
+               return Inactive;
+            }
+            break;
+         case 982065527:
+            if ("Pending".equals($name)) {
+               return Pending;
+            }
+            break;
+         case 1955883814:
+            if ("Active".equals($name)) {
+               return Active;
+            }
+      }
+
+      throw new IllegalArgumentException("enum Status has no case with name: " + $name);
+   }
+
+   private Status $new(final int _$ordinal, final String $name) {
+      return new 1($name, _$ordinal);
+   }
+
+   public Status fromOrdinal(final int ordinal) {
+      try {
+         return $values[ordinal];
+      } catch (Throwable var2) {
+         throw new NoSuchElementException("enum Status has no case with ordinal: " + BoxesRunTime.boxToInteger(ordinal).toString());
+      }
+   }
+
+   public Status fromString(final String s) {
+      String var2 = s.toLowerCase();
+      switch (var2 == null ? 0 : var2.hashCode()) {
+         case -1422950650:
+            if ("active".equals(var2)) {
+               return Active;
+            }
+            break;
+         case 3551:
+            if ("on".equals(var2)) {
+               return Active;
+            }
+            break;
+         case 109935:
+            if ("off".equals(var2)) {
+               return Inactive;
+            }
+            break;
+         case 24665195:
+            if ("inactive".equals(var2)) {
+               return Inactive;
+            }
+      }
+
+      return Pending;
+   }
+
+   public int ordinal(final Status x$0) {
+      return x$0.ordinal();
+   }
+}

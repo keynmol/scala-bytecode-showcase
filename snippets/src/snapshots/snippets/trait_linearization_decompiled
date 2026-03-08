@@ -1,0 +1,129 @@
+/*
+================================================================================
+Snippet: trait_linearization
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      trait Base:
+        def value: String = "base"
+
+@Snapshot
+      trait A extends Base:
+        override def value: String = "A -> " + super.value
+
+@Snapshot
+      trait B extends Base:
+        override def value: String = "B -> " + super.value
+
+@Snapshot
+      class C extends A with B
+
+@Snapshot
+      def run: String =
+        C().value
+
+*/
+
+// ================================================================================
+// Definition: trait_linearization$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import trait_linearization.package.;
+
+public final class trait_linearization$package {
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: trait_linearization$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class trait_linearization$package$ implements Serializable {
+   public static final trait_linearization$package$ MODULE$ = new trait_linearization$package$();
+
+   private trait_linearization$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(trait_linearization$package$.class);
+   }
+
+   @Snapshot
+   public String run() {
+      return new C().value();
+   }
+}
+
+// ================================================================================
+// Definition: B (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+
+@Snapshot
+public interface B extends Base {
+   static String value$(final B $this) {
+      return $this.value();
+   }
+
+   default String value() {
+      return "B -> " + this.B$$super$value();
+   }
+}
+
+// ================================================================================
+// Definition: Base (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+
+@Snapshot
+public interface Base {
+   static String value$(final Base $this) {
+      return $this.value();
+   }
+
+   default String value() {
+      return "base";
+   }
+}
+
+// ================================================================================
+// Definition: A (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+
+@Snapshot
+public interface A extends Base {
+   static String value$(final A $this) {
+      return $this.value();
+   }
+
+   default String value() {
+      return "A -> " + this.A$$super$value();
+   }
+}
+
+// ================================================================================
+// Definition: C (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+
+@Snapshot
+public class C implements Base, A, B {
+   public String value() {
+      return B.value$(this);
+   }
+}

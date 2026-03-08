@@ -1,0 +1,160 @@
+================================================================================
+// Snippet: enum_ordinal
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      enum Priority:
+        case Low, Medium, High
+
+@Snapshot
+      def run: String =
+        val all = Priority.values.map(p => s"${p.ordinal}:$p").mkString(", ")
+        val fromName = Priority.valueOf("High")
+        s"$all; valueOf: $fromName"
+
+================================================================================
+// Definition: enum_ordinal$package (javap)
+================================================================================
+
+Compiled from "enum_ordinal.scala"
+public final class enum_ordinal$package {
+  public static java.lang.String run();
+    Code:
+       0: getstatic     #14                 // Field enum_ordinal$package$.MODULE$:Lenum_ordinal$package$;
+       3: invokevirtual #16                 // Method enum_ordinal$package$.run:()Ljava/lang/String;
+       6: areturn
+}
+
+================================================================================
+// Definition: enum_ordinal$package$ (javap)
+================================================================================
+
+Compiled from "enum_ordinal.scala"
+public final class enum_ordinal$package$ implements java.io.Serializable {
+  public static final enum_ordinal$package$ MODULE$;
+
+  private enum_ordinal$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #23                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class enum_ordinal$package$
+       3: dup
+       4: invokespecial #26                 // Method "<init>":()V
+       7: putstatic     #28                 // Field MODULE$:Lenum_ordinal$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #32                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class enum_ordinal$package$
+       6: invokespecial #35                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public java.lang.String run();
+    Code:
+       0: getstatic     #43                 // Field scala/Predef$.MODULE$:Lscala/Predef$;
+       3: getstatic     #43                 // Field scala/Predef$.MODULE$:Lscala/Predef$;
+       6: getstatic     #48                 // Field Priority$.MODULE$:LPriority$;
+       9: invokevirtual #52                 // Method Priority$.values:()[LPriority;
+      12: invokevirtual #56                 // Method scala/Predef$.refArrayOps:([Ljava/lang/Object;)Ljava/lang/Object;
+      15: astore_2
+      16: getstatic     #61                 // Field scala/collection/ArrayOps$.MODULE$:Lscala/collection/ArrayOps$;
+      19: aload_2
+      20: invokedynamic #82,  0             // InvokeDynamic #0:apply:()Lscala/Function1;
+      25: getstatic     #87                 // Field scala/reflect/ClassTag$.MODULE$:Lscala/reflect/ClassTag$;
+      28: ldc           #89                 // class java/lang/String
+      30: invokevirtual #92                 // Method scala/reflect/ClassTag$.apply:(Ljava/lang/Class;)Lscala/reflect/ClassTag;
+      33: invokevirtual #96                 // Method scala/collection/ArrayOps$.map$extension:(Ljava/lang/Object;Lscala/Function1;Lscala/reflect/ClassTag;)Ljava/lang/Object;
+      36: checkcast     #98                 // class "[Ljava/lang/Object;"
+      39: invokevirtual #102                // Method scala/Predef$.wrapRefArray:([Ljava/lang/Object;)Lscala/collection/mutable/ArraySeq$ofRef;
+      42: ldc           #104                // String ,
+      44: invokevirtual #108                // Method scala/collection/mutable/ArraySeq$ofRef.mkString:(Ljava/lang/String;)Ljava/lang/String;
+      47: astore_1
+      48: getstatic     #48                 // Field Priority$.MODULE$:LPriority$;
+      51: ldc           #110                // String High
+      53: invokevirtual #114                // Method Priority$.valueOf:(Ljava/lang/String;)LPriority;
+      56: astore_3
+      57: aload_1
+      58: aload_3
+      59: invokedynamic #126,  0            // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;LPriority;)Ljava/lang/String;
+      64: areturn
+
+  private static final java.lang.String $anonfun$1(Priority);
+    Code:
+       0: aload_0
+       1: invokevirtual #137                // Method Priority.ordinal:()I
+       4: aload_0
+       5: invokedynamic #142,  0            // InvokeDynamic #2:makeConcatWithConstants:(ILPriority;)Ljava/lang/String;
+      10: areturn
+
+  private static java.lang.Object $deserializeLambda$(java.lang.invoke.SerializedLambda);
+    Code:
+       0: aload_0
+       1: invokedynamic #154,  0            // InvokeDynamic #3:lambdaDeserialize:(Ljava/lang/invoke/SerializedLambda;)Ljava/lang/Object;
+       6: areturn
+}
+
+================================================================================
+// Definition: Priority (javap)
+================================================================================
+
+Compiled from "enum_ordinal.scala"
+public abstract class Priority implements scala.Product,scala.reflect.Enum {
+  public static Priority fromOrdinal(int);
+    Code:
+       0: getstatic     #18                 // Field Priority$.MODULE$:LPriority$;
+       3: iload_0
+       4: invokevirtual #20                 // Method Priority$.fromOrdinal:(I)LPriority;
+       7: areturn
+
+  public static Priority valueOf(java.lang.String);
+    Code:
+       0: getstatic     #18                 // Field Priority$.MODULE$:LPriority$;
+       3: aload_0
+       4: invokevirtual #24                 // Method Priority$.valueOf:(Ljava/lang/String;)LPriority;
+       7: areturn
+
+  public static Priority[] values();
+    Code:
+       0: getstatic     #18                 // Field Priority$.MODULE$:LPriority$;
+       3: invokevirtual #28                 // Method Priority$.values:()[LPriority;
+       6: areturn
+
+  public Priority();
+    Code:
+       0: aload_0
+       1: invokespecial #32                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public scala.collection.Iterator<java.lang.Object> productIterator();
+    Code:
+       0: aload_0
+       1: invokestatic  #41                 // InterfaceMethod scala/Product.productIterator$:(Lscala/Product;)Lscala/collection/Iterator;
+       4: areturn
+
+  public java.lang.String productPrefix();
+    Code:
+       0: aload_0
+       1: invokestatic  #47                 // InterfaceMethod scala/Product.productPrefix$:(Lscala/Product;)Ljava/lang/String;
+       4: areturn
+
+  public java.lang.String productElementName(int);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: invokestatic  #54                 // InterfaceMethod scala/Product.productElementName$:(Lscala/Product;I)Ljava/lang/String;
+       5: areturn
+
+  public scala.collection.Iterator<java.lang.String> productElementNames();
+    Code:
+       0: aload_0
+       1: invokestatic  #60                 // InterfaceMethod scala/Product.productElementNames$:(Lscala/Product;)Lscala/collection/Iterator;
+       4: areturn
+}

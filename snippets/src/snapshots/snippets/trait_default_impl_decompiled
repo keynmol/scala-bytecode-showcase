@@ -1,0 +1,102 @@
+/*
+================================================================================
+Snippet: trait_default_impl
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      trait Logger:
+        def log(msg: String): String = s"[LOG] $msg"
+        def warn(msg: String): String = s"[WARN] $msg"
+
+@Snapshot
+      class AppLogger extends Logger
+
+@Snapshot
+      def run: String =
+        val logger = AppLogger()
+        logger.log("Starting") + "; " + logger.warn("Low memory")
+
+*/
+
+// ================================================================================
+// Definition: trait_default_impl$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import trait_default_impl.package.;
+
+public final class trait_default_impl$package {
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: Logger (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+
+@Snapshot
+public interface Logger {
+   static String log$(final Logger $this, final String msg) {
+      return $this.log(msg);
+   }
+
+   default String log(final String msg) {
+      return "[LOG] " + msg;
+   }
+
+   static String warn$(final Logger $this, final String msg) {
+      return $this.warn(msg);
+   }
+
+   default String warn(final String msg) {
+      return "[WARN] " + msg;
+   }
+}
+
+// ================================================================================
+// Definition: trait_default_impl$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class trait_default_impl$package$ implements Serializable {
+   public static final trait_default_impl$package$ MODULE$ = new trait_default_impl$package$();
+
+   private trait_default_impl$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(trait_default_impl$package$.class);
+   }
+
+   @Snapshot
+   public String run() {
+      AppLogger logger = new AppLogger();
+      return logger.log("Starting") + "; " + logger.warn("Low memory");
+   }
+}
+
+// ================================================================================
+// Definition: AppLogger (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+
+@Snapshot
+public class AppLogger implements Logger {
+   public String log(final String msg) {
+      return Logger.log$(this, msg);
+   }
+
+   public String warn(final String msg) {
+      return Logger.warn$(this, msg);
+   }
+}

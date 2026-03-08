@@ -1,0 +1,97 @@
+/*
+================================================================================
+Snippet: enum_ordinal
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      enum Priority:
+        case Low, Medium, High
+
+@Snapshot
+      def run: String =
+        val all = Priority.values.map(p => s"${p.ordinal}:$p").mkString(", ")
+        val fromName = Priority.valueOf("High")
+        s"$all; valueOf: $fromName"
+
+*/
+
+// ================================================================================
+// Definition: enum_ordinal$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import enum_ordinal.package.;
+
+public final class enum_ordinal$package {
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: enum_ordinal$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Predef.;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class enum_ordinal$package$ implements Serializable {
+   public static final enum_ordinal$package$ MODULE$ = new enum_ordinal$package$();
+
+   private enum_ordinal$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(enum_ordinal$package$.class);
+   }
+
+   @Snapshot
+   public String run() {
+       var10000 = .MODULE$;
+      Object var2 = .MODULE$.refArrayOps(Priority..MODULE$.values());
+      String all = var10000.wrapRefArray(
+            (Object[])scala.collection.ArrayOps..MODULE$.map$extension(var2, p -> p.ordinal() + ":" + p, scala.reflect.ClassTag..MODULE$.apply(String.class))
+         )
+         .mkString(", ");
+      Priority fromName = Priority..MODULE$.valueOf("High");
+      return all + "; valueOf: " + fromName;
+   }
+}
+
+// ================================================================================
+// Definition: Priority (decompiled)
+// ================================================================================
+
+import Priority.;
+import compiler.iface.Snapshot;
+import scala.Product;
+import scala.collection.Iterator;
+import scala.reflect.Enum;
+
+@Snapshot
+public enum Priority implements Product, Enum {
+   public static Priority fromOrdinal(int var0) {
+      return .MODULE$.fromOrdinal(var0);
+   }
+
+   public Iterator<Object> productIterator() {
+      return Product.productIterator$(this);
+   }
+
+   public String productPrefix() {
+      return Product.productPrefix$(this);
+   }
+
+   public String productElementName(final int n) {
+      return Product.productElementName$(this, n);
+   }
+
+   public Iterator<String> productElementNames() {
+      return Product.productElementNames$(this);
+   }
+}

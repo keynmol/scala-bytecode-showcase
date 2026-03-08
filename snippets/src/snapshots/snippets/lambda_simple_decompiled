@@ -1,0 +1,67 @@
+/*
+================================================================================
+Snippet: lambda_simple
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def applyTwice(f: Int => Int, x: Int): Int =
+        f(f(x))
+
+@Snapshot
+      def run: Int =
+        applyTwice(x => x + 1, 5)
+
+*/
+
+// ================================================================================
+// Definition: lambda_simple$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Function1;
+import scala.runtime.ModuleSerializationProxy;
+import scala.runtime.java8.JFunction1.mcII.sp;
+
+public final class lambda_simple$package$ implements Serializable {
+   public static final lambda_simple$package$ MODULE$ = new lambda_simple$package$();
+
+   private lambda_simple$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(lambda_simple$package$.class);
+   }
+
+   @Snapshot
+   public int applyTwice(final Function1<Object, Object> f, final int x) {
+      return f.apply$mcII$sp(f.apply$mcII$sp(x));
+   }
+
+   @Snapshot
+   public int run() {
+      return this.applyTwice((sp)x -> x + 1, 5);
+   }
+}
+
+// ================================================================================
+// Definition: lambda_simple$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import lambda_simple.package.;
+import scala.Function1;
+
+public final class lambda_simple$package {
+   @Snapshot
+   public static int applyTwice(Function1<Object, Object> var0, int var1) {
+      return .MODULE$.applyTwice(var0, var1);
+   }
+
+   @Snapshot
+   public static int run() {
+      return .MODULE$.run();
+   }
+}

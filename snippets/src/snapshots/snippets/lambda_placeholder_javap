@@ -1,0 +1,130 @@
+================================================================================
+// Snippet: lambda_placeholder
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def process(xs: List[Int]): List[Int] =
+        xs.map(_ * 2).filter(_ > 5)
+
+@Snapshot
+      def run: List[Int] =
+        process(List(1, 2, 3, 4, 5))
+
+================================================================================
+// Definition: lambda_placeholder$package (javap)
+================================================================================
+
+Compiled from "lambda_placeholder.scala"
+public final class lambda_placeholder$package {
+  public static scala.collection.immutable.List<java.lang.Object> process(scala.collection.immutable.List<java.lang.Object>);
+    Code:
+       0: getstatic     #15                 // Field lambda_placeholder$package$.MODULE$:Llambda_placeholder$package$;
+       3: aload_0
+       4: invokevirtual #17                 // Method lambda_placeholder$package$.process:(Lscala/collection/immutable/List;)Lscala/collection/immutable/List;
+       7: areturn
+
+  public static scala.collection.immutable.List<java.lang.Object> run();
+    Code:
+       0: getstatic     #15                 // Field lambda_placeholder$package$.MODULE$:Llambda_placeholder$package$;
+       3: invokevirtual #22                 // Method lambda_placeholder$package$.run:()Lscala/collection/immutable/List;
+       6: areturn
+}
+
+================================================================================
+// Definition: lambda_placeholder$package$ (javap)
+================================================================================
+
+Compiled from "lambda_placeholder.scala"
+public final class lambda_placeholder$package$ implements java.io.Serializable {
+  public static final lambda_placeholder$package$ MODULE$;
+
+  private lambda_placeholder$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #18                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class lambda_placeholder$package$
+       3: dup
+       4: invokespecial #21                 // Method "<init>":()V
+       7: putstatic     #23                 // Field MODULE$:Llambda_placeholder$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #27                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class lambda_placeholder$package$
+       6: invokespecial #30                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public scala.collection.immutable.List<java.lang.Object> process(scala.collection.immutable.List<java.lang.Object>);
+    Code:
+       0: aload_1
+       1: invokedynamic #53,  0             // InvokeDynamic #0:apply$mcII$sp:()Lscala/runtime/java8/JFunction1$mcII$sp;
+       6: invokevirtual #59                 // Method scala/collection/immutable/List.map:(Lscala/Function1;)Lscala/collection/immutable/List;
+       9: invokedynamic #69,  0             // InvokeDynamic #1:apply$mcZI$sp:()Lscala/runtime/java8/JFunction1$mcZI$sp;
+      14: invokevirtual #72                 // Method scala/collection/immutable/List.filter:(Lscala/Function1;)Lscala/collection/immutable/List;
+      17: areturn
+
+  public scala.collection.immutable.List<java.lang.Object> run();
+    Code:
+       0: aload_0
+       1: new           #78                 // class scala/collection/immutable/$colon$colon
+       4: dup
+       5: iconst_1
+       6: invokestatic  #84                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+       9: new           #78                 // class scala/collection/immutable/$colon$colon
+      12: dup
+      13: iconst_2
+      14: invokestatic  #84                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      17: new           #78                 // class scala/collection/immutable/$colon$colon
+      20: dup
+      21: iconst_3
+      22: invokestatic  #84                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      25: new           #78                 // class scala/collection/immutable/$colon$colon
+      28: dup
+      29: iconst_4
+      30: invokestatic  #84                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      33: new           #78                 // class scala/collection/immutable/$colon$colon
+      36: dup
+      37: iconst_5
+      38: invokestatic  #84                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      41: getstatic     #89                 // Field scala/collection/immutable/Nil$.MODULE$:Lscala/collection/immutable/Nil$;
+      44: invokespecial #92                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      47: invokespecial #92                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      50: invokespecial #92                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      53: invokespecial #92                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      56: invokespecial #92                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      59: checkcast     #4                  // class java/lang/Object
+      62: checkcast     #55                 // class scala/collection/immutable/List
+      65: invokevirtual #94                 // Method process:(Lscala/collection/immutable/List;)Lscala/collection/immutable/List;
+      68: areturn
+
+  private static final int process$$anonfun$1(int);
+    Code:
+       0: iload_0
+       1: iconst_2
+       2: imul
+       3: ireturn
+
+  private static final boolean process$$anonfun$2(int);
+    Code:
+       0: iload_0
+       1: iconst_5
+       2: if_icmple     9
+       5: iconst_1
+       6: goto          10
+       9: iconst_0
+      10: ireturn
+
+  private static java.lang.Object $deserializeLambda$(java.lang.invoke.SerializedLambda);
+    Code:
+       0: aload_0
+       1: invokedynamic #109,  0            // InvokeDynamic #2:lambdaDeserialize:(Ljava/lang/invoke/SerializedLambda;)Ljava/lang/Object;
+       6: areturn
+}
