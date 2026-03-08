@@ -1,0 +1,113 @@
+/*
+================================================================================
+Snippet: boundary_simple
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      object BoundaryExample:
+        import scala.util.boundary, boundary.break
+
+        def findFirst(xs: List[Int], pred: Int => Boolean): Option[Int] =
+          boundary:
+            for x <- xs do
+              if pred(x) then break(Some(x))
+            None
+
+        def run: Option[Int] =
+          findFirst(List(1, 2, 3, 4, 5), _ > 3)
+
+*/
+
+// ================================================================================
+// Definition: BoundaryExample$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Function1;
+import scala.Option;
+import scala.collection.immutable.List;
+import scala.collection.immutable..colon.colon;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+import scala.runtime.java8.JFunction1.mcVI.sp;
+import scala.util.boundary.;
+import scala.util.boundary.Break;
+import scala.util.boundary.Label;
+
+@Snapshot
+public final class BoundaryExample$ implements Serializable {
+   public static final BoundaryExample$ MODULE$ = new BoundaryExample$();
+
+   private BoundaryExample$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(BoundaryExample$.class);
+   }
+
+   public Option<Object> findFirst(final List<Object> xs, final Function1<Object, Object> pred) {
+      Label local = new Label();
+
+      Object var10000;
+      try {
+         xs.foreach((sp)x -> {
+            if (pred.apply$mcZI$sp(x)) {
+               throw .MODULE$.break(scala.Some..MODULE$.apply(BoxesRunTime.boxToInteger(x)), local);
+            }
+         });
+         var10000 = scala.None..MODULE$;
+      } catch (Break var5) {
+         if (!var5.isSameLabelAs(local)) {
+            throw var5;
+         }
+
+         var10000 = (Option)var5.value();
+      }
+
+      return (Option<Object>)var10000;
+   }
+
+   public Option<Object> run() {
+      return this.findFirst(
+         (List<Object>)(
+            (Object)(
+               new colon(
+                  BoxesRunTime.boxToInteger(1),
+                  new colon(
+                     BoxesRunTime.boxToInteger(2),
+                     new colon(
+                        BoxesRunTime.boxToInteger(3),
+                        new colon(BoxesRunTime.boxToInteger(4), new colon(BoxesRunTime.boxToInteger(5), scala.collection.immutable.Nil..MODULE$))
+                     )
+                  )
+               )
+            )
+         ),
+         (scala.runtime.java8.JFunction1.mcZI.sp)_$1 -> _$1 > 3
+      );
+   }
+}
+
+// ================================================================================
+// Definition: BoundaryExample (decompiled)
+// ================================================================================
+
+import BoundaryExample.;
+import compiler.iface.Snapshot;
+import scala.Function1;
+import scala.Option;
+import scala.collection.immutable.List;
+
+@Snapshot
+public final class BoundaryExample {
+   public static Option<Object> findFirst(List<Object> var0, Function1<Object, Object> var1) {
+      return .MODULE$.findFirst(var0, var1);
+   }
+
+   public static Option<Object> run() {
+      return .MODULE$.run();
+   }
+}

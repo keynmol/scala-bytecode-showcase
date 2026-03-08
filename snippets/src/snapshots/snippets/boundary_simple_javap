@@ -1,0 +1,168 @@
+================================================================================
+// Snippet: boundary_simple
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      object BoundaryExample:
+        import scala.util.boundary, boundary.break
+
+        def findFirst(xs: List[Int], pred: Int => Boolean): Option[Int] =
+          boundary:
+            for x <- xs do
+              if pred(x) then break(Some(x))
+            None
+
+        def run: Option[Int] =
+          findFirst(List(1, 2, 3, 4, 5), _ > 3)
+
+================================================================================
+// Definition: BoundaryExample$ (javap)
+================================================================================
+
+Compiled from "boundary_simple.scala"
+public final class BoundaryExample$ implements java.io.Serializable {
+  public static final BoundaryExample$ MODULE$;
+
+  private BoundaryExample$();
+    Code:
+       0: aload_0
+       1: invokespecial #27                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class BoundaryExample$
+       3: dup
+       4: invokespecial #30                 // Method "<init>":()V
+       7: putstatic     #32                 // Field MODULE$:LBoundaryExample$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #36                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class BoundaryExample$
+       6: invokespecial #39                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public scala.Option<java.lang.Object> findFirst(scala.collection.immutable.List<java.lang.Object>, scala.Function1<java.lang.Object, java.lang.Object>);
+    Code:
+       0: new           #20                 // class scala/util/boundary$Label
+       3: dup
+       4: invokespecial #45                 // Method scala/util/boundary$Label."<init>":()V
+       7: astore_3
+       8: aload_1
+       9: aload_2
+      10: aload_3
+      11: invokedynamic #64,  0             // InvokeDynamic #0:apply$mcVI$sp:(Lscala/Function1;Lscala/util/boundary$Label;)Lscala/runtime/java8/JFunction1$mcVI$sp;
+      16: invokevirtual #70                 // Method scala/collection/immutable/List.foreach:(Lscala/Function1;)V
+      19: getstatic     #75                 // Field scala/None$.MODULE$:Lscala/None$;
+      22: goto          53
+      25: astore        4
+      27: aload         4
+      29: aload_3
+      30: invokevirtual #79                 // Method scala/util/boundary$Break.isSameLabelAs:(Lscala/util/boundary$Label;)Z
+      33: ifeq          47
+      36: aload         4
+      38: invokevirtual #82                 // Method scala/util/boundary$Break.value:()Ljava/lang/Object;
+      41: checkcast     #84                 // class scala/Option
+      44: goto          50
+      47: aload         4
+      49: athrow
+      50: goto          53
+      53: areturn
+    Exception table:
+       from    to  target type
+           8    22    25   Class scala/util/boundary$Break
+
+  public scala.Option<java.lang.Object> run();
+    Code:
+       0: aload_0
+       1: new           #97                 // class scala/collection/immutable/$colon$colon
+       4: dup
+       5: iconst_1
+       6: invokestatic  #103                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+       9: new           #97                 // class scala/collection/immutable/$colon$colon
+      12: dup
+      13: iconst_2
+      14: invokestatic  #103                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      17: new           #97                 // class scala/collection/immutable/$colon$colon
+      20: dup
+      21: iconst_3
+      22: invokestatic  #103                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      25: new           #97                 // class scala/collection/immutable/$colon$colon
+      28: dup
+      29: iconst_4
+      30: invokestatic  #103                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      33: new           #97                 // class scala/collection/immutable/$colon$colon
+      36: dup
+      37: iconst_5
+      38: invokestatic  #103                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      41: getstatic     #108                // Field scala/collection/immutable/Nil$.MODULE$:Lscala/collection/immutable/Nil$;
+      44: invokespecial #111                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      47: invokespecial #111                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      50: invokespecial #111                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      53: invokespecial #111                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      56: invokespecial #111                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      59: checkcast     #4                  // class java/lang/Object
+      62: checkcast     #66                 // class scala/collection/immutable/List
+      65: invokedynamic #121,  0            // InvokeDynamic #1:apply$mcZI$sp:()Lscala/runtime/java8/JFunction1$mcZI$sp;
+      70: invokevirtual #123                // Method findFirst:(Lscala/collection/immutable/List;Lscala/Function1;)Lscala/Option;
+      73: areturn
+
+  private static final void findFirst$$anonfun$1(scala.Function1, scala.util.boundary$Label, int);
+    Code:
+       0: aload_0
+       1: iload_2
+       2: invokeinterface #128,  2          // InterfaceMethod scala/Function1.apply$mcZI$sp:(I)Z
+       7: ifeq          29
+      10: getstatic     #133                // Field scala/util/boundary$.MODULE$:Lscala/util/boundary$;
+      13: getstatic     #138                // Field scala/Some$.MODULE$:Lscala/Some$;
+      16: iload_2
+      17: invokestatic  #103                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      20: invokevirtual #142                // Method scala/Some$.apply:(Ljava/lang/Object;)Lscala/Some;
+      23: aload_1
+      24: invokevirtual #146                // Method scala/util/boundary$.break:(Ljava/lang/Object;Lscala/util/boundary$Label;)Lscala/runtime/Nothing$;
+      27: athrow
+      28: athrow
+      29: return
+
+  private static final boolean run$$anonfun$1(int);
+    Code:
+       0: iload_0
+       1: iconst_3
+       2: if_icmple     9
+       5: iconst_1
+       6: goto          10
+       9: iconst_0
+      10: ireturn
+
+  private static java.lang.Object $deserializeLambda$(java.lang.invoke.SerializedLambda);
+    Code:
+       0: aload_0
+       1: invokedynamic #162,  0            // InvokeDynamic #2:lambdaDeserialize:(Ljava/lang/invoke/SerializedLambda;)Ljava/lang/Object;
+       6: areturn
+}
+
+================================================================================
+// Definition: BoundaryExample (javap)
+================================================================================
+
+Compiled from "boundary_simple.scala"
+public final class BoundaryExample {
+  public static scala.Option<java.lang.Object> findFirst(scala.collection.immutable.List<java.lang.Object>, scala.Function1<java.lang.Object, java.lang.Object>);
+    Code:
+       0: getstatic     #15                 // Field BoundaryExample$.MODULE$:LBoundaryExample$;
+       3: aload_0
+       4: aload_1
+       5: invokevirtual #17                 // Method BoundaryExample$.findFirst:(Lscala/collection/immutable/List;Lscala/Function1;)Lscala/Option;
+       8: areturn
+
+  public static scala.Option<java.lang.Object> run();
+    Code:
+       0: getstatic     #15                 // Field BoundaryExample$.MODULE$:LBoundaryExample$;
+       3: invokevirtual #22                 // Method BoundaryExample$.run:()Lscala/Option;
+       6: areturn
+}

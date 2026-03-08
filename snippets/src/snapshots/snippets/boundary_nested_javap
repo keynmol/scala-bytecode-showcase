@@ -1,0 +1,252 @@
+================================================================================
+// Snippet: boundary_nested
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      object BoundaryNested:
+        import scala.util.boundary, boundary.break
+
+        def findInMatrix(matrix: List[List[Int]], target: Int): Option[(Int, Int)] =
+          boundary:
+            for (row, i) <- matrix.zipWithIndex do
+              boundary:
+                for (cell, j) <- row.zipWithIndex do
+                  if cell == target then break(Some((i, j)))
+            None
+
+        def run: Option[(Int, Int)] =
+          val matrix = List(
+            List(1, 2, 3),
+            List(4, 5, 6),
+            List(7, 8, 9)
+          )
+          findInMatrix(matrix, 5)
+
+================================================================================
+// Definition: BoundaryNested (javap)
+================================================================================
+
+Compiled from "boundary_nested.scala"
+public final class BoundaryNested {
+  public static scala.Option<scala.Tuple2<java.lang.Object, java.lang.Object>> findInMatrix(scala.collection.immutable.List<scala.collection.immutable.List<java.lang.Object>>, int);
+    Code:
+       0: getstatic     #15                 // Field BoundaryNested$.MODULE$:LBoundaryNested$;
+       3: aload_0
+       4: iload_1
+       5: invokevirtual #17                 // Method BoundaryNested$.findInMatrix:(Lscala/collection/immutable/List;I)Lscala/Option;
+       8: areturn
+
+  public static scala.Option<scala.Tuple2<java.lang.Object, java.lang.Object>> run();
+    Code:
+       0: getstatic     #15                 // Field BoundaryNested$.MODULE$:LBoundaryNested$;
+       3: invokevirtual #22                 // Method BoundaryNested$.run:()Lscala/Option;
+       6: areturn
+}
+
+================================================================================
+// Definition: BoundaryNested$ (javap)
+================================================================================
+
+Compiled from "boundary_nested.scala"
+public final class BoundaryNested$ implements java.io.Serializable {
+  public static final BoundaryNested$ MODULE$;
+
+  private BoundaryNested$();
+    Code:
+       0: aload_0
+       1: invokespecial #27                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class BoundaryNested$
+       3: dup
+       4: invokespecial #30                 // Method "<init>":()V
+       7: putstatic     #32                 // Field MODULE$:LBoundaryNested$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #36                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class BoundaryNested$
+       6: invokespecial #39                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public scala.Option<scala.Tuple2<java.lang.Object, java.lang.Object>> findInMatrix(scala.collection.immutable.List<scala.collection.immutable.List<java.lang.Object>>, int);
+    Code:
+       0: aload_1
+       1: invokevirtual #49                 // Method scala/collection/immutable/List.zipWithIndex:()Ljava/lang/Object;
+       4: checkcast     #46                 // class scala/collection/immutable/List
+       7: iload_2
+       8: invokedynamic #71,  0             // InvokeDynamic #0:apply:(I)Lscala/Function1;
+      13: invokevirtual #75                 // Method scala/collection/immutable/List.foreach:(Lscala/Function1;)V
+      16: getstatic     #80                 // Field scala/None$.MODULE$:Lscala/None$;
+      19: areturn
+
+  public scala.Option<scala.Tuple2<java.lang.Object, java.lang.Object>> run();
+    Code:
+       0: new           #87                 // class scala/collection/immutable/$colon$colon
+       3: dup
+       4: new           #87                 // class scala/collection/immutable/$colon$colon
+       7: dup
+       8: iconst_1
+       9: invokestatic  #93                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      12: new           #87                 // class scala/collection/immutable/$colon$colon
+      15: dup
+      16: iconst_2
+      17: invokestatic  #93                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      20: new           #87                 // class scala/collection/immutable/$colon$colon
+      23: dup
+      24: iconst_3
+      25: invokestatic  #93                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      28: getstatic     #98                 // Field scala/collection/immutable/Nil$.MODULE$:Lscala/collection/immutable/Nil$;
+      31: invokespecial #101                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      34: invokespecial #101                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      37: invokespecial #101                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      40: checkcast     #4                  // class java/lang/Object
+      43: checkcast     #46                 // class scala/collection/immutable/List
+      46: new           #87                 // class scala/collection/immutable/$colon$colon
+      49: dup
+      50: new           #87                 // class scala/collection/immutable/$colon$colon
+      53: dup
+      54: iconst_4
+      55: invokestatic  #93                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      58: new           #87                 // class scala/collection/immutable/$colon$colon
+      61: dup
+      62: iconst_5
+      63: invokestatic  #93                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      66: new           #87                 // class scala/collection/immutable/$colon$colon
+      69: dup
+      70: bipush        6
+      72: invokestatic  #93                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      75: getstatic     #98                 // Field scala/collection/immutable/Nil$.MODULE$:Lscala/collection/immutable/Nil$;
+      78: invokespecial #101                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      81: invokespecial #101                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      84: invokespecial #101                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      87: checkcast     #4                  // class java/lang/Object
+      90: checkcast     #46                 // class scala/collection/immutable/List
+      93: new           #87                 // class scala/collection/immutable/$colon$colon
+      96: dup
+      97: new           #87                 // class scala/collection/immutable/$colon$colon
+     100: dup
+     101: bipush        7
+     103: invokestatic  #93                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+     106: new           #87                 // class scala/collection/immutable/$colon$colon
+     109: dup
+     110: bipush        8
+     112: invokestatic  #93                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+     115: new           #87                 // class scala/collection/immutable/$colon$colon
+     118: dup
+     119: bipush        9
+     121: invokestatic  #93                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+     124: getstatic     #98                 // Field scala/collection/immutable/Nil$.MODULE$:Lscala/collection/immutable/Nil$;
+     127: invokespecial #101                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+     130: invokespecial #101                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+     133: invokespecial #101                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+     136: checkcast     #4                  // class java/lang/Object
+     139: checkcast     #46                 // class scala/collection/immutable/List
+     142: getstatic     #98                 // Field scala/collection/immutable/Nil$.MODULE$:Lscala/collection/immutable/Nil$;
+     145: invokespecial #101                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+     148: invokespecial #101                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+     151: invokespecial #101                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+     154: checkcast     #4                  // class java/lang/Object
+     157: checkcast     #46                 // class scala/collection/immutable/List
+     160: astore_1
+     161: aload_0
+     162: aload_1
+     163: iconst_5
+     164: invokevirtual #103                // Method findInMatrix:(Lscala/collection/immutable/List;I)Lscala/Option;
+     167: areturn
+
+  private static final void findInMatrix$$anonfun$1$$anonfun$1(int, int, scala.util.boundary$Label, scala.Tuple2);
+    Code:
+       0: aload_3
+       1: astore        4
+       3: aload         4
+       5: ifnull        54
+       8: aload         4
+      10: invokevirtual #115                // Method scala/Tuple2._1$mcI$sp:()I
+      13: istore        5
+      15: aload         4
+      17: invokevirtual #118                // Method scala/Tuple2._2$mcI$sp:()I
+      20: istore        6
+      22: iload         5
+      24: iload_0
+      25: if_icmpne     53
+      28: getstatic     #123                // Field scala/util/boundary$.MODULE$:Lscala/util/boundary$;
+      31: getstatic     #128                // Field scala/Some$.MODULE$:Lscala/Some$;
+      34: new           #130                // class scala/Tuple2$mcII$sp
+      37: dup
+      38: iload_1
+      39: iload         6
+      41: invokespecial #133                // Method scala/Tuple2$mcII$sp."<init>":(II)V
+      44: invokevirtual #136                // Method scala/Some$.apply:(Ljava/lang/Object;)Lscala/Some;
+      47: aload_2
+      48: invokevirtual #140                // Method scala/util/boundary$.break:(Ljava/lang/Object;Lscala/util/boundary$Label;)Lscala/runtime/Nothing$;
+      51: athrow
+      52: athrow
+      53: return
+      54: new           #142                // class scala/MatchError
+      57: dup
+      58: aload         4
+      60: invokespecial #145                // Method scala/MatchError."<init>":(Ljava/lang/Object;)V
+      63: athrow
+
+  private static final java.lang.Object findInMatrix$$anonfun$1(int, scala.Tuple2);
+    Code:
+       0: aload_1
+       1: astore_2
+       2: aload_2
+       3: ifnull        85
+       6: aload_2
+       7: invokevirtual #155                // Method scala/Tuple2._1:()Ljava/lang/Object;
+      10: checkcast     #46                 // class scala/collection/immutable/List
+      13: astore_3
+      14: aload_2
+      15: invokevirtual #158                // Method scala/Tuple2._2:()Ljava/lang/Object;
+      18: invokestatic  #162                // Method scala/runtime/BoxesRunTime.unboxToInt:(Ljava/lang/Object;)I
+      21: istore        4
+      23: new           #20                 // class scala/util/boundary$Label
+      26: dup
+      27: invokespecial #163                // Method scala/util/boundary$Label."<init>":()V
+      30: astore        5
+      32: aload_3
+      33: invokevirtual #49                 // Method scala/collection/immutable/List.zipWithIndex:()Ljava/lang/Object;
+      36: checkcast     #46                 // class scala/collection/immutable/List
+      39: iload_0
+      40: iload         4
+      42: aload         5
+      44: invokedynamic #173,  0            // InvokeDynamic #1:applyVoid:(IILscala/util/boundary$Label;)Lscala/runtime/function/JProcedure1;
+      49: invokevirtual #75                 // Method scala/collection/immutable/List.foreach:(Lscala/Function1;)V
+      52: getstatic     #179                // Field scala/runtime/BoxedUnit.UNIT:Lscala/runtime/BoxedUnit;
+      55: goto          84
+      58: astore        6
+      60: aload         6
+      62: aload         5
+      64: invokevirtual #183                // Method scala/util/boundary$Break.isSameLabelAs:(Lscala/util/boundary$Label;)Z
+      67: ifeq          78
+      70: aload         6
+      72: invokevirtual #186                // Method scala/util/boundary$Break.value:()Ljava/lang/Object;
+      75: goto          81
+      78: aload         6
+      80: athrow
+      81: goto          84
+      84: areturn
+      85: new           #142                // class scala/MatchError
+      88: dup
+      89: aload_2
+      90: invokespecial #145                // Method scala/MatchError."<init>":(Ljava/lang/Object;)V
+      93: athrow
+    Exception table:
+       from    to  target type
+          32    55    58   Class scala/util/boundary$Break
+
+  private static java.lang.Object $deserializeLambda$(java.lang.invoke.SerializedLambda);
+    Code:
+       0: aload_0
+       1: invokedynamic #203,  0            // InvokeDynamic #2:lambdaDeserialize:(Ljava/lang/invoke/SerializedLambda;)Ljava/lang/Object;
+       6: areturn
+}

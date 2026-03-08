@@ -1,0 +1,128 @@
+/*
+================================================================================
+Snippet: boundary_optional
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      object BoundaryOptional:
+        import scala.util.boundary, boundary.break
+
+        def process(xs: List[Int]): Int =
+          boundary:
+            val sum = xs.sum
+            if sum > 100 then break(100)
+            if sum < 0 then break(0)
+            sum
+
+        def run: List[Int] =
+          List(
+            process(List(10, 20, 30)),
+            process(List(50, 60, 70)),
+            process(List(-5, -10, 2))
+          )
+
+*/
+
+// ================================================================================
+// Definition: BoundaryOptional$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.collection.immutable.List;
+import scala.collection.immutable..colon.colon;
+import scala.math.Numeric.IntIsIntegral.;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+
+@Snapshot
+public final class BoundaryOptional$ implements Serializable {
+   public static final BoundaryOptional$ MODULE$ = new BoundaryOptional$();
+
+   private BoundaryOptional$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(BoundaryOptional$.class);
+   }
+
+   public int process(final List<Object> xs) {
+      int sum = BoxesRunTime.unboxToInt(xs.sum(.MODULE$));
+      if (sum > 100) {
+         return 100;
+      } else {
+         return sum < 0 ? 0 : sum;
+      }
+   }
+
+   public List<Object> run() {
+      return (List<Object>)(
+         (Object)(
+            new colon(
+               BoxesRunTime.boxToInteger(
+                  this.process(
+                     (List<Object>)(
+                        (Object)(
+                           new colon(
+                              BoxesRunTime.boxToInteger(10),
+                              new colon(BoxesRunTime.boxToInteger(20), new colon(BoxesRunTime.boxToInteger(30), scala.collection.immutable.Nil..MODULE$))
+                           )
+                        )
+                     )
+                  )
+               ),
+               new colon(
+                  BoxesRunTime.boxToInteger(
+                     this.process(
+                        (List<Object>)(
+                           (Object)(
+                              new colon(
+                                 BoxesRunTime.boxToInteger(50),
+                                 new colon(BoxesRunTime.boxToInteger(60), new colon(BoxesRunTime.boxToInteger(70), scala.collection.immutable.Nil..MODULE$))
+                              )
+                           )
+                        )
+                     )
+                  ),
+                  new colon(
+                     BoxesRunTime.boxToInteger(
+                        this.process(
+                           (List<Object>)(
+                              (Object)(
+                                 new colon(
+                                    BoxesRunTime.boxToInteger(-5),
+                                    new colon(BoxesRunTime.boxToInteger(-10), new colon(BoxesRunTime.boxToInteger(2), scala.collection.immutable.Nil..MODULE$))
+                                 )
+                              )
+                           )
+                        )
+                     ),
+                     scala.collection.immutable.Nil..MODULE$
+                  )
+               )
+            )
+         )
+      );
+   }
+}
+
+// ================================================================================
+// Definition: BoundaryOptional (decompiled)
+// ================================================================================
+
+import BoundaryOptional.;
+import compiler.iface.Snapshot;
+import scala.collection.immutable.List;
+
+@Snapshot
+public final class BoundaryOptional {
+   public static int process(List<Object> var0) {
+      return .MODULE$.process(var0);
+   }
+
+   public static List<Object> run() {
+      return .MODULE$.run();
+   }
+}

@@ -1,0 +1,224 @@
+================================================================================
+// Snippet: boundary_helper
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      object BoundaryHelper:
+        import scala.util.boundary, boundary.break, boundary.Label
+
+        def checkCondition(x: Int)(using Label[Option[String]]): Unit =
+          if x < 0 then break(Some(s"negative: $x"))
+          if x > 100 then break(Some(s"too large: $x"))
+
+        def validate(xs: List[Int]): Option[String] =
+          boundary:
+            for x <- xs do checkCondition(x)
+            None
+
+        def run: String =
+          val r1 = validate(List(1, 50, 99))
+          val r2 = validate(List(1, -5, 99))
+          val r3 = validate(List(1, 150, 99))
+          s"$r1, $r2, $r3"
+
+================================================================================
+// Definition: BoundaryHelper (javap)
+================================================================================
+
+Compiled from "boundary_helper.scala"
+public final class BoundaryHelper {
+  public static void checkCondition(int, scala.util.boundary$Label<scala.Option<java.lang.String>>);
+    Code:
+       0: getstatic     #20                 // Field BoundaryHelper$.MODULE$:LBoundaryHelper$;
+       3: iload_0
+       4: aload_1
+       5: invokevirtual #22                 // Method BoundaryHelper$.checkCondition:(ILscala/util/boundary$Label;)V
+       8: return
+
+  public static java.lang.String run();
+    Code:
+       0: getstatic     #20                 // Field BoundaryHelper$.MODULE$:LBoundaryHelper$;
+       3: invokevirtual #26                 // Method BoundaryHelper$.run:()Ljava/lang/String;
+       6: areturn
+
+  public static scala.Option<java.lang.String> validate(scala.collection.immutable.List<java.lang.Object>);
+    Code:
+       0: getstatic     #20                 // Field BoundaryHelper$.MODULE$:LBoundaryHelper$;
+       3: aload_0
+       4: invokevirtual #31                 // Method BoundaryHelper$.validate:(Lscala/collection/immutable/List;)Lscala/Option;
+       7: areturn
+}
+
+================================================================================
+// Definition: BoundaryHelper$ (javap)
+================================================================================
+
+Compiled from "boundary_helper.scala"
+public final class BoundaryHelper$ implements java.io.Serializable {
+  public static final BoundaryHelper$ MODULE$;
+
+  private BoundaryHelper$();
+    Code:
+       0: aload_0
+       1: invokespecial #27                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class BoundaryHelper$
+       3: dup
+       4: invokespecial #30                 // Method "<init>":()V
+       7: putstatic     #32                 // Field MODULE$:LBoundaryHelper$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #36                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class BoundaryHelper$
+       6: invokespecial #39                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public void checkCondition(int, scala.util.boundary$Label<scala.Option<java.lang.String>>);
+    Code:
+       0: iload_1
+       1: iconst_0
+       2: if_icmpge     25
+       5: getstatic     #49                 // Field scala/util/boundary$.MODULE$:Lscala/util/boundary$;
+       8: getstatic     #54                 // Field scala/Some$.MODULE$:Lscala/Some$;
+      11: iload_1
+      12: invokedynamic #66,  0             // InvokeDynamic #0:makeConcatWithConstants:(I)Ljava/lang/String;
+      17: invokevirtual #70                 // Method scala/Some$.apply:(Ljava/lang/Object;)Lscala/Some;
+      20: aload_2
+      21: invokevirtual #74                 // Method scala/util/boundary$.break:(Ljava/lang/Object;Lscala/util/boundary$Label;)Lscala/runtime/Nothing$;
+      24: athrow
+      25: iload_1
+      26: bipush        100
+      28: if_icmple     52
+      31: getstatic     #49                 // Field scala/util/boundary$.MODULE$:Lscala/util/boundary$;
+      34: getstatic     #54                 // Field scala/Some$.MODULE$:Lscala/Some$;
+      37: iload_1
+      38: invokedynamic #77,  0             // InvokeDynamic #1:makeConcatWithConstants:(I)Ljava/lang/String;
+      43: invokevirtual #70                 // Method scala/Some$.apply:(Ljava/lang/Object;)Lscala/Some;
+      46: aload_2
+      47: invokevirtual #74                 // Method scala/util/boundary$.break:(Ljava/lang/Object;Lscala/util/boundary$Label;)Lscala/runtime/Nothing$;
+      50: athrow
+      51: athrow
+      52: return
+
+  public scala.Option<java.lang.String> validate(scala.collection.immutable.List<java.lang.Object>);
+    Code:
+       0: new           #20                 // class scala/util/boundary$Label
+       3: dup
+       4: invokespecial #86                 // Method scala/util/boundary$Label."<init>":()V
+       7: astore_2
+       8: aload_1
+       9: aload_2
+      10: invokedynamic #105,  0            // InvokeDynamic #2:apply$mcVI$sp:(Lscala/util/boundary$Label;)Lscala/runtime/java8/JFunction1$mcVI$sp;
+      15: invokevirtual #111                // Method scala/collection/immutable/List.foreach:(Lscala/Function1;)V
+      18: getstatic     #116                // Field scala/None$.MODULE$:Lscala/None$;
+      21: goto          48
+      24: astore_3
+      25: aload_3
+      26: aload_2
+      27: invokevirtual #120                // Method scala/util/boundary$Break.isSameLabelAs:(Lscala/util/boundary$Label;)Z
+      30: ifeq          43
+      33: aload_3
+      34: invokevirtual #123                // Method scala/util/boundary$Break.value:()Ljava/lang/Object;
+      37: checkcast     #125                // class scala/Option
+      40: goto          45
+      43: aload_3
+      44: athrow
+      45: goto          48
+      48: areturn
+    Exception table:
+       from    to  target type
+           8    21    24   Class scala/util/boundary$Break
+
+  public java.lang.String run();
+    Code:
+       0: aload_0
+       1: new           #133                // class scala/collection/immutable/$colon$colon
+       4: dup
+       5: iconst_1
+       6: invokestatic  #139                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+       9: new           #133                // class scala/collection/immutable/$colon$colon
+      12: dup
+      13: bipush        50
+      15: invokestatic  #139                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      18: new           #133                // class scala/collection/immutable/$colon$colon
+      21: dup
+      22: bipush        99
+      24: invokestatic  #139                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      27: getstatic     #144                // Field scala/collection/immutable/Nil$.MODULE$:Lscala/collection/immutable/Nil$;
+      30: invokespecial #147                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      33: invokespecial #147                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      36: invokespecial #147                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      39: checkcast     #4                  // class java/lang/Object
+      42: checkcast     #107                // class scala/collection/immutable/List
+      45: invokevirtual #149                // Method validate:(Lscala/collection/immutable/List;)Lscala/Option;
+      48: astore_1
+      49: aload_0
+      50: new           #133                // class scala/collection/immutable/$colon$colon
+      53: dup
+      54: iconst_1
+      55: invokestatic  #139                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      58: new           #133                // class scala/collection/immutable/$colon$colon
+      61: dup
+      62: bipush        -5
+      64: invokestatic  #139                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      67: new           #133                // class scala/collection/immutable/$colon$colon
+      70: dup
+      71: bipush        99
+      73: invokestatic  #139                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      76: getstatic     #144                // Field scala/collection/immutable/Nil$.MODULE$:Lscala/collection/immutable/Nil$;
+      79: invokespecial #147                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      82: invokespecial #147                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      85: invokespecial #147                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      88: checkcast     #4                  // class java/lang/Object
+      91: checkcast     #107                // class scala/collection/immutable/List
+      94: invokevirtual #149                // Method validate:(Lscala/collection/immutable/List;)Lscala/Option;
+      97: astore_2
+      98: aload_0
+      99: new           #133                // class scala/collection/immutable/$colon$colon
+     102: dup
+     103: iconst_1
+     104: invokestatic  #139                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+     107: new           #133                // class scala/collection/immutable/$colon$colon
+     110: dup
+     111: sipush        150
+     114: invokestatic  #139                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+     117: new           #133                // class scala/collection/immutable/$colon$colon
+     120: dup
+     121: bipush        99
+     123: invokestatic  #139                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+     126: getstatic     #144                // Field scala/collection/immutable/Nil$.MODULE$:Lscala/collection/immutable/Nil$;
+     129: invokespecial #147                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+     132: invokespecial #147                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+     135: invokespecial #147                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+     138: checkcast     #4                  // class java/lang/Object
+     141: checkcast     #107                // class scala/collection/immutable/List
+     144: invokevirtual #149                // Method validate:(Lscala/collection/immutable/List;)Lscala/Option;
+     147: astore_3
+     148: aload_1
+     149: aload_2
+     150: aload_3
+     151: invokedynamic #154,  0            // InvokeDynamic #3:makeConcatWithConstants:(Lscala/Option;Lscala/Option;Lscala/Option;)Ljava/lang/String;
+     156: areturn
+
+  private static final void validate$$anonfun$1(scala.util.boundary$Label, int);
+    Code:
+       0: getstatic     #32                 // Field MODULE$:LBoundaryHelper$;
+       3: iload_1
+       4: aload_0
+       5: invokevirtual #161                // Method checkCondition:(ILscala/util/boundary$Label;)V
+       8: return
+
+  private static java.lang.Object $deserializeLambda$(java.lang.invoke.SerializedLambda);
+    Code:
+       0: aload_0
+       1: invokedynamic #173,  0            // InvokeDynamic #4:lambdaDeserialize:(Ljava/lang/invoke/SerializedLambda;)Ljava/lang/Object;
+       6: areturn
+}

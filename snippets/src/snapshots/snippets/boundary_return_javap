@@ -1,0 +1,195 @@
+================================================================================
+// Snippet: boundary_return
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      object BoundaryReturn:
+        import scala.util.boundary, boundary.break
+
+        def indexOf(xs: List[String], target: String): Int =
+          boundary:
+            for (x, i) <- xs.zipWithIndex do
+              if x == target then break(i)
+            -1
+
+        def run: List[Int] =
+          val list = List("a", "b", "c", "d")
+          List(
+            indexOf(list, "c"),
+            indexOf(list, "x")
+          )
+
+================================================================================
+// Definition: BoundaryReturn$ (javap)
+================================================================================
+
+Compiled from "boundary_return.scala"
+public final class BoundaryReturn$ implements java.io.Serializable {
+  public static final BoundaryReturn$ MODULE$;
+
+  private BoundaryReturn$();
+    Code:
+       0: aload_0
+       1: invokespecial #27                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class BoundaryReturn$
+       3: dup
+       4: invokespecial #30                 // Method "<init>":()V
+       7: putstatic     #32                 // Field MODULE$:LBoundaryReturn$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #36                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class BoundaryReturn$
+       6: invokespecial #39                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public int indexOf(scala.collection.immutable.List<java.lang.String>, java.lang.String);
+    Code:
+       0: new           #20                 // class scala/util/boundary$Label
+       3: dup
+       4: invokespecial #45                 // Method scala/util/boundary$Label."<init>":()V
+       7: astore_3
+       8: aload_1
+       9: invokevirtual #50                 // Method scala/collection/immutable/List.zipWithIndex:()Ljava/lang/Object;
+      12: checkcast     #47                 // class scala/collection/immutable/List
+      15: aload_2
+      16: aload_3
+      17: invokedynamic #72,  0             // InvokeDynamic #0:applyVoid:(Ljava/lang/String;Lscala/util/boundary$Label;)Lscala/runtime/function/JProcedure1;
+      22: invokevirtual #76                 // Method scala/collection/immutable/List.foreach:(Lscala/Function1;)V
+      25: iconst_m1
+      26: goto          57
+      29: astore        4
+      31: aload         4
+      33: aload_3
+      34: invokevirtual #80                 // Method scala/util/boundary$Break.isSameLabelAs:(Lscala/util/boundary$Label;)Z
+      37: ifeq          51
+      40: aload         4
+      42: invokevirtual #83                 // Method scala/util/boundary$Break.value:()Ljava/lang/Object;
+      45: invokestatic  #89                 // Method scala/runtime/BoxesRunTime.unboxToInt:(Ljava/lang/Object;)I
+      48: goto          54
+      51: aload         4
+      53: athrow
+      54: goto          57
+      57: ireturn
+    Exception table:
+       from    to  target type
+           8    26    29   Class scala/util/boundary$Break
+
+  public scala.collection.immutable.List<java.lang.Object> run();
+    Code:
+       0: new           #102                // class scala/collection/immutable/$colon$colon
+       3: dup
+       4: ldc           #104                // String a
+       6: new           #102                // class scala/collection/immutable/$colon$colon
+       9: dup
+      10: ldc           #106                // String b
+      12: new           #102                // class scala/collection/immutable/$colon$colon
+      15: dup
+      16: ldc           #108                // String c
+      18: new           #102                // class scala/collection/immutable/$colon$colon
+      21: dup
+      22: ldc           #110                // String d
+      24: getstatic     #115                // Field scala/collection/immutable/Nil$.MODULE$:Lscala/collection/immutable/Nil$;
+      27: invokespecial #118                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      30: invokespecial #118                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      33: invokespecial #118                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      36: invokespecial #118                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      39: checkcast     #4                  // class java/lang/Object
+      42: checkcast     #47                 // class scala/collection/immutable/List
+      45: astore_1
+      46: new           #102                // class scala/collection/immutable/$colon$colon
+      49: dup
+      50: aload_0
+      51: aload_1
+      52: ldc           #108                // String c
+      54: invokevirtual #120                // Method indexOf:(Lscala/collection/immutable/List;Ljava/lang/String;)I
+      57: invokestatic  #124                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      60: new           #102                // class scala/collection/immutable/$colon$colon
+      63: dup
+      64: aload_0
+      65: aload_1
+      66: ldc           #126                // String x
+      68: invokevirtual #120                // Method indexOf:(Lscala/collection/immutable/List;Ljava/lang/String;)I
+      71: invokestatic  #124                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      74: getstatic     #115                // Field scala/collection/immutable/Nil$.MODULE$:Lscala/collection/immutable/Nil$;
+      77: invokespecial #118                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      80: invokespecial #118                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      83: checkcast     #4                  // class java/lang/Object
+      86: checkcast     #47                 // class scala/collection/immutable/List
+      89: areturn
+
+  private static final void indexOf$$anonfun$1(java.lang.String, scala.util.boundary$Label, scala.Tuple2);
+    Code:
+       0: aload_2
+       1: astore_3
+       2: aload_3
+       3: ifnull        65
+       6: aload_3
+       7: invokevirtual #135                // Method scala/Tuple2._1:()Ljava/lang/Object;
+      10: checkcast     #97                 // class java/lang/String
+      13: astore        4
+      15: aload_3
+      16: invokevirtual #138                // Method scala/Tuple2._2:()Ljava/lang/Object;
+      19: invokestatic  #89                 // Method scala/runtime/BoxesRunTime.unboxToInt:(Ljava/lang/Object;)I
+      22: istore        5
+      24: aload         4
+      26: aload_0
+      27: astore        6
+      29: dup
+      30: ifnonnull     42
+      33: pop
+      34: aload         6
+      36: ifnull        50
+      39: goto          64
+      42: aload         6
+      44: invokevirtual #142                // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      47: ifeq          64
+      50: getstatic     #147                // Field scala/util/boundary$.MODULE$:Lscala/util/boundary$;
+      53: iload         5
+      55: invokestatic  #124                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      58: aload_1
+      59: invokevirtual #151                // Method scala/util/boundary$.break:(Ljava/lang/Object;Lscala/util/boundary$Label;)Lscala/runtime/Nothing$;
+      62: athrow
+      63: athrow
+      64: return
+      65: new           #153                // class scala/MatchError
+      68: dup
+      69: aload_3
+      70: invokespecial #155                // Method scala/MatchError."<init>":(Ljava/lang/Object;)V
+      73: athrow
+
+  private static java.lang.Object $deserializeLambda$(java.lang.invoke.SerializedLambda);
+    Code:
+       0: aload_0
+       1: invokedynamic #172,  0            // InvokeDynamic #1:lambdaDeserialize:(Ljava/lang/invoke/SerializedLambda;)Ljava/lang/Object;
+       6: areturn
+}
+
+================================================================================
+// Definition: BoundaryReturn (javap)
+================================================================================
+
+Compiled from "boundary_return.scala"
+public final class BoundaryReturn {
+  public static int indexOf(scala.collection.immutable.List<java.lang.String>, java.lang.String);
+    Code:
+       0: getstatic     #15                 // Field BoundaryReturn$.MODULE$:LBoundaryReturn$;
+       3: aload_0
+       4: aload_1
+       5: invokevirtual #17                 // Method BoundaryReturn$.indexOf:(Lscala/collection/immutable/List;Ljava/lang/String;)I
+       8: ireturn
+
+  public static scala.collection.immutable.List<java.lang.Object> run();
+    Code:
+       0: getstatic     #15                 // Field BoundaryReturn$.MODULE$:LBoundaryReturn$;
+       3: invokevirtual #22                 // Method BoundaryReturn$.run:()Lscala/collection/immutable/List;
+       6: areturn
+}

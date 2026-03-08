@@ -21,6 +21,7 @@ object SnapshotMacros:
           !d.name.contains("$default$")
         case c: ClassDef =>
           !c.symbol.flags.is(Flags.Synthetic)
+        case _: Import => true
         case _ => false
 
     def getStatementPos(stmt: Statement): Position =
@@ -29,6 +30,7 @@ object SnapshotMacros:
         case d: DefDef   => d.pos
         case c: ClassDef => c.pos
         case v: ValDef   => v.pos
+        case i: Import   => i.pos
         case other       => other.pos
 
     def getStatementSource(stmt: Statement): String =

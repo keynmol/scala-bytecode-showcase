@@ -1,0 +1,117 @@
+/*
+================================================================================
+Snippet: boundary_label
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      object BoundaryLabel:
+        import scala.util.boundary, boundary.break
+
+        def sumUntilNegative(xs: List[Int]): Int =
+          boundary[Int]:
+            var sum = 0
+            for x <- xs do
+              if x < 0 then break(sum)
+              sum += x
+            sum
+
+        def run: Int =
+          sumUntilNegative(List(1, 2, 3, -1, 4, 5))
+
+*/
+
+// ================================================================================
+// Definition: BoundaryLabel$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.collection.immutable.List;
+import scala.collection.immutable..colon.colon;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.IntRef;
+import scala.runtime.ModuleSerializationProxy;
+import scala.runtime.java8.JFunction1.mcVI.sp;
+import scala.util.boundary.;
+import scala.util.boundary.Break;
+import scala.util.boundary.Label;
+
+@Snapshot
+public final class BoundaryLabel$ implements Serializable {
+   public static final BoundaryLabel$ MODULE$ = new BoundaryLabel$();
+
+   private BoundaryLabel$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(BoundaryLabel$.class);
+   }
+
+   public int sumUntilNegative(final List<Object> xs) {
+      Label local = new Label();
+
+      int var10000;
+      try {
+         IntRef sum = IntRef.create(0);
+         xs.foreach((sp)x -> {
+            if (x < 0) {
+               throw .MODULE$.break(BoxesRunTime.boxToInteger(sum.elem), local);
+            } else {
+               sum.elem += x;
+            }
+         });
+         var10000 = sum.elem;
+      } catch (Break var5) {
+         if (!var5.isSameLabelAs(local)) {
+            throw var5;
+         }
+
+         var10000 = BoxesRunTime.unboxToInt(var5.value());
+      }
+
+      return var10000;
+   }
+
+   public int run() {
+      return this.sumUntilNegative(
+         (List<Object>)(
+            (Object)(
+               new colon(
+                  BoxesRunTime.boxToInteger(1),
+                  new colon(
+                     BoxesRunTime.boxToInteger(2),
+                     new colon(
+                        BoxesRunTime.boxToInteger(3),
+                        new colon(
+                           BoxesRunTime.boxToInteger(-1),
+                           new colon(BoxesRunTime.boxToInteger(4), new colon(BoxesRunTime.boxToInteger(5), scala.collection.immutable.Nil..MODULE$))
+                        )
+                     )
+                  )
+               )
+            )
+         )
+      );
+   }
+}
+
+// ================================================================================
+// Definition: BoundaryLabel (decompiled)
+// ================================================================================
+
+import BoundaryLabel.;
+import compiler.iface.Snapshot;
+import scala.collection.immutable.List;
+
+@Snapshot
+public final class BoundaryLabel {
+   public static int run() {
+      return .MODULE$.run();
+   }
+
+   public static int sumUntilNegative(List<Object> var0) {
+      return .MODULE$.sumUntilNegative(var0);
+   }
+}

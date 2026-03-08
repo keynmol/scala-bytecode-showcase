@@ -1,0 +1,173 @@
+================================================================================
+// Snippet: boundary_optional
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      object BoundaryOptional:
+        import scala.util.boundary, boundary.break
+
+        def process(xs: List[Int]): Int =
+          boundary:
+            val sum = xs.sum
+            if sum > 100 then break(100)
+            if sum < 0 then break(0)
+            sum
+
+        def run: List[Int] =
+          List(
+            process(List(10, 20, 30)),
+            process(List(50, 60, 70)),
+            process(List(-5, -10, 2))
+          )
+
+================================================================================
+// Definition: BoundaryOptional$ (javap)
+================================================================================
+
+Compiled from "boundary_optional.scala"
+public final class BoundaryOptional$ implements java.io.Serializable {
+  public static final BoundaryOptional$ MODULE$;
+
+  private BoundaryOptional$();
+    Code:
+       0: aload_0
+       1: invokespecial #19                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class BoundaryOptional$
+       3: dup
+       4: invokespecial #22                 // Method "<init>":()V
+       7: putstatic     #24                 // Field MODULE$:LBoundaryOptional$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #28                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class BoundaryOptional$
+       6: invokespecial #31                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public int process(scala.collection.immutable.List<java.lang.Object>);
+    Code:
+       0: aload_1
+       1: getstatic     #38                 // Field scala/math/Numeric$IntIsIntegral$.MODULE$:Lscala/math/Numeric$IntIsIntegral$;
+       4: invokevirtual #44                 // Method scala/collection/immutable/List.sum:(Lscala/math/Numeric;)Ljava/lang/Object;
+       7: invokestatic  #50                 // Method scala/runtime/BoxesRunTime.unboxToInt:(Ljava/lang/Object;)I
+      10: istore_2
+      11: iload_2
+      12: bipush        100
+      14: if_icmple     20
+      17: bipush        100
+      19: ireturn
+      20: iload_2
+      21: iconst_0
+      22: if_icmpge     27
+      25: iconst_0
+      26: ireturn
+      27: iload_2
+      28: ireturn
+
+  public scala.collection.immutable.List<java.lang.Object> run();
+    Code:
+       0: new           #57                 // class scala/collection/immutable/$colon$colon
+       3: dup
+       4: aload_0
+       5: new           #57                 // class scala/collection/immutable/$colon$colon
+       8: dup
+       9: bipush        10
+      11: invokestatic  #61                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      14: new           #57                 // class scala/collection/immutable/$colon$colon
+      17: dup
+      18: bipush        20
+      20: invokestatic  #61                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      23: new           #57                 // class scala/collection/immutable/$colon$colon
+      26: dup
+      27: bipush        30
+      29: invokestatic  #61                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      32: getstatic     #66                 // Field scala/collection/immutable/Nil$.MODULE$:Lscala/collection/immutable/Nil$;
+      35: invokespecial #69                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      38: invokespecial #69                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      41: invokespecial #69                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      44: checkcast     #4                  // class java/lang/Object
+      47: checkcast     #40                 // class scala/collection/immutable/List
+      50: invokevirtual #71                 // Method process:(Lscala/collection/immutable/List;)I
+      53: invokestatic  #61                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      56: new           #57                 // class scala/collection/immutable/$colon$colon
+      59: dup
+      60: aload_0
+      61: new           #57                 // class scala/collection/immutable/$colon$colon
+      64: dup
+      65: bipush        50
+      67: invokestatic  #61                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      70: new           #57                 // class scala/collection/immutable/$colon$colon
+      73: dup
+      74: bipush        60
+      76: invokestatic  #61                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      79: new           #57                 // class scala/collection/immutable/$colon$colon
+      82: dup
+      83: bipush        70
+      85: invokestatic  #61                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      88: getstatic     #66                 // Field scala/collection/immutable/Nil$.MODULE$:Lscala/collection/immutable/Nil$;
+      91: invokespecial #69                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      94: invokespecial #69                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      97: invokespecial #69                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+     100: checkcast     #4                  // class java/lang/Object
+     103: checkcast     #40                 // class scala/collection/immutable/List
+     106: invokevirtual #71                 // Method process:(Lscala/collection/immutable/List;)I
+     109: invokestatic  #61                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+     112: new           #57                 // class scala/collection/immutable/$colon$colon
+     115: dup
+     116: aload_0
+     117: new           #57                 // class scala/collection/immutable/$colon$colon
+     120: dup
+     121: bipush        -5
+     123: invokestatic  #61                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+     126: new           #57                 // class scala/collection/immutable/$colon$colon
+     129: dup
+     130: bipush        -10
+     132: invokestatic  #61                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+     135: new           #57                 // class scala/collection/immutable/$colon$colon
+     138: dup
+     139: iconst_2
+     140: invokestatic  #61                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+     143: getstatic     #66                 // Field scala/collection/immutable/Nil$.MODULE$:Lscala/collection/immutable/Nil$;
+     146: invokespecial #69                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+     149: invokespecial #69                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+     152: invokespecial #69                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+     155: checkcast     #4                  // class java/lang/Object
+     158: checkcast     #40                 // class scala/collection/immutable/List
+     161: invokevirtual #71                 // Method process:(Lscala/collection/immutable/List;)I
+     164: invokestatic  #61                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+     167: getstatic     #66                 // Field scala/collection/immutable/Nil$.MODULE$:Lscala/collection/immutable/Nil$;
+     170: invokespecial #69                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+     173: invokespecial #69                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+     176: invokespecial #69                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+     179: checkcast     #4                  // class java/lang/Object
+     182: checkcast     #40                 // class scala/collection/immutable/List
+     185: areturn
+}
+
+================================================================================
+// Definition: BoundaryOptional (javap)
+================================================================================
+
+Compiled from "boundary_optional.scala"
+public final class BoundaryOptional {
+  public static int process(scala.collection.immutable.List<java.lang.Object>);
+    Code:
+       0: getstatic     #15                 // Field BoundaryOptional$.MODULE$:LBoundaryOptional$;
+       3: aload_0
+       4: invokevirtual #17                 // Method BoundaryOptional$.process:(Lscala/collection/immutable/List;)I
+       7: ireturn
+
+  public static scala.collection.immutable.List<java.lang.Object> run();
+    Code:
+       0: getstatic     #15                 // Field BoundaryOptional$.MODULE$:LBoundaryOptional$;
+       3: invokevirtual #22                 // Method BoundaryOptional$.run:()Lscala/collection/immutable/List;
+       6: areturn
+}
