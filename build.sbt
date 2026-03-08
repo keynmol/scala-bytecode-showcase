@@ -50,3 +50,46 @@ lazy val root = project
   .settings(
     name := "snapshot-compiler-demo"
   )
+
+val snapshotDiff = inputKey[Unit]("Generate diff between two version snapshots: snapshotDiff <fromVersion> <toVersion> <kind>")
+
+snapshotDiff := {
+  import complete.DefaultParsers._
+  import scala.sys.process._
+
+  val args = spaceDelimited("<arg>").parsed
+  if (args.size != 3) {
+    sys.error("Usage: snapshotDiff <fromVersion> <toVersion> <kind (decompiled|javap)>")
+  }
+  val Seq(fromVersion, toVersion, kind) = args
+  if (kind != "decompiled" && kind != "javap") {
+    sys.error(s"Invalid kind '$kind'. Must be 'decompiled' or 'javap'")
+  }
+
+  val snapshotsDir = baseDirectory.value / "snapshots"
+  val fromDir = snapshotsDir / fromVersion
+  val toDir = snapshotsDir / toVersion
+
+  if (!fromDir.exists()) sys.error(s"Snapshot directory not found: $fromDir")
+  if (!toDir.exists()) sys.error(s"Snapshot directory not found: $toDir")
+
+  val outputFile = snapshotsDir / s"${fromVersion}_${toVersion}_$kind.diff"
+
+  // Find matching files in the 'from' directory
+  val fromFiles = fromDir.listFiles().filter(_.getName.endsWith(s"_$kind")).sortBy(_.getName)
+
+  val diffOutput = new StringBuilder
+  for (fromFile <- fromFiles) {
+    val toFile = toDir / fromFile.getName
+    if (toFile.exists()) {
+      val cmd = Seq("git", "diff", "--no-index", fromFile.getAbsolutePath, toFile.getAbsolutePath)
+      val output = new StringBuilder
+      // git diff returns 1 when there are differences, so we ignore the exit code
+      cmd.!(ProcessLogger(line => output.append(line + "\n"), _ => ()))
+      diffOutput.append(output)
+    }
+  }
+
+  IO.write(outputFile, diffOutput.toString)
+  println(s"Diff written to: $outputFile")
+}

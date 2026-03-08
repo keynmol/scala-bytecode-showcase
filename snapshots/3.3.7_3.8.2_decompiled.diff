@@ -1,0 +1,1622 @@
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/boundary_helper_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/boundary_helper_decompiled
+index 60009c8..3904510 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/boundary_helper_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/boundary_helper_decompiled
+@@ -80,9 +80,9 @@ public final class BoundaryHelper$ implements Serializable {
+ 
+    public void checkCondition(final int x, final Label<Option<String>> x$2) {
+       if (x < 0) {
+-         throw .MODULE$.break(scala.Some..MODULE$.apply(new StringBuilder(10).append("negative: ").append(x).toString()), x$2);
++         throw .MODULE$.break(scala.Some..MODULE$.apply("negative: " + x), x$2);
+       } else if (x > 100) {
+-         throw .MODULE$.break(scala.Some..MODULE$.apply(new StringBuilder(11).append("too large: ").append(x).toString()), x$2);
++         throw .MODULE$.break(scala.Some..MODULE$.apply("too large: " + x), x$2);
+       }
+    }
+ 
+@@ -94,7 +94,7 @@ public final class BoundaryHelper$ implements Serializable {
+          xs.foreach((sp)x -> MODULE$.checkCondition(x, local));
+          var10000 = scala.None..MODULE$;
+       } catch (Break var4) {
+-         if (var4.label() != local) {
++         if (!var4.isSameLabelAs(local)) {
+             throw var4;
+          }
+ 
+@@ -135,6 +135,6 @@ public final class BoundaryHelper$ implements Serializable {
+             )
+          )
+       );
+-      return new StringBuilder(4).append(r1).append(", ").append(r2).append(", ").append(r3).toString();
++      return r1 + ", " + r2 + ", " + r3;
+    }
+ }
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/boundary_label_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/boundary_label_decompiled
+index df7fdb3..3725e90 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/boundary_label_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/boundary_label_decompiled
+@@ -64,7 +64,7 @@ public final class BoundaryLabel$ implements Serializable {
+          });
+          var10000 = sum.elem;
+       } catch (Break var5) {
+-         if (var5.label() != local) {
++         if (!var5.isSameLabelAs(local)) {
+             throw var5;
+          }
+ 
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/boundary_nested_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/boundary_nested_decompiled
+index c054f54..ea9b177 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/boundary_nested_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/boundary_nested_decompiled
+@@ -58,7 +58,6 @@ import scala.MatchError;
+ import scala.Option;
+ import scala.Tuple2;
+ import scala.Tuple2.mcII.sp;
+-import scala.collection.IterableOps;
+ import scala.collection.immutable.List;
+ import scala.collection.immutable..colon.colon;
+ import scala.runtime.BoxedUnit;
+@@ -81,15 +80,7 @@ public final class BoundaryNested$ implements Serializable {
+    }
+ 
+    public Option<Tuple2<Object, Object>> findInMatrix(final List<List<Object>> matrix, final int target) {
+-      ((IterableOps)matrix.zipWithIndex()).withFilter(x$1 -> {
+-         if (x$1 != null) {
+-            List row = (List)x$1._1();
+-            int i = BoxesRunTime.unboxToInt(x$1._2());
+-            return true;
+-         } else {
+-            return false;
+-         }
+-      }).foreach(x$1 -> {
++      ((List)matrix.zipWithIndex()).foreach(x$1 -> {
+          if (x$1 != null) {
+             List row = (List)x$1._1();
+             int i = BoxesRunTime.unboxToInt(x$1._2());
+@@ -97,15 +88,7 @@ public final class BoundaryNested$ implements Serializable {
+ 
+             Object var10000;
+             try {
+-               ((IterableOps)row.zipWithIndex()).withFilter(x$1x -> {
+-                  if (x$1x != null) {
+-                     int cell = x$1x._1$mcI$sp();
+-                     int j = x$1x._2$mcI$sp();
+-                     return true;
+-                  } else {
+-                     return false;
+-                  }
+-               }).foreach((JProcedure1)x$1x -> {
++               ((List)row.zipWithIndex()).foreach((JProcedure1)x$1x -> {
+                   if (x$1x != null) {
+                      int cell = x$1x._1$mcI$sp();
+                      int j = x$1x._2$mcI$sp();
+@@ -118,7 +101,7 @@ public final class BoundaryNested$ implements Serializable {
+                });
+                var10000 = BoxedUnit.UNIT;
+             } catch (Break var7) {
+-               if (var7.label() != local) {
++               if (!var7.isSameLabelAs(local)) {
+                   throw var7;
+                }
+ 
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/boundary_pattern_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/boundary_pattern_decompiled
+index cbcd70b..9561ccc 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/boundary_pattern_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/boundary_pattern_decompiled
+@@ -83,7 +83,7 @@ public final class BoundaryPattern$ implements Serializable {
+             }));
+          var10000 = scala.None..MODULE$;
+       } catch (Break var5) {
+-         if (var5.label() != local) {
++         if (!var5.isSameLabelAs(local)) {
+             throw var5;
+          }
+ 
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/boundary_return_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/boundary_return_decompiled
+index d16b6d8..8ff0050 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/boundary_return_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/boundary_return_decompiled
+@@ -31,7 +31,6 @@ import compiler.iface.Snapshot
+ import compiler.iface.Snapshot;
+ import java.io.Serializable;
+ import scala.MatchError;
+-import scala.collection.IterableOps;
+ import scala.collection.immutable.List;
+ import scala.collection.immutable..colon.colon;
+ import scala.runtime.BoxesRunTime;
+@@ -57,15 +56,7 @@ public final class BoundaryReturn$ implements Serializable {
+ 
+       int var10000;
+       try {
+-         ((IterableOps)xs.zipWithIndex()).withFilter(x$1 -> {
+-            if (x$1 != null) {
+-               String x = (String)x$1._1();
+-               int i = BoxesRunTime.unboxToInt(x$1._2());
+-               return true;
+-            } else {
+-               return false;
+-            }
+-         }).foreach((JProcedure1)x$1 -> {
++         ((List)xs.zipWithIndex()).foreach((JProcedure1)x$1 -> {
+             if (x$1 == null) {
+                throw new MatchError(x$1);
+             } else {
+@@ -78,7 +69,7 @@ public final class BoundaryReturn$ implements Serializable {
+          });
+          var10000 = -1;
+       } catch (Break var5) {
+-         if (var5.label() != local) {
++         if (!var5.isSameLabelAs(local)) {
+             throw var5;
+          }
+ 
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/boundary_simple_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/boundary_simple_decompiled
+index 25e1592..4f628bf 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/boundary_simple_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/boundary_simple_decompiled
+@@ -60,7 +60,7 @@ public final class BoundaryExample$ implements Serializable {
+          });
+          var10000 = scala.None..MODULE$;
+       } catch (Break var5) {
+-         if (var5.label() != local) {
++         if (!var5.isSameLabelAs(local)) {
+             throw var5;
+          }
+ 
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/boundary_validation_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/boundary_validation_decompiled
+index e3e62b4..eb80a58 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/boundary_validation_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/boundary_validation_decompiled
+@@ -74,19 +74,14 @@ public final class BoundaryValidation$ implements Serializable {
+ 
+       Object var10000;
+       try {
+-         xs.foreach(
+-            (sp)x -> {
+-               if (x <= 0) {
+-                  throw .MODULE$
+-                     .break(
+-                        scala.package..MODULE$.Left().apply(new StringBuilder(25).append("Invalid: ").append(x).append(" is not positive").toString()), local
+-                     );
+-               }
++         xs.foreach((sp)x -> {
++            if (x <= 0) {
++               throw .MODULE$.break(scala.package..MODULE$.Left().apply("Invalid: " + x + " is not positive"), local);
+             }
+-         );
++         });
+          var10000 = scala.package..MODULE$.Right().apply(xs);
+       } catch (Break var4) {
+-         if (var4.label() != local) {
++         if (!var4.isSameLabelAs(local)) {
+             throw var4;
+          }
+ 
+@@ -117,6 +112,6 @@ public final class BoundaryValidation$ implements Serializable {
+             )
+          )
+       );
+-      return new StringBuilder(2).append(r1).append(", ").append(r2).toString();
++      return r1 + ", " + r2;
+    }
+ }
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/case_class_copy_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/case_class_copy_decompiled
+index 37fcf00..0ce1e3e 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/case_class_copy_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/case_class_copy_decompiled
+@@ -25,6 +25,7 @@ import Person.;
+ import compiler.iface.Snapshot;
+ import java.io.Serializable;
+ import scala.Product;
++import scala.collection.Iterator;
+ import scala.runtime.BoxesRunTime;
+ import scala.runtime.Statics;
+ 
+@@ -50,6 +51,14 @@ public class Person implements Product, Serializable {
+       this.age = age;
+    }
+ 
++   public Iterator<Object> productIterator() {
++      return Product.productIterator$(this);
++   }
++
++   public Iterator<String> productElementNames() {
++      return Product.productElementNames$(this);
++   }
++
+    @Override
+    public int hashCode() {
+       int var1 = -889275714;
+@@ -62,26 +71,25 @@ public class Person implements Product, Serializable {
+    @Override
+    public boolean equals(final Object x$0) {
+       if (this != x$0) {
+-         boolean var5;
+-         if (!(x$0 instanceof Person)) {
+-            var5 = false;
++         boolean var6;
++         if (!(x$0 instanceof Person var3)) {
++            var6 = false;
+          } else {
+             label38: {
+-               Person var3 = (Person)x$0;
+                if (this.age() == var3.age()) {
+                   String var10000 = this.name();
+-                  String var4 = var3.name();
+-                  if ((var10000 == null ? var4 == null : var10000.equals(var4)) && var3.canEqual(this)) {
+-                     var5 = true;
++                  String var5 = var3.name();
++                  if ((var10000 == null ? var5 == null : var10000.equals(var5)) && var3.canEqual(this)) {
++                     var6 = true;
+                      break label38;
+                   }
+                }
+ 
+-               var5 = false;
++               var6 = false;
+             }
+          }
+ 
+-         if (!var5) {
++         if (!var6) {
+             return false;
+          }
+       }
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/case_class_defaults_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/case_class_defaults_decompiled
+index b4c039b..6fd3511 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/case_class_defaults_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/case_class_defaults_decompiled
+@@ -41,6 +41,7 @@ import Config.;
+ import compiler.iface.Snapshot;
+ import java.io.Serializable;
+ import scala.Product;
++import scala.collection.Iterator;
+ import scala.runtime.BoxesRunTime;
+ import scala.runtime.Statics;
+ 
+@@ -76,6 +77,14 @@ public class Config implements Product, Serializable {
+       this.secure = secure;
+    }
+ 
++   public Iterator<Object> productIterator() {
++      return Product.productIterator$(this);
++   }
++
++   public Iterator<String> productElementNames() {
++      return Product.productElementNames$(this);
++   }
++
+    @Override
+    public int hashCode() {
+       int var1 = -889275714;
+@@ -89,26 +98,25 @@ public class Config implements Product, Serializable {
+    @Override
+    public boolean equals(final Object x$0) {
+       if (this != x$0) {
+-         boolean var5;
+-         if (!(x$0 instanceof Config)) {
+-            var5 = false;
++         boolean var6;
++         if (!(x$0 instanceof Config var3)) {
++            var6 = false;
+          } else {
+             label40: {
+-               Config var3 = (Config)x$0;
+                if (this.port() == var3.port() && this.secure() == var3.secure()) {
+                   String var10000 = this.host();
+-                  String var4 = var3.host();
+-                  if ((var10000 == null ? var4 == null : var10000.equals(var4)) && var3.canEqual(this)) {
+-                     var5 = true;
++                  String var5 = var3.host();
++                  if ((var10000 == null ? var5 == null : var10000.equals(var5)) && var3.canEqual(this)) {
++                     var6 = true;
+                      break label40;
+                   }
+                }
+ 
+-               var5 = false;
++               var6 = false;
+             }
+          }
+ 
+-         if (!var5) {
++         if (!var6) {
+             return false;
+          }
+       }
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/case_class_nested_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/case_class_nested_decompiled
+index 09d8413..36e3f70 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/case_class_nested_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/case_class_nested_decompiled
+@@ -25,6 +25,7 @@ import Address.;
+ import compiler.iface.Snapshot;
+ import java.io.Serializable;
+ import scala.Product;
++import scala.collection.Iterator;
+ import scala.runtime.BoxesRunTime;
+ 
+ @Snapshot
+@@ -49,6 +50,14 @@ public class Address implements Product, Serializable {
+       this.city = city;
+    }
+ 
++   public Iterator<Object> productIterator() {
++      return Product.productIterator$(this);
++   }
++
++   public Iterator<String> productElementNames() {
++      return Product.productElementNames$(this);
++   }
++
+    @Override
+    public int hashCode() {
+       return scala.util.hashing.MurmurHash3..MODULE$.productHash(this, -513741543, true);
+@@ -57,28 +66,27 @@ public class Address implements Product, Serializable {
+    @Override
+    public boolean equals(final Object x$0) {
+       if (this != x$0) {
+-         boolean var7;
+-         if (!(x$0 instanceof Address)) {
+-            var7 = false;
++         boolean var8;
++         if (!(x$0 instanceof Address var3)) {
++            var8 = false;
+          } else {
+             label49: {
+-               Address var3 = (Address)x$0;
+                String var10000 = this.street();
+-               String var4 = var3.street();
+-               if (var10000 == null ? var4 == null : var10000.equals(var4)) {
+-                  String var6 = this.city();
+-                  String var5 = var3.city();
+-                  if ((var6 == null ? var5 == null : var6.equals(var5)) && var3.canEqual(this)) {
+-                     var7 = true;
++               String var5 = var3.street();
++               if (var10000 == null ? var5 == null : var10000.equals(var5)) {
++                  String var7 = this.city();
++                  String var6 = var3.city();
++                  if ((var7 == null ? var6 == null : var7.equals(var6)) && var3.canEqual(this)) {
++                     var8 = true;
+                      break label49;
+                   }
+                }
+ 
+-               var7 = false;
++               var8 = false;
+             }
+          }
+ 
+-         if (!var7) {
++         if (!var8) {
+             return false;
+          }
+       }
+@@ -199,6 +207,7 @@ import Employee.;
+ import compiler.iface.Snapshot;
+ import java.io.Serializable;
+ import scala.Product;
++import scala.collection.Iterator;
+ import scala.runtime.BoxesRunTime;
+ 
+ @Snapshot
+@@ -223,6 +232,14 @@ public class Employee implements Product, Serializable {
+       this.address = address;
+    }
+ 
++   public Iterator<Object> productIterator() {
++      return Product.productIterator$(this);
++   }
++
++   public Iterator<String> productElementNames() {
++      return Product.productElementNames$(this);
++   }
++
+    @Override
+    public int hashCode() {
+       return scala.util.hashing.MurmurHash3..MODULE$.productHash(this, 1591730427, true);
+@@ -231,28 +248,27 @@ public class Employee implements Product, Serializable {
+    @Override
+    public boolean equals(final Object x$0) {
+       if (this != x$0) {
+-         boolean var7;
+-         if (!(x$0 instanceof Employee)) {
+-            var7 = false;
++         boolean var8;
++         if (!(x$0 instanceof Employee var3)) {
++            var8 = false;
+          } else {
+             label49: {
+-               Employee var3 = (Employee)x$0;
+                String var10000 = this.name();
+-               String var4 = var3.name();
+-               if (var10000 == null ? var4 == null : var10000.equals(var4)) {
+-                  Address var6 = this.address();
+-                  Address var5 = var3.address();
+-                  if ((var6 == null ? var5 == null : var6.equals(var5)) && var3.canEqual(this)) {
+-                     var7 = true;
++               String var5 = var3.name();
++               if (var10000 == null ? var5 == null : var10000.equals(var5)) {
++                  Address var7 = this.address();
++                  Address var6 = var3.address();
++                  if ((var7 == null ? var6 == null : var7.equals(var6)) && var3.canEqual(this)) {
++                     var8 = true;
+                      break label49;
+                   }
+                }
+ 
+-               var7 = false;
++               var8 = false;
+             }
+          }
+ 
+-         if (!var7) {
++         if (!var8) {
+             return false;
+          }
+       }
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/case_class_pattern_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/case_class_pattern_decompiled
+index f3b5eaf..5c85709 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/case_class_pattern_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/case_class_pattern_decompiled
+@@ -84,6 +84,7 @@ import Rectangle.;
+ import compiler.iface.Snapshot;
+ import java.io.Serializable;
+ import scala.Product;
++import scala.collection.Iterator;
+ import scala.runtime.BoxesRunTime;
+ import scala.runtime.Statics;
+ 
+@@ -109,6 +110,14 @@ public class Rectangle implements Product, Serializable {
+       this.height = height;
+    }
+ 
++   public Iterator<Object> productIterator() {
++      return Product.productIterator$(this);
++   }
++
++   public Iterator<String> productElementNames() {
++      return Product.productElementNames$(this);
++   }
++
+    @Override
+    public int hashCode() {
+       int var1 = -889275714;
+@@ -120,21 +129,7 @@ public class Rectangle implements Product, Serializable {
+ 
+    @Override
+    public boolean equals(final Object x$0) {
+-      if (this != x$0) {
+-         boolean var10000;
+-         if (x$0 instanceof Rectangle) {
+-            Rectangle var3 = (Rectangle)x$0;
+-            var10000 = this.width() == var3.width() && this.height() == var3.height() && var3.canEqual(this);
+-         } else {
+-            var10000 = false;
+-         }
+-
+-         if (!var10000) {
+-            return false;
+-         }
+-      }
+-
+-      return true;
++      return this == x$0 || (x$0 instanceof Rectangle var3 ? this.width() == var3.width() && this.height() == var3.height() && var3.canEqual(this) : false);
+    }
+ 
+    @Override
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/case_class_simple_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/case_class_simple_decompiled
+index 9699fc3..15c6fda 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/case_class_simple_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/case_class_simple_decompiled
+@@ -36,6 +36,7 @@ import Point.;
+ import compiler.iface.Snapshot;
+ import java.io.Serializable;
+ import scala.Product;
++import scala.collection.Iterator;
+ import scala.runtime.BoxesRunTime;
+ import scala.runtime.Statics;
+ 
+@@ -61,6 +62,14 @@ public class Point implements Product, Serializable {
+       this.y = y;
+    }
+ 
++   public Iterator<Object> productIterator() {
++      return Product.productIterator$(this);
++   }
++
++   public Iterator<String> productElementNames() {
++      return Product.productElementNames$(this);
++   }
++
+    @Override
+    public int hashCode() {
+       int var1 = -889275714;
+@@ -72,21 +81,7 @@ public class Point implements Product, Serializable {
+ 
+    @Override
+    public boolean equals(final Object x$0) {
+-      if (this != x$0) {
+-         boolean var10000;
+-         if (x$0 instanceof Point) {
+-            Point var3 = (Point)x$0;
+-            var10000 = this.x() == var3.x() && this.y() == var3.y() && var3.canEqual(this);
+-         } else {
+-            var10000 = false;
+-         }
+-
+-         if (!var10000) {
+-            return false;
+-         }
+-      }
+-
+-      return true;
++      return this == x$0 || (x$0 instanceof Point var3 ? this.x() == var3.x() && this.y() == var3.y() && var3.canEqual(this) : false);
+    }
+ 
+    @Override
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/default_params_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/default_params_decompiled
+index d5143b7..e2cc9a3 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/default_params_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/default_params_decompiled
+@@ -67,7 +67,7 @@ public final class default_params$package$ implements Serializable {
+    @Snapshot
+    public String configure(final String host, final int port, final boolean secure) {
+       String protocol = secure ? "https" : "http";
+-      return new StringBuilder(4).append(protocol).append("://").append(host).append(":").append(port).toString();
++      return protocol + "://" + host + ":" + port;
+    }
+ 
+    public int configure$default$2() {
+@@ -83,6 +83,6 @@ public final class default_params$package$ implements Serializable {
+       String a = this.configure("localhost", this.configure$default$2(), this.configure$default$3());
+       String b = this.configure("example.com", 443, true);
+       String c = this.configure("api.server", this.configure$default$2(), true);
+-      return new StringBuilder(4).append(a).append(", ").append(b).append(", ").append(c).toString();
++      return a + ", " + b + ", " + c;
+    }
+ }
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/enum_adt_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/enum_adt_decompiled
+index 8f24364..705ea6b 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/enum_adt_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/enum_adt_decompiled
+@@ -32,6 +32,7 @@ import compiler.iface.Snapshot
+ import Expr.;
+ import compiler.iface.Snapshot;
+ import scala.Product;
++import scala.collection.Iterator;
+ import scala.reflect.Enum;
+ 
+ @Snapshot
+@@ -39,6 +40,22 @@ public enum Expr implements Product, Enum {
+    public static Expr fromOrdinal(int var0) {
+       return .MODULE$.fromOrdinal(var0);
+    }
++
++   public Iterator<Object> productIterator() {
++      return Product.productIterator$(this);
++   }
++
++   public String productPrefix() {
++      return Product.productPrefix$(this);
++   }
++
++   public String productElementName(final int n) {
++      return Product.productElementName$(this, n);
++   }
++
++   public Iterator<String> productElementNames() {
++      return Product.productElementNames$(this);
++   }
+ }
+ 
+ // ================================================================================
+@@ -66,19 +83,19 @@ public final class enum_adt$package$ implements Serializable {
+ 
+    @Snapshot
+    public int eval(final Expr e) {
+-      if (e instanceof Num) {
+-         Num var3 = .MODULE$.unapply((Num)e);
+-         return var3._1();
+-      } else if (e instanceof Add) {
+-         Add var6 = Expr.Add..MODULE$.unapply((Add)e);
+-         Expr var7 = var6._1();
+-         Expr var8 = var6._2();
+-         return this.eval(var7) + this.eval(var8);
+-      } else if (e instanceof Mul) {
+-         Mul var11 = Expr.Mul..MODULE$.unapply((Mul)e);
+-         Expr var12 = var11._1();
+-         Expr var13 = var11._2();
+-         return this.eval(var12) * this.eval(var13);
++      if (e instanceof Num var3) {
++         Num var4 = .MODULE$.unapply(var3);
++         return var4._1();
++      } else if (e instanceof Add var7) {
++         Add var8 = Expr.Add..MODULE$.unapply(var7);
++         Expr var9 = var8._1();
++         Expr var10 = var8._2();
++         return this.eval(var9) + this.eval(var10);
++      } else if (e instanceof Mul var13) {
++         Mul var14 = Expr.Mul..MODULE$.unapply(var13);
++         Expr var15 = var14._1();
++         Expr var16 = var14._2();
++         return this.eval(var15) * this.eval(var16);
+       } else {
+          throw new MatchError(e);
+       }
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/enum_companion_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/enum_companion_decompiled
+index 8444dee..35bf672 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/enum_companion_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/enum_companion_decompiled
+@@ -73,6 +73,7 @@ public final class enum_companion$package {
+ import Status.;
+ import compiler.iface.Snapshot;
+ import scala.Product;
++import scala.collection.Iterator;
+ import scala.reflect.Enum;
+ 
+ @Snapshot
+@@ -84,6 +85,22 @@ public enum Status implements Product, Enum {
+    public static Status fromString(String var0) {
+       return .MODULE$.fromString(var0);
+    }
++
++   public Iterator<Object> productIterator() {
++      return Product.productIterator$(this);
++   }
++
++   public String productPrefix() {
++      return Product.productPrefix$(this);
++   }
++
++   public String productElementName(final int n) {
++      return Product.productElementName$(this, n);
++   }
++
++   public Iterator<String> productElementNames() {
++      return Product.productElementNames$(this);
++   }
+ }
+ 
+ // ================================================================================
+@@ -136,7 +153,7 @@ public final class Status$ implements Sum, Serializable {
+             }
+       }
+ 
+-      throw new IllegalArgumentException(new StringBuilder(35).append("enum Status has no case with name: ").append($name).toString());
++      throw new IllegalArgumentException("enum Status has no case with name: " + $name);
+    }
+ 
+    private Status $new(final int _$ordinal, final String $name) {
+@@ -147,9 +164,7 @@ public final class Status$ implements Sum, Serializable {
+       try {
+          return $values[ordinal];
+       } catch (Throwable var2) {
+-         throw new NoSuchElementException(
+-            new StringBuilder(38).append("enum Status has no case with ordinal: ").append(BoxesRunTime.boxToInteger(ordinal).toString()).toString()
+-         );
++         throw new NoSuchElementException("enum Status has no case with ordinal: " + BoxesRunTime.boxToInteger(ordinal).toString());
+       }
+    }
+ 
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/enum_generic_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/enum_generic_decompiled
+index cb60050..360a0e8 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/enum_generic_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/enum_generic_decompiled
+@@ -30,6 +30,8 @@ import compiler.iface.Snapshot
+ 
+ import Option.;
+ import compiler.iface.Snapshot;
++import scala.Product;
++import scala.collection.Iterator;
+ import scala.reflect.Enum;
+ 
+ @Snapshot
+@@ -37,6 +39,22 @@ public enum Option<T> implements Enum,  {
+    public static Option<?> fromOrdinal(int var0) {
+       return .MODULE$.fromOrdinal(var0);
+    }
++
++   public Iterator<Object> productIterator() {
++      return Product.productIterator$(this);
++   }
++
++   public String productPrefix() {
++      return Product.productPrefix$(this);
++   }
++
++   public String productElementName(final int n) {
++      return Product.productElementName$(this, n);
++   }
++
++   public Iterator<String> productElementNames() {
++      return Product.productElementNames$(this);
++   }
+ }
+ 
+ // ================================================================================
+@@ -62,9 +80,9 @@ public final class enum_generic$package$ implements Serializable {
+ 
+    @Snapshot
+    public <T> T getOrElse(final Option<T> opt, final T default) {
+-      if (opt instanceof Some) {
+-         Some var4 = .MODULE$.unapply((Some)opt);
+-         return (T)var4._1();
++      if (opt instanceof Some var4) {
++         Some var5 = .MODULE$.unapply(var4);
++         return (T)var5._1();
+       } else if (Option..None == null ? opt != null : !Option..None.equals(opt)) {
+          throw new MatchError(opt);
+       } else {
+@@ -76,7 +94,7 @@ public final class enum_generic$package$ implements Serializable {
+    public String run() {
+       String a = this.getOrElse(.MODULE$.apply("hello"), "default");
+       String b = this.getOrElse(Option..None, "fallback");
+-      return new StringBuilder(2).append(a).append(", ").append(b).toString();
++      return a + ", " + b;
+    }
+ }
+ 
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/enum_methods_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/enum_methods_decompiled
+index 5063d7a..15de677 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/enum_methods_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/enum_methods_decompiled
+@@ -50,7 +50,7 @@ public final class enum_methods$package$ implements Serializable {
+    @Snapshot
+    public String run() {
+       Direction d = .North;
+-      return new StringBuilder(17).append(d).append(" opposite=").append(d.opposite()).append(" right=").append(d.turnRight()).toString();
++      return d + " opposite=" + d.opposite() + " right=" + d.turnRight();
+    }
+ }
+ 
+@@ -76,6 +76,7 @@ import Direction.;
+ import compiler.iface.Snapshot;
+ import scala.MatchError;
+ import scala.Product;
++import scala.collection.Iterator;
+ import scala.reflect.Enum;
+ 
+ @Snapshot
+@@ -84,6 +85,22 @@ public enum Direction implements Product, Enum {
+       return .MODULE$.fromOrdinal(var0);
+    }
+ 
++   public Iterator<Object> productIterator() {
++      return Product.productIterator$(this);
++   }
++
++   public String productPrefix() {
++      return Product.productPrefix$(this);
++   }
++
++   public String productElementName(final int n) {
++      return Product.productElementName$(this, n);
++   }
++
++   public Iterator<String> productElementNames() {
++      return Product.productElementNames$(this);
++   }
++
+    public Direction opposite() {
+       if (.North == null ? this != null : !.North.equals(this)) {
+          if (.South == null ? this != null : !.South.equals(this)) {
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/enum_ordinal_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/enum_ordinal_decompiled
+index 4e0a348..de88c03 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/enum_ordinal_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/enum_ordinal_decompiled
+@@ -55,14 +55,11 @@ public final class enum_ordinal$package$ implements Serializable {
+        var10000 = .MODULE$;
+       Object var2 = .MODULE$.refArrayOps(Priority..MODULE$.values());
+       String all = var10000.wrapRefArray(
+-            (Object[])scala.collection.ArrayOps..MODULE$
+-               .map$extension(
+-                  var2, p -> new StringBuilder(1).append(p.ordinal()).append(":").append(p).toString(), scala.reflect.ClassTag..MODULE$.apply(String.class)
+-               )
++            (Object[])scala.collection.ArrayOps..MODULE$.map$extension(var2, p -> p.ordinal() + ":" + p, scala.reflect.ClassTag..MODULE$.apply(String.class))
+          )
+          .mkString(", ");
+       Priority fromName = Priority..MODULE$.valueOf("High");
+-      return new StringBuilder(11).append(all).append("; valueOf: ").append(fromName).toString();
++      return all + "; valueOf: " + fromName;
+    }
+ }
+ 
+@@ -73,6 +70,7 @@ public final class enum_ordinal$package$ implements Serializable {
+ import Priority.;
+ import compiler.iface.Snapshot;
+ import scala.Product;
++import scala.collection.Iterator;
+ import scala.reflect.Enum;
+ 
+ @Snapshot
+@@ -80,4 +78,20 @@ public enum Priority implements Product, Enum {
+    public static Priority fromOrdinal(int var0) {
+       return .MODULE$.fromOrdinal(var0);
+    }
++
++   public Iterator<Object> productIterator() {
++      return Product.productIterator$(this);
++   }
++
++   public String productPrefix() {
++      return Product.productPrefix$(this);
++   }
++
++   public String productElementName(final int n) {
++      return Product.productElementName$(this, n);
++   }
++
++   public Iterator<String> productElementNames() {
++      return Product.productElementNames$(this);
++   }
+ }
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/enum_params_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/enum_params_decompiled
+index 1b552c2..4b0c763 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/enum_params_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/enum_params_decompiled
+@@ -46,11 +46,7 @@ public final class enum_params$package$ implements Serializable {
+       Object var1 = .MODULE$.refArrayOps(Planet..MODULE$.values());
+       return var10000.wrapRefArray(
+             (Object[])scala.collection.ArrayOps..MODULE$
+-               .map$extension(
+-                  var1,
+-                  p -> new StringBuilder(4).append(p).append(": g=").append(p.surfaceGravity()).toString(),
+-                  scala.reflect.ClassTag..MODULE$.apply(String.class)
+-               )
++               .map$extension(var1, p -> p + ": g=" + p.surfaceGravity(), scala.reflect.ClassTag..MODULE$.apply(String.class))
+          )
+          .mkString("; ");
+    }
+@@ -63,6 +59,7 @@ public final class enum_params$package$ implements Serializable {
+ import Planet.;
+ import compiler.iface.Snapshot;
+ import scala.Product;
++import scala.collection.Iterator;
+ import scala.reflect.Enum;
+ 
+ @Snapshot
+@@ -79,6 +76,22 @@ public enum Planet implements Product, Enum {
+       this.radius = radius;
+    }
+ 
++   public Iterator<Object> productIterator() {
++      return Product.productIterator$(this);
++   }
++
++   public String productPrefix() {
++      return Product.productPrefix$(this);
++   }
++
++   public String productElementName(final int n) {
++      return Product.productElementName$(this, n);
++   }
++
++   public Iterator<String> productElementNames() {
++      return Product.productElementNames$(this);
++   }
++
+    public double mass() {
+       return this.mass;
+    }
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/enum_simple_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/enum_simple_decompiled
+index 2771fbc..85d0cb2 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/enum_simple_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/enum_simple_decompiled
+@@ -61,7 +61,7 @@ public final class enum_simple$package$ implements Serializable {
+ 
+    @Snapshot
+    public String run() {
+-      return new StringBuilder(2).append(this.describe(.Red)).append(", ").append(this.describe(.Blue)).toString();
++      return this.describe(.Red) + ", " + this.describe(.Blue);
+    }
+ }
+ 
+@@ -91,6 +91,7 @@ public final class enum_simple$package {
+ import Color.;
+ import compiler.iface.Snapshot;
+ import scala.Product;
++import scala.collection.Iterator;
+ import scala.reflect.Enum;
+ 
+ @Snapshot
+@@ -98,4 +99,20 @@ public enum Color implements Product, Enum {
+    public static Color fromOrdinal(int var0) {
+       return .MODULE$.fromOrdinal(var0);
+    }
++
++   public Iterator<Object> productIterator() {
++      return Product.productIterator$(this);
++   }
++
++   public String productPrefix() {
++      return Product.productPrefix$(this);
++   }
++
++   public String productElementName(final int n) {
++      return Product.productElementName$(this, n);
++   }
++
++   public Iterator<String> productElementNames() {
++      return Product.productElementNames$(this);
++   }
+ }
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/enum_trait_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/enum_trait_decompiled
+index 574b6bc..d37ddf2 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/enum_trait_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/enum_trait_decompiled
+@@ -83,6 +83,7 @@ import LogLevel.;
+ import compiler.iface.Snapshot;
+ import scala.MatchError;
+ import scala.Product;
++import scala.collection.Iterator;
+ import scala.reflect.Enum;
+ 
+ @Snapshot
+@@ -91,6 +92,22 @@ public enum LogLevel implements Describable, Product, Enum {
+       return .MODULE$.fromOrdinal(var0);
+    }
+ 
++   public Iterator<Object> productIterator() {
++      return Product.productIterator$(this);
++   }
++
++   public String productPrefix() {
++      return Product.productPrefix$(this);
++   }
++
++   public String productElementName(final int n) {
++      return Product.productElementName$(this, n);
++   }
++
++   public Iterator<String> productElementNames() {
++      return Product.productElementNames$(this);
++   }
++
+    public String description() {
+       if (.Debug == null ? this != null : !.Debug.equals(this)) {
+          if (.Info == null ? this != null : !.Info.equals(this)) {
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/for_definitions_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/for_definitions_decompiled
+index 91f8290..9e5b1de 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/for_definitions_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/for_definitions_decompiled
+@@ -45,7 +45,6 @@ public final class for_definitions$package {
+ 
+ import compiler.iface.Snapshot;
+ import java.io.Serializable;
+-import scala.MatchError;
+ import scala.collection.immutable.List;
+ import scala.collection.immutable..colon.colon;
+ import scala.collection.immutable.Nil.;
+@@ -64,16 +63,7 @@ public final class for_definitions$package$ implements Serializable {
+ 
+    @Snapshot
+    public List<String> process(final List<Object> xs) {
+-      return xs.map(x -> process$$anonfun$1(BoxesRunTime.unboxToInt(x))).map(x$1 -> {
+-         if (x$1 != null) {
+-            int x = BoxesRunTime.unboxToInt(x$1._1());
+-            int doubled = BoxesRunTime.unboxToInt(x$1._2());
+-            int squared = BoxesRunTime.unboxToInt(x$1._3());
+-            return new StringBuilder(8).append(x).append(" -> ").append(doubled).append(" -> ").append(squared).toString();
+-         } else {
+-            throw new MatchError(x$1);
+-         }
+-      });
++      return xs.map(x -> process$$anonfun$1(BoxesRunTime.unboxToInt(x)));
+    }
+ 
+    @Snapshot
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/for_either_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/for_either_decompiled
+index 82bc498..e6b2f63 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/for_either_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/for_either_decompiled
+@@ -85,6 +85,6 @@ public final class for_either$package$ implements Serializable {
+    public String run() {
+       Either r1 = this.compute(20, 2, 5);
+       Either r2 = this.compute(20, 0, 5);
+-      return new StringBuilder(2).append(r1).append(", ").append(r2).toString();
++      return r1 + ", " + r2;
+    }
+ }
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/for_imperative_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/for_imperative_decompiled
+index 0711981..095d687 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/for_imperative_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/for_imperative_decompiled
+@@ -65,7 +65,7 @@ public final class for_imperative$package$ implements Serializable {
+    @Snapshot
+    public List<String> printAll(final List<Object> xs) {
+       ObjectRef results = ObjectRef.create(.MODULE$.List().empty());
+-      xs.foreach((sp)x -> results.elem = (List)((List)results.elem).$colon$plus(new StringBuilder(11).append("Processing ").append(x).toString()));
++      xs.foreach((sp)x -> results.elem = (List)((List)results.elem).$colon$plus("Processing " + x));
+       return (List<String>)results.elem;
+    }
+ 
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/for_option_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/for_option_decompiled
+index 55f75a5..371e87d 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/for_option_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/for_option_decompiled
+@@ -50,7 +50,7 @@ public final class for_option$package$ implements Serializable {
+    public String run() {
+       Option r1 = this.combine(.MODULE$.apply(BoxesRunTime.boxToInteger(1)), .MODULE$.apply(BoxesRunTime.boxToInteger(2)));
+       Option r2 = this.combine(.MODULE$.apply(BoxesRunTime.boxToInteger(1)), scala.None..MODULE$);
+-      return new StringBuilder(2).append(r1).append(", ").append(r2).toString();
++      return r1 + ", " + r2;
+    }
+ }
+ 
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/pattern_boolean_extractor_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/pattern_boolean_extractor_decompiled
+index 61172ac..b973938 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/pattern_boolean_extractor_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/pattern_boolean_extractor_decompiled
+@@ -47,7 +47,7 @@ public final class pattern_boolean_extractor$package$ implements Serializable {
+ 
+    @Snapshot
+    public String run() {
+-      return new StringBuilder(2).append(this.check(5)).append(", ").append(this.check(-3)).toString();
++      return this.check(5) + ", " + this.check(-3);
+    }
+ }
+ 
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/pattern_extractor_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/pattern_extractor_decompiled
+index 69bb694..bca8d02 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/pattern_extractor_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/pattern_extractor_decompiled
+@@ -109,14 +109,14 @@ public final class pattern_extractor$package$ implements Serializable {
+       Option var3 = .MODULE$.unapply(n);
+       if (!var3.isEmpty()) {
+          int var4 = BoxesRunTime.unboxToInt(var3.get());
+-         return new StringBuilder(18).append(n).append(" is even, half is ").append(var4).toString();
++         return n + " is even, half is " + var4;
+       } else {
+-         return new StringBuilder(7).append(n).append(" is odd").toString();
++         return n + " is odd";
+       }
+    }
+ 
+    @Snapshot
+    public String run() {
+-      return new StringBuilder(2).append(this.describeNumber(10)).append("; ").append(this.describeNumber(7)).toString();
++      return this.describeNumber(10) + "; " + this.describeNumber(7);
+    }
+ }
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/pattern_nested_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/pattern_nested_decompiled
+index c606807..806e8b3 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/pattern_nested_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/pattern_nested_decompiled
+@@ -30,6 +30,7 @@ import Address.;
+ import compiler.iface.Snapshot;
+ import java.io.Serializable;
+ import scala.Product;
++import scala.collection.Iterator;
+ import scala.runtime.BoxesRunTime;
+ import scala.runtime.Statics;
+ 
+@@ -55,6 +56,14 @@ public class Address implements Product, Serializable {
+       this.zip = zip;
+    }
+ 
++   public Iterator<Object> productIterator() {
++      return Product.productIterator$(this);
++   }
++
++   public Iterator<String> productElementNames() {
++      return Product.productElementNames$(this);
++   }
++
+    @Override
+    public int hashCode() {
+       int var1 = -889275714;
+@@ -67,26 +76,25 @@ public class Address implements Product, Serializable {
+    @Override
+    public boolean equals(final Object x$0) {
+       if (this != x$0) {
+-         boolean var5;
+-         if (!(x$0 instanceof Address)) {
+-            var5 = false;
++         boolean var6;
++         if (!(x$0 instanceof Address var3)) {
++            var6 = false;
+          } else {
+             label38: {
+-               Address var3 = (Address)x$0;
+                if (this.zip() == var3.zip()) {
+                   String var10000 = this.city();
+-                  String var4 = var3.city();
+-                  if ((var10000 == null ? var4 == null : var10000.equals(var4)) && var3.canEqual(this)) {
+-                     var5 = true;
++                  String var5 = var3.city();
++                  if ((var10000 == null ? var5 == null : var10000.equals(var5)) && var3.canEqual(this)) {
++                     var6 = true;
+                      break label38;
+                   }
+                }
+ 
+-               var5 = false;
++               var6 = false;
+             }
+          }
+ 
+-         if (!var5) {
++         if (!var6) {
+             return false;
+          }
+       }
+@@ -168,6 +176,7 @@ import Person.;
+ import compiler.iface.Snapshot;
+ import java.io.Serializable;
+ import scala.Product;
++import scala.collection.Iterator;
+ import scala.runtime.BoxesRunTime;
+ 
+ @Snapshot
+@@ -192,6 +201,14 @@ public class Person implements Product, Serializable {
+       this.address = address;
+    }
+ 
++   public Iterator<Object> productIterator() {
++      return Product.productIterator$(this);
++   }
++
++   public Iterator<String> productElementNames() {
++      return Product.productElementNames$(this);
++   }
++
+    @Override
+    public int hashCode() {
+       return scala.util.hashing.MurmurHash3..MODULE$.productHash(this, 1890237178, true);
+@@ -200,28 +217,27 @@ public class Person implements Product, Serializable {
+    @Override
+    public boolean equals(final Object x$0) {
+       if (this != x$0) {
+-         boolean var7;
+-         if (!(x$0 instanceof Person)) {
+-            var7 = false;
++         boolean var8;
++         if (!(x$0 instanceof Person var3)) {
++            var8 = false;
+          } else {
+             label49: {
+-               Person var3 = (Person)x$0;
+                String var10000 = this.name();
+-               String var4 = var3.name();
+-               if (var10000 == null ? var4 == null : var10000.equals(var4)) {
+-                  Address var6 = this.address();
+-                  Address var5 = var3.address();
+-                  if ((var6 == null ? var5 == null : var6.equals(var5)) && var3.canEqual(this)) {
+-                     var7 = true;
++               String var5 = var3.name();
++               if (var10000 == null ? var5 == null : var10000.equals(var5)) {
++                  Address var7 = this.address();
++                  Address var6 = var3.address();
++                  if ((var7 == null ? var6 == null : var7.equals(var6)) && var3.canEqual(this)) {
++                     var8 = true;
+                      break label49;
+                   }
+                }
+ 
+-               var7 = false;
++               var8 = false;
+             }
+          }
+ 
+-         if (!var7) {
++         if (!var8) {
+             return false;
+          }
+       }
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/pattern_or_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/pattern_or_decompiled
+index 3aeea23..5eacadd 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/pattern_or_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/pattern_or_decompiled
+@@ -67,7 +67,7 @@ public final class pattern_or$package$ implements Serializable {
+    @Snapshot
+    public String run() {
+       return ((List)(new colon("Monday", new colon("Saturday", new colon("Sunday", new colon("Friday", .MODULE$))))))
+-         .map(d -> new StringBuilder(2).append(d).append(": ").append(MODULE$.isWeekend(d)).toString())
++         .map(d -> d + ": " + MODULE$.isWeekend(d))
+          .mkString(", ");
+    }
+ }
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/pattern_sequence_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/pattern_sequence_decompiled
+index d38d264..a9143c7 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/pattern_sequence_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/pattern_sequence_decompiled
+@@ -50,16 +50,13 @@ public final class pattern_sequence$package$ implements Serializable {
+    public String describeList(final List<Object> xs) {
+        var10000 = scala.package..MODULE$.Nil();
+       if (var10000 == null ? xs != null : !var10000.equals(xs)) {
+-         if (!(xs instanceof colon)) {
++         if (!(xs instanceof colon var4)) {
+             throw new MatchError(xs);
+          } else {
+-            colon var4 = (colon)xs;
+             int var5 = BoxesRunTime.unboxToInt(var4.head());
+-            List var6 = var4.next$access$1();
++            List var6 = var4.next();
+             var10000 = scala.package..MODULE$.Nil();
+-            return (var10000 == null ? var6 != null : !var10000.equals(var6))
+-               ? new StringBuilder(21).append("head: ").append(var5).append(", tail length: ").append(var6.length()).toString()
+-               : new StringBuilder(8).append("single: ").append(var5).toString();
++            return (var10000 == null ? var6 != null : !var10000.equals(var6)) ? "head: " + var5 + ", tail length: " + var6.length() : "single: " + var5;
+          }
+       } else {
+          return "empty";
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/pattern_simple_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/pattern_simple_decompiled
+index 0bc728c..bf719b2 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/pattern_simple_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/pattern_simple_decompiled
+@@ -43,19 +43,16 @@ public final class pattern_simple$package$ implements Serializable {
+       if (BoxesRunTime.equals(BoxesRunTime.boxToInteger(0), x)) {
+          return "zero";
+       } else if (x instanceof Integer) {
+-         int i = BoxesRunTime.unboxToInt(x);
+-         return new StringBuilder(9).append("integer: ").append(i).toString();
+-      } else if (x instanceof String) {
+-         String s = (String)x;
+-         return new StringBuilder(8).append("string: ").append(s).toString();
++         int var3 = BoxesRunTime.unboxToInt(x);
++         return "integer: " + var3;
+       } else {
+-         return "unknown";
++         return x instanceof String var5 ? "string: " + var5 : "unknown";
+       }
+    }
+ 
+    @Snapshot
+    public String run() {
+-      return new StringBuilder(2).append(this.describe(BoxesRunTime.boxToInteger(42))).append(", ").append(this.describe("hello")).toString();
++      return this.describe(BoxesRunTime.boxToInteger(42)) + ", " + this.describe("hello");
+    }
+ }
+ 
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/pattern_tuple_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/pattern_tuple_decompiled
+index f15fed5..d40007f 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/pattern_tuple_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/pattern_tuple_decompiled
+@@ -52,11 +52,9 @@ public final class pattern_tuple$package$ implements Serializable {
+          int var3 = BoxesRunTime.unboxToInt(pair._1());
+          String var4 = (String)pair._2();
+          if (0 == var3) {
+-            return new StringBuilder(10).append("zero with ").append(var4).toString();
++            return "zero with " + var4;
+          } else {
+-            return "special".equals(var4)
+-               ? new StringBuilder(11).append(var3).append(" is special").toString()
+-               : new StringBuilder(5).append(var3).append(" and ").append(var4).toString();
++            return "special".equals(var4) ? var3 + " is special" : var3 + " and " + var4;
+          }
+       } else {
+          throw new MatchError(pair);
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/simple_call_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/simple_call_decompiled
+index 1424445..ed068cd 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/simple_call_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/simple_call_decompiled
+@@ -54,7 +54,7 @@ public final class simple_call$package$ implements Serializable {
+ 
+    @Snapshot
+    public String greet(final String name) {
+-      return new StringBuilder(8).append("Hello, ").append(name).append("!").toString();
++      return "Hello, " + name + "!";
+    }
+ 
+    @Snapshot
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/trait_default_impl_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/trait_default_impl_decompiled
+index 0373a2d..02e30f4 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/trait_default_impl_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/trait_default_impl_decompiled
+@@ -47,7 +47,7 @@ public interface Logger {
+    }
+ 
+    default String log(final String msg) {
+-      return new StringBuilder(6).append("[LOG] ").append(msg).toString();
++      return "[LOG] " + msg;
+    }
+ 
+    static String warn$(final Logger $this, final String msg) {
+@@ -55,7 +55,7 @@ public interface Logger {
+    }
+ 
+    default String warn(final String msg) {
+-      return new StringBuilder(7).append("[WARN] ").append(msg).toString();
++      return "[WARN] " + msg;
+    }
+ }
+ 
+@@ -80,7 +80,7 @@ public final class trait_default_impl$package$ implements Serializable {
+    @Snapshot
+    public String run() {
+       AppLogger logger = new AppLogger();
+-      return new StringBuilder(2).append(logger.log("Starting")).append("; ").append(logger.warn("Low memory")).toString();
++      return logger.log("Starting") + "; " + logger.warn("Low memory");
+    }
+ }
+ 
+@@ -92,4 +92,11 @@ import compiler.iface.Snapshot;
+ 
+ @Snapshot
+ public class AppLogger implements Logger {
++   public String log(final String msg) {
++      return Logger.log$(this, msg);
++   }
++
++   public String warn(final String msg) {
++      return Logger.warn$(this, msg);
++   }
+ }
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/trait_fields_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/trait_fields_decompiled
+index 0a69405..87b1743 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/trait_fields_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/trait_fields_decompiled
+@@ -44,6 +44,14 @@ public class ClickCounter implements Counter {
+    public void count_$eq(final int x$1) {
+       this.count = x$1;
+    }
++
++   public void increment() {
++      Counter.increment$(this);
++   }
++
++   public int current() {
++      return Counter.current$(this);
++   }
+ }
+ 
+ // ================================================================================
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/trait_linearization_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/trait_linearization_decompiled
+index f27c2e4..84c5b5d 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/trait_linearization_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/trait_linearization_decompiled
+@@ -77,7 +77,7 @@ public interface B extends Base {
+    }
+ 
+    default String value() {
+-      return new StringBuilder(5).append("B -> ").append(this.B$$super$value()).toString();
++      return "B -> " + this.B$$super$value();
+    }
+ }
+ 
+@@ -111,7 +111,7 @@ public interface A extends Base {
+    }
+ 
+    default String value() {
+-      return new StringBuilder(5).append("A -> ").append(this.A$$super$value()).toString();
++      return "A -> " + this.A$$super$value();
+    }
+ }
+ 
+@@ -123,4 +123,7 @@ import compiler.iface.Snapshot;
+ 
+ @Snapshot
+ public class C implements Base, A, B {
++   public String value() {
++      return B.value$(this);
++   }
+ }
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/trait_mixed_methods_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/trait_mixed_methods_decompiled
+index 688d10d..8db7d53 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/trait_mixed_methods_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/trait_mixed_methods_decompiled
+@@ -49,7 +49,7 @@ public interface Formatter {
+    }
+ 
+    default String format(final String msg) {
+-      return new StringBuilder(2).append(this.prefix()).append(": ").append(msg).toString();
++      return this.prefix() + ": " + msg;
+    }
+ }
+ 
+@@ -61,6 +61,10 @@ import compiler.iface.Snapshot;
+ 
+ @Snapshot
+ public class ErrorFormatter implements Formatter {
++   public String format(final String msg) {
++      return Formatter.format$(this, msg);
++   }
++
+    public String prefix() {
+       return "ERROR";
+    }
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/trait_mixin_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/trait_mixin_decompiled
+index a8876fa..b3e5627 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/trait_mixin_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/trait_mixin_decompiled
+@@ -45,7 +45,7 @@ public final class trait_mixin$package$ implements Serializable {
+    @Snapshot
+    public String run() {
+       Duck duck = new Duck();
+-      return new StringBuilder(4).append(duck.swim()).append(", ").append(duck.fly()).append(", ").append(duck.quack()).toString();
++      return duck.swim() + ", " + duck.fly() + ", " + duck.quack();
+    }
+ }
+ 
+@@ -57,6 +57,14 @@ import compiler.iface.Snapshot;
+ 
+ @Snapshot
+ public class Duck implements Swimmer, Flyer {
++   public String swim() {
++      return Swimmer.swim$(this);
++   }
++
++   public String fly() {
++      return Flyer.fly$(this);
++   }
++
+    public String quack() {
+       return "quack";
+    }
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/trait_sealed_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/trait_sealed_decompiled
+index fda3a1e..8f919b3 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/trait_sealed_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/trait_sealed_decompiled
+@@ -34,6 +34,7 @@ import Failure.;
+ import compiler.iface.Snapshot;
+ import java.io.Serializable;
+ import scala.Product;
++import scala.collection.Iterator;
+ import scala.runtime.BoxesRunTime;
+ 
+ @Snapshot
+@@ -56,6 +57,14 @@ public class Failure implements Result, Product, Serializable {
+       this.error = error;
+    }
+ 
++   public Iterator<Object> productIterator() {
++      return Product.productIterator$(this);
++   }
++
++   public Iterator<String> productElementNames() {
++      return Product.productElementNames$(this);
++   }
++
+    @Override
+    public int hashCode() {
+       return scala.util.hashing.MurmurHash3..MODULE$.productHash(this, -1408943127, true);
+@@ -64,17 +73,16 @@ public class Failure implements Result, Product, Serializable {
+    @Override
+    public boolean equals(final Object x$0) {
+       if (this != x$0) {
+-         boolean var5;
+-         if (!(x$0 instanceof Failure)) {
+-            var5 = false;
++         boolean var6;
++         if (!(x$0 instanceof Failure var3)) {
++            var6 = false;
+          } else {
+-            Failure var3 = (Failure)x$0;
+             String var10000 = this.error();
+-            String var4 = var3.error();
+-            var5 = (var10000 == null ? var4 == null : var10000.equals(var4)) && var3.canEqual(this);
++            String var5 = var3.error();
++            var6 = (var10000 == null ? var5 == null : var10000.equals(var5)) && var3.canEqual(this);
+          }
+ 
+-         if (!var5) {
++         if (!var6) {
+             return false;
+          }
+       }
+@@ -169,6 +177,7 @@ import Success.;
+ import compiler.iface.Snapshot;
+ import java.io.Serializable;
+ import scala.Product;
++import scala.collection.Iterator;
+ import scala.runtime.BoxesRunTime;
+ import scala.runtime.Statics;
+ 
+@@ -192,6 +201,14 @@ public class Success implements Result, Product, Serializable {
+       this.value = value;
+    }
+ 
++   public Iterator<Object> productIterator() {
++      return Product.productIterator$(this);
++   }
++
++   public Iterator<String> productElementNames() {
++      return Product.productElementNames$(this);
++   }
++
+    @Override
+    public int hashCode() {
+       int var1 = -889275714;
+@@ -202,21 +219,7 @@ public class Success implements Result, Product, Serializable {
+ 
+    @Override
+    public boolean equals(final Object x$0) {
+-      if (this != x$0) {
+-         boolean var10000;
+-         if (x$0 instanceof Success) {
+-            Success var3 = (Success)x$0;
+-            var10000 = this.value() == var3.value() && var3.canEqual(this);
+-         } else {
+-            var10000 = false;
+-         }
+-
+-         if (!var10000) {
+-            return false;
+-         }
+-      }
+-
+-      return true;
++      return this == x$0 || (x$0 instanceof Success var3 ? this.value() == var3.value() && var3.canEqual(this) : false);
+    }
+ 
+    @Override
+@@ -291,14 +294,14 @@ public final class trait_sealed$package$ implements Serializable {
+ 
+    @Snapshot
+    public String describe(final Result r) {
+-      if (r instanceof Success) {
+-         Success var3 = .MODULE$.unapply((Success)r);
+-         int var4 = var3._1();
+-         return new StringBuilder(9).append("Success: ").append(var4).toString();
+-      } else if (r instanceof Failure) {
+-         Failure var6 = Failure..MODULE$.unapply((Failure)r);
+-         String var7 = var6._1();
+-         return new StringBuilder(9).append("Failure: ").append(var7).toString();
++      if (r instanceof Success var3) {
++         Success var4 = .MODULE$.unapply(var3);
++         int var5 = var4._1();
++         return "Success: " + var5;
++      } else if (r instanceof Failure var7) {
++         Failure var8 = Failure..MODULE$.unapply(var7);
++         String var9 = var8._1();
++         return "Failure: " + var9;
+       } else {
+          throw new MatchError(r);
+       }
+@@ -306,6 +309,6 @@ public final class trait_sealed$package$ implements Serializable {
+ 
+    @Snapshot
+    public String run() {
+-      return new StringBuilder(2).append(this.describe(.MODULE$.apply(42))).append("; ").append(this.describe(Failure..MODULE$.apply("oops"))).toString();
++      return this.describe(.MODULE$.apply(42)) + "; " + this.describe(Failure..MODULE$.apply("oops"));
+    }
+ }
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/trait_self_type_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/trait_self_type_decompiled
+index 0ca2785..6def8a0 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/trait_self_type_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/trait_self_type_decompiled
+@@ -37,7 +37,7 @@ public interface UserService {
+    }
+ 
+    default String createUser(final String name) {
+-      return ((Persistence)this).save(new StringBuilder(6).append("User(").append(name).append(")").toString());
++      return ((Persistence)this).save("User(" + name + ")");
+    }
+ }
+ 
+@@ -54,7 +54,7 @@ public interface Persistence {
+    }
+ 
+    default String save(final String data) {
+-      return new StringBuilder(7).append("Saved: ").append(data).toString();
++      return "Saved: " + data;
+    }
+ }
+ 
+@@ -66,6 +66,13 @@ import compiler.iface.Snapshot;
+ 
+ @Snapshot
+ public class UserServiceImpl implements UserService, Persistence {
++   public String createUser(final String name) {
++      return UserService.createUser$(this, name);
++   }
++
++   public String save(final String data) {
++      return Persistence.save$(this, data);
++   }
+ }
+ 
+ // ================================================================================
+diff --git a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/trait_simple_decompiled b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/trait_simple_decompiled
+index 5d2232c..d4204a0 100644
+--- a/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.3.7/trait_simple_decompiled
++++ b/Users/velvetbaldmime/.local/share/sniper/data/144/snapshots/3.8.2/trait_simple_decompiled
+@@ -65,7 +65,7 @@ import compiler.iface.Snapshot;
+ @Snapshot
+ public class FriendlyGreeter implements Greeter {
+    public String greet(final String name) {
+-      return new StringBuilder(8).append("Hello, ").append(name).append("!").toString();
++      return "Hello, " + name + "!";
+    }
+ }
+ 
