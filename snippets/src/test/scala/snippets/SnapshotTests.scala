@@ -100,12 +100,23 @@ trait SnapshotTests extends FunSuite with MunitSnapshotsIntegration:
   ): (String, String) =
     val separator = "=" * 80
 
-    // Build header with the original snippet
-    val header = s"""$separator
+    // Build header with the original snippet (using multi-line comments for decompiled)
+    val javapHeader = s"""$separator
 // Snippet: $snippetName
 $separator
 
 $code
+
+"""
+
+    val decompiledHeader = s"""/*
+$separator
+Snippet: $snippetName
+$separator
+
+$code
+
+*/
 
 """
 
@@ -122,20 +133,20 @@ $javapOutput"""
       }
       .mkString("\n")
 
-    // Build decompiled section
+    // Build decompiled section (with Java-compatible comments)
     val decompiledContent = annotatedClasses
       .map { classFile =>
         val className = classFile.getFileName.toString.replace(".class", "")
         val decompiledOutput = decompileWithFernflower(classFile)
-        s"""$separator
+        s"""// $separator
 // Definition: $className (decompiled)
-$separator
+// $separator
 
 $decompiledOutput"""
       }
       .mkString("\n")
 
-    (header + javapContent, header + decompiledContent)
+    (javapHeader + javapContent, decompiledHeader + decompiledContent)
 
   protected def compileAndSnapshot(snippetName: String, code: String): Unit =
     val outputDir = Files.createTempDirectory(s"$snippetName-out")
