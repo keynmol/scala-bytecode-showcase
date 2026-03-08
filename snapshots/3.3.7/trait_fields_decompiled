@@ -1,0 +1,121 @@
+/*
+================================================================================
+Snippet: trait_fields
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      trait Counter:
+        var count: Int = 0
+        def increment(): Unit = count += 1
+        def current: Int = count
+
+@Snapshot
+      class ClickCounter extends Counter
+
+@Snapshot
+      def run: Int =
+        val counter = ClickCounter()
+        counter.increment()
+        counter.increment()
+        counter.current
+
+*/
+
+// ================================================================================
+// Definition: ClickCounter (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+
+@Snapshot
+public class ClickCounter implements Counter {
+   private int count;
+
+   public ClickCounter() {
+      Counter.$init$(this);
+   }
+
+   public int count() {
+      return this.count;
+   }
+
+   public void count_$eq(final int x$1) {
+      this.count = x$1;
+   }
+}
+
+// ================================================================================
+// Definition: Counter (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+
+@Snapshot
+public interface Counter {
+   static void $init$(final Counter $this) {
+      $this.count_$eq(0);
+   }
+
+   int count();
+
+   void count_$eq(final int x$1);
+
+   static void increment$(final Counter $this) {
+      $this.increment();
+   }
+
+   default void increment() {
+      this.count_$eq(this.count() + 1);
+   }
+
+   static int current$(final Counter $this) {
+      return $this.current();
+   }
+
+   default int current() {
+      return this.count();
+   }
+}
+
+// ================================================================================
+// Definition: trait_fields$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import trait_fields.package.;
+
+public final class trait_fields$package {
+   @Snapshot
+   public static int run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: trait_fields$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class trait_fields$package$ implements Serializable {
+   public static final trait_fields$package$ MODULE$ = new trait_fields$package$();
+
+   private trait_fields$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(trait_fields$package$.class);
+   }
+
+   @Snapshot
+   public int run() {
+      ClickCounter counter = new ClickCounter();
+      counter.increment();
+      counter.increment();
+      return counter.current();
+   }
+}

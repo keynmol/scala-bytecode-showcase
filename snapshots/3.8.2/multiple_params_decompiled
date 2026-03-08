@@ -1,0 +1,64 @@
+/*
+================================================================================
+Snippet: multiple_params
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def add(a: Int, b: Int, c: Int): Int =
+        a + b + c
+
+@Snapshot
+      def run: Int =
+        add(1, 2, 3)
+
+*/
+
+// ================================================================================
+// Definition: multiple_params$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class multiple_params$package$ implements Serializable {
+   public static final multiple_params$package$ MODULE$ = new multiple_params$package$();
+
+   private multiple_params$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(multiple_params$package$.class);
+   }
+
+   @Snapshot
+   public int add(final int a, final int b, final int c) {
+      return a + b + c;
+   }
+
+   @Snapshot
+   public int run() {
+      return this.add(1, 2, 3);
+   }
+}
+
+// ================================================================================
+// Definition: multiple_params$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import multiple_params.package.;
+
+public final class multiple_params$package {
+   @Snapshot
+   public static int add(int var0, int var1, int var2) {
+      return .MODULE$.add(var0, var1, var2);
+   }
+
+   @Snapshot
+   public static int run() {
+      return .MODULE$.run();
+   }
+}

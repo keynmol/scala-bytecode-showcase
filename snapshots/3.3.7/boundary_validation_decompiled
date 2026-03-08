@@ -1,0 +1,122 @@
+/*
+================================================================================
+Snippet: boundary_validation
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      object BoundaryValidation:
+        import scala.util.boundary, boundary.break
+
+        def validatePositive(xs: List[Int]): Either[String, List[Int]] =
+          boundary:
+            for x <- xs do
+              if x <= 0 then break(Left(s"Invalid: $x is not positive"))
+            Right(xs)
+
+        def run: String =
+          val r1 = validatePositive(List(1, 2, 3))
+          val r2 = validatePositive(List(1, -2, 3))
+          s"$r1, $r2"
+
+*/
+
+// ================================================================================
+// Definition: BoundaryValidation (decompiled)
+// ================================================================================
+
+import BoundaryValidation.;
+import compiler.iface.Snapshot;
+import scala.collection.immutable.List;
+import scala.util.Either;
+
+@Snapshot
+public final class BoundaryValidation {
+   public static String run() {
+      return .MODULE$.run();
+   }
+
+   public static Either<String, List<Object>> validatePositive(List<Object> var0) {
+      return .MODULE$.validatePositive(var0);
+   }
+}
+
+// ================================================================================
+// Definition: BoundaryValidation$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.collection.immutable.List;
+import scala.collection.immutable..colon.colon;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+import scala.runtime.java8.JFunction1.mcVI.sp;
+import scala.util.Either;
+import scala.util.boundary.;
+import scala.util.boundary.Break;
+import scala.util.boundary.Label;
+
+@Snapshot
+public final class BoundaryValidation$ implements Serializable {
+   public static final BoundaryValidation$ MODULE$ = new BoundaryValidation$();
+
+   private BoundaryValidation$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(BoundaryValidation$.class);
+   }
+
+   public Either<String, List<Object>> validatePositive(final List<Object> xs) {
+      Label local = new Label();
+
+      Object var10000;
+      try {
+         xs.foreach(
+            (sp)x -> {
+               if (x <= 0) {
+                  throw .MODULE$
+                     .break(
+                        scala.package..MODULE$.Left().apply(new StringBuilder(25).append("Invalid: ").append(x).append(" is not positive").toString()), local
+                     );
+               }
+            }
+         );
+         var10000 = scala.package..MODULE$.Right().apply(xs);
+      } catch (Break var4) {
+         if (var4.label() != local) {
+            throw var4;
+         }
+
+         var10000 = (Either)var4.value();
+      }
+
+      return (Either<String, List<Object>>)var10000;
+   }
+
+   public String run() {
+      Either r1 = this.validatePositive(
+         (List<Object>)(
+            (Object)(
+               new colon(
+                  BoxesRunTime.boxToInteger(1),
+                  new colon(BoxesRunTime.boxToInteger(2), new colon(BoxesRunTime.boxToInteger(3), scala.collection.immutable.Nil..MODULE$))
+               )
+            )
+         )
+      );
+      Either r2 = this.validatePositive(
+         (List<Object>)(
+            (Object)(
+               new colon(
+                  BoxesRunTime.boxToInteger(1),
+                  new colon(BoxesRunTime.boxToInteger(-2), new colon(BoxesRunTime.boxToInteger(3), scala.collection.immutable.Nil..MODULE$))
+               )
+            )
+         )
+      );
+      return new StringBuilder(2).append(r1).append(", ").append(r2).toString();
+   }
+}

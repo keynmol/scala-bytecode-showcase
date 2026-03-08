@@ -1,0 +1,161 @@
+================================================================================
+// Snippet: trait_self_type
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      trait Persistence:
+        def save(data: String): String = s"Saved: $data"
+
+@Snapshot
+      trait UserService:
+        this: Persistence =>
+        def createUser(name: String): String =
+          save(s"User($name)")
+
+@Snapshot
+      class UserServiceImpl extends UserService with Persistence
+
+@Snapshot
+      def run: String =
+        UserServiceImpl().createUser("Alice")
+
+================================================================================
+// Definition: UserService (javap)
+================================================================================
+
+Compiled from "trait_self_type.scala"
+public interface UserService {
+  public static java.lang.String createUser$(UserService, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #14                 // InterfaceMethod createUser:(Ljava/lang/String;)Ljava/lang/String;
+       5: areturn
+
+  public default java.lang.String createUser(java.lang.String);
+    Code:
+       0: aload_0
+       1: checkcast     #18                 // class Persistence
+       4: new           #20                 // class java/lang/StringBuilder
+       7: dup
+       8: ldc           #21                 // int 6
+      10: invokespecial #25                 // Method java/lang/StringBuilder."<init>":(I)V
+      13: ldc           #27                 // String User(
+      15: invokevirtual #31                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      18: aload_1
+      19: invokevirtual #31                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      22: ldc           #33                 // String )
+      24: invokevirtual #31                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      27: invokevirtual #37                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      30: invokeinterface #40,  2           // InterfaceMethod Persistence.save:(Ljava/lang/String;)Ljava/lang/String;
+      35: areturn
+}
+
+================================================================================
+// Definition: Persistence (javap)
+================================================================================
+
+Compiled from "trait_self_type.scala"
+public interface Persistence {
+  public static java.lang.String save$(Persistence, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #14                 // InterfaceMethod save:(Ljava/lang/String;)Ljava/lang/String;
+       5: areturn
+
+  public default java.lang.String save(java.lang.String);
+    Code:
+       0: new           #18                 // class java/lang/StringBuilder
+       3: dup
+       4: ldc           #19                 // int 7
+       6: invokespecial #23                 // Method java/lang/StringBuilder."<init>":(I)V
+       9: ldc           #25                 // String Saved:
+      11: invokevirtual #29                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      14: aload_1
+      15: invokevirtual #29                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      18: invokevirtual #33                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      21: areturn
+}
+
+================================================================================
+// Definition: UserServiceImpl (javap)
+================================================================================
+
+Compiled from "trait_self_type.scala"
+public class UserServiceImpl implements UserService,Persistence {
+  public UserServiceImpl();
+    Code:
+       0: aload_0
+       1: invokespecial #14                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public java.lang.String createUser(java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokestatic  #23                 // InterfaceMethod UserService.createUser$:(LUserService;Ljava/lang/String;)Ljava/lang/String;
+       5: areturn
+
+  public java.lang.String save(java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokestatic  #30                 // InterfaceMethod Persistence.save$:(LPersistence;Ljava/lang/String;)Ljava/lang/String;
+       5: areturn
+}
+
+================================================================================
+// Definition: trait_self_type$package (javap)
+================================================================================
+
+Compiled from "trait_self_type.scala"
+public final class trait_self_type$package {
+  public static java.lang.String run();
+    Code:
+       0: getstatic     #14                 // Field trait_self_type$package$.MODULE$:Ltrait_self_type$package$;
+       3: invokevirtual #16                 // Method trait_self_type$package$.run:()Ljava/lang/String;
+       6: areturn
+}
+
+================================================================================
+// Definition: trait_self_type$package$ (javap)
+================================================================================
+
+Compiled from "trait_self_type.scala"
+public final class trait_self_type$package$ implements java.io.Serializable {
+  public static final trait_self_type$package$ MODULE$;
+
+  private trait_self_type$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class trait_self_type$package$
+       3: dup
+       4: invokespecial #16                 // Method "<init>":()V
+       7: putstatic     #18                 // Field MODULE$:Ltrait_self_type$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #22                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class trait_self_type$package$
+       6: invokespecial #25                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public java.lang.String run();
+    Code:
+       0: new           #30                 // class UserServiceImpl
+       3: dup
+       4: invokespecial #31                 // Method UserServiceImpl."<init>":()V
+       7: ldc           #33                 // String Alice
+       9: invokevirtual #37                 // Method UserServiceImpl.createUser:(Ljava/lang/String;)Ljava/lang/String;
+      12: areturn
+}

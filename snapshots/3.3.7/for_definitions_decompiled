@@ -1,0 +1,87 @@
+/*
+================================================================================
+Snippet: for_definitions
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def process(xs: List[Int]): List[String] =
+        for
+          x <- xs
+          doubled = x * 2
+          squared = doubled * doubled
+        yield s"$x -> $doubled -> $squared"
+
+@Snapshot
+      def run: List[String] =
+        process(List(1, 2, 3))
+
+*/
+
+// ================================================================================
+// Definition: for_definitions$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import for_definitions.package.;
+import scala.collection.immutable.List;
+
+public final class for_definitions$package {
+   @Snapshot
+   public static List<String> process(List<Object> var0) {
+      return .MODULE$.process(var0);
+   }
+
+   @Snapshot
+   public static List<String> run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: for_definitions$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.MatchError;
+import scala.collection.immutable.List;
+import scala.collection.immutable..colon.colon;
+import scala.collection.immutable.Nil.;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class for_definitions$package$ implements Serializable {
+   public static final for_definitions$package$ MODULE$ = new for_definitions$package$();
+
+   private for_definitions$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(for_definitions$package$.class);
+   }
+
+   @Snapshot
+   public List<String> process(final List<Object> xs) {
+      return xs.map(x -> process$$anonfun$1(BoxesRunTime.unboxToInt(x))).map(x$1 -> {
+         if (x$1 != null) {
+            int x = BoxesRunTime.unboxToInt(x$1._1());
+            int doubled = BoxesRunTime.unboxToInt(x$1._2());
+            int squared = BoxesRunTime.unboxToInt(x$1._3());
+            return new StringBuilder(8).append(x).append(" -> ").append(doubled).append(" -> ").append(squared).toString();
+         } else {
+            throw new MatchError(x$1);
+         }
+      });
+   }
+
+   @Snapshot
+   public List<String> run() {
+      return this.process(
+         (List<Object>)(
+            (Object)(new colon(BoxesRunTime.boxToInteger(1), new colon(BoxesRunTime.boxToInteger(2), new colon(BoxesRunTime.boxToInteger(3), .MODULE$))))
+         )
+      );
+   }
+}

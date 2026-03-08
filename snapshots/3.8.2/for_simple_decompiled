@@ -1,0 +1,74 @@
+/*
+================================================================================
+Snippet: for_simple
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def doubled(xs: List[Int]): List[Int] =
+        for x <- xs yield x * 2
+
+@Snapshot
+      def run: List[Int] =
+        doubled(List(1, 2, 3))
+
+*/
+
+// ================================================================================
+// Definition: for_simple$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import for_simple.package.;
+import scala.collection.immutable.List;
+
+public final class for_simple$package {
+   @Snapshot
+   public static List<Object> doubled(List<Object> var0) {
+      return .MODULE$.doubled(var0);
+   }
+
+   @Snapshot
+   public static List<Object> run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: for_simple$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.collection.immutable.List;
+import scala.collection.immutable..colon.colon;
+import scala.collection.immutable.Nil.;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+import scala.runtime.java8.JFunction1.mcII.sp;
+
+public final class for_simple$package$ implements Serializable {
+   public static final for_simple$package$ MODULE$ = new for_simple$package$();
+
+   private for_simple$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(for_simple$package$.class);
+   }
+
+   @Snapshot
+   public List<Object> doubled(final List<Object> xs) {
+      return xs.map((sp)x -> x * 2);
+   }
+
+   @Snapshot
+   public List<Object> run() {
+      return this.doubled(
+         (List<Object>)(
+            (Object)(new colon(BoxesRunTime.boxToInteger(1), new colon(BoxesRunTime.boxToInteger(2), new colon(BoxesRunTime.boxToInteger(3), .MODULE$))))
+         )
+      );
+   }
+}

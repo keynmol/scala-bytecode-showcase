@@ -1,0 +1,90 @@
+/*
+================================================================================
+Snippet: for_either
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def divide(a: Int, b: Int): Either[String, Int] =
+        if b == 0 then Left("division by zero")
+        else Right(a / b)
+
+@Snapshot
+      def compute(a: Int, b: Int, c: Int): Either[String, Int] =
+        for
+          x <- divide(a, b)
+          y <- divide(x, c)
+        yield y
+
+@Snapshot
+      def run: String =
+        val r1 = compute(20, 2, 5)
+        val r2 = compute(20, 0, 5)
+        s"$r1, $r2"
+
+*/
+
+// ================================================================================
+// Definition: for_either$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import for_either.package.;
+import scala.util.Either;
+
+public final class for_either$package {
+   @Snapshot
+   public static Either<String, Object> compute(int var0, int var1, int var2) {
+      return .MODULE$.compute(var0, var1, var2);
+   }
+
+   @Snapshot
+   public static Either<String, Object> divide(int var0, int var1) {
+      return .MODULE$.divide(var0, var1);
+   }
+
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: for_either$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.package.;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+import scala.util.Either;
+
+public final class for_either$package$ implements Serializable {
+   public static final for_either$package$ MODULE$ = new for_either$package$();
+
+   private for_either$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(for_either$package$.class);
+   }
+
+   @Snapshot
+   public Either<String, Object> divide(final int a, final int b) {
+      return (Either<String, Object>)(b == 0 ? .MODULE$.Left().apply("division by zero") : .MODULE$.Right().apply(BoxesRunTime.boxToInteger(a / b)));
+   }
+
+   @Snapshot
+   public Either<String, Object> compute(final int a, final int b, final int c) {
+      return this.divide(a, b).flatMap(x -> compute$$anonfun$1(c, BoxesRunTime.unboxToInt(x)));
+   }
+
+   @Snapshot
+   public String run() {
+      Either r1 = this.compute(20, 2, 5);
+      Either r2 = this.compute(20, 0, 5);
+      return new StringBuilder(2).append(r1).append(", ").append(r2).toString();
+   }
+}

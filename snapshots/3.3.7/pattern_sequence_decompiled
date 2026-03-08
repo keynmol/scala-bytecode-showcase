@@ -1,0 +1,113 @@
+/*
+================================================================================
+Snippet: pattern_sequence
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def describeList(xs: List[Int]): String =
+        xs match
+          case Nil => "empty"
+          case head :: Nil => s"single: $head"
+          case head :: tail => s"head: $head, tail length: ${tail.length}"
+
+@Snapshot
+      def run: String =
+        List(
+          describeList(Nil),
+          describeList(List(1)),
+          describeList(List(1, 2, 3))
+        ).mkString("; ")
+
+*/
+
+// ================================================================================
+// Definition: pattern_sequence$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.MatchError;
+import scala.collection.IterableOnceOps;
+import scala.collection.immutable.List;
+import scala.collection.immutable..colon.colon;
+import scala.collection.immutable.Nil.;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class pattern_sequence$package$ implements Serializable {
+   public static final pattern_sequence$package$ MODULE$ = new pattern_sequence$package$();
+
+   private pattern_sequence$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(pattern_sequence$package$.class);
+   }
+
+   @Snapshot
+   public String describeList(final List<Object> xs) {
+       var10000 = scala.package..MODULE$.Nil();
+      if (var10000 == null ? xs != null : !var10000.equals(xs)) {
+         if (!(xs instanceof colon)) {
+            throw new MatchError(xs);
+         } else {
+            colon var4 = (colon)xs;
+            int var5 = BoxesRunTime.unboxToInt(var4.head());
+            List var6 = var4.next$access$1();
+            var10000 = scala.package..MODULE$.Nil();
+            return (var10000 == null ? var6 != null : !var10000.equals(var6))
+               ? new StringBuilder(21).append("head: ").append(var5).append(", tail length: ").append(var6.length()).toString()
+               : new StringBuilder(8).append("single: ").append(var5).toString();
+         }
+      } else {
+         return "empty";
+      }
+   }
+
+   @Snapshot
+   public String run() {
+      return ((IterableOnceOps)(
+            new colon(
+               this.describeList(scala.package..MODULE$.Nil()),
+               new colon(
+                  this.describeList((List<Object>)((Object)(new colon(BoxesRunTime.boxToInteger(1), .MODULE$)))),
+                  new colon(
+                     this.describeList(
+                        (List<Object>)(
+                           (Object)(
+                              new colon(
+                                 BoxesRunTime.boxToInteger(1), new colon(BoxesRunTime.boxToInteger(2), new colon(BoxesRunTime.boxToInteger(3), .MODULE$))
+                              )
+                           )
+                        )
+                     ),
+                     .MODULE$
+                  )
+               )
+            )
+         ))
+         .mkString("; ");
+   }
+}
+
+// ================================================================================
+// Definition: pattern_sequence$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import pattern_sequence.package.;
+import scala.collection.immutable.List;
+
+public final class pattern_sequence$package {
+   @Snapshot
+   public static String describeList(List<Object> var0) {
+      return .MODULE$.describeList(var0);
+   }
+
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}

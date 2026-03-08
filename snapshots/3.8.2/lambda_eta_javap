@@ -1,0 +1,127 @@
+================================================================================
+// Snippet: lambda_eta
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def double(x: Int): Int = x * 2
+
+@Snapshot
+      def applyToList(xs: List[Int], f: Int => Int): List[Int] =
+        xs.map(f)
+
+@Snapshot
+      def run: List[Int] =
+        applyToList(List(1, 2, 3), double)
+
+================================================================================
+// Definition: lambda_eta$package$ (javap)
+================================================================================
+
+Compiled from "lambda_eta.scala"
+public final class lambda_eta$package$ implements java.io.Serializable {
+  public static final lambda_eta$package$ MODULE$;
+
+  private lambda_eta$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #18                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class lambda_eta$package$
+       3: dup
+       4: invokespecial #21                 // Method "<init>":()V
+       7: putstatic     #23                 // Field MODULE$:Llambda_eta$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #27                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class lambda_eta$package$
+       6: invokespecial #30                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public int double(int);
+    Code:
+       0: iload_1
+       1: iconst_2
+       2: imul
+       3: ireturn
+
+  public scala.collection.immutable.List<java.lang.Object> applyToList(scala.collection.immutable.List<java.lang.Object>, scala.Function1<java.lang.Object, java.lang.Object>);
+    Code:
+       0: aload_1
+       1: aload_2
+       2: invokevirtual #46                 // Method scala/collection/immutable/List.map:(Lscala/Function1;)Lscala/collection/immutable/List;
+       5: areturn
+
+  public scala.collection.immutable.List<java.lang.Object> run();
+    Code:
+       0: aload_0
+       1: new           #53                 // class scala/collection/immutable/$colon$colon
+       4: dup
+       5: iconst_1
+       6: invokestatic  #59                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+       9: new           #53                 // class scala/collection/immutable/$colon$colon
+      12: dup
+      13: iconst_2
+      14: invokestatic  #59                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      17: new           #53                 // class scala/collection/immutable/$colon$colon
+      20: dup
+      21: iconst_3
+      22: invokestatic  #59                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      25: getstatic     #64                 // Field scala/collection/immutable/Nil$.MODULE$:Lscala/collection/immutable/Nil$;
+      28: invokespecial #67                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      31: invokespecial #67                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      34: invokespecial #67                 // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      37: checkcast     #4                  // class java/lang/Object
+      40: checkcast     #42                 // class scala/collection/immutable/List
+      43: invokedynamic #84,  0             // InvokeDynamic #0:apply$mcII$sp:()Lscala/runtime/java8/JFunction1$mcII$sp;
+      48: invokevirtual #86                 // Method applyToList:(Lscala/collection/immutable/List;Lscala/Function1;)Lscala/collection/immutable/List;
+      51: areturn
+
+  private static final int run$$anonfun$1(int);
+    Code:
+       0: getstatic     #23                 // Field MODULE$:Llambda_eta$package$;
+       3: iload_0
+       4: invokevirtual #88                 // Method double:(I)I
+       7: ireturn
+
+  private static java.lang.Object $deserializeLambda$(java.lang.invoke.SerializedLambda);
+    Code:
+       0: aload_0
+       1: invokedynamic #100,  0            // InvokeDynamic #1:lambdaDeserialize:(Ljava/lang/invoke/SerializedLambda;)Ljava/lang/Object;
+       6: areturn
+}
+
+================================================================================
+// Definition: lambda_eta$package (javap)
+================================================================================
+
+Compiled from "lambda_eta.scala"
+public final class lambda_eta$package {
+  public static scala.collection.immutable.List<java.lang.Object> applyToList(scala.collection.immutable.List<java.lang.Object>, scala.Function1<java.lang.Object, java.lang.Object>);
+    Code:
+       0: getstatic     #15                 // Field lambda_eta$package$.MODULE$:Llambda_eta$package$;
+       3: aload_0
+       4: aload_1
+       5: invokevirtual #17                 // Method lambda_eta$package$.applyToList:(Lscala/collection/immutable/List;Lscala/Function1;)Lscala/collection/immutable/List;
+       8: areturn
+
+  public static int double(int);
+    Code:
+       0: getstatic     #15                 // Field lambda_eta$package$.MODULE$:Llambda_eta$package$;
+       3: iload_0
+       4: invokevirtual #21                 // Method lambda_eta$package$.double:(I)I
+       7: ireturn
+
+  public static scala.collection.immutable.List<java.lang.Object> run();
+    Code:
+       0: getstatic     #15                 // Field lambda_eta$package$.MODULE$:Llambda_eta$package$;
+       3: invokevirtual #26                 // Method lambda_eta$package$.run:()Lscala/collection/immutable/List;
+       6: areturn
+}

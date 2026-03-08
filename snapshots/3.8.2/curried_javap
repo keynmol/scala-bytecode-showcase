@@ -1,0 +1,111 @@
+================================================================================
+// Snippet: curried
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def multiply(a: Int)(b: Int): Int =
+        a * b
+
+@Snapshot
+      def run: Int =
+        val double = multiply(2)
+        val triple = multiply(3)
+        double(5) + triple(4)
+
+================================================================================
+// Definition: curried$package (javap)
+================================================================================
+
+Compiled from "curried.scala"
+public final class curried$package {
+  public static int multiply(int, int);
+    Code:
+       0: getstatic     #14                 // Field curried$package$.MODULE$:Lcurried$package$;
+       3: iload_0
+       4: iload_1
+       5: invokevirtual #16                 // Method curried$package$.multiply:(II)I
+       8: ireturn
+
+  public static int run();
+    Code:
+       0: getstatic     #14                 // Field curried$package$.MODULE$:Lcurried$package$;
+       3: invokevirtual #20                 // Method curried$package$.run:()I
+       6: ireturn
+}
+
+================================================================================
+// Definition: curried$package$ (javap)
+================================================================================
+
+Compiled from "curried.scala"
+public final class curried$package$ implements java.io.Serializable {
+  public static final curried$package$ MODULE$;
+
+  private curried$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #18                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class curried$package$
+       3: dup
+       4: invokespecial #21                 // Method "<init>":()V
+       7: putstatic     #23                 // Field MODULE$:Lcurried$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #27                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class curried$package$
+       6: invokespecial #30                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public int multiply(int, int);
+    Code:
+       0: iload_1
+       1: iload_2
+       2: imul
+       3: ireturn
+
+  public int run();
+    Code:
+       0: invokedynamic #56,  0             // InvokeDynamic #0:apply$mcII$sp:()Lscala/runtime/java8/JFunction1$mcII$sp;
+       5: astore_1
+       6: invokedynamic #61,  0             // InvokeDynamic #1:apply$mcII$sp:()Lscala/runtime/java8/JFunction1$mcII$sp;
+      11: astore_2
+      12: aload_1
+      13: iconst_5
+      14: invokeinterface #65,  2           // InterfaceMethod scala/Function1.apply$mcII$sp:(I)I
+      19: aload_2
+      20: iconst_4
+      21: invokeinterface #65,  2           // InterfaceMethod scala/Function1.apply$mcII$sp:(I)I
+      26: iadd
+      27: ireturn
+
+  private static final int $anonfun$1(int);
+    Code:
+       0: getstatic     #23                 // Field MODULE$:Lcurried$package$;
+       3: iconst_2
+       4: iload_0
+       5: invokevirtual #70                 // Method multiply:(II)I
+       8: ireturn
+
+  private static final int $anonfun$2(int);
+    Code:
+       0: getstatic     #23                 // Field MODULE$:Lcurried$package$;
+       3: iconst_3
+       4: iload_0
+       5: invokevirtual #70                 // Method multiply:(II)I
+       8: ireturn
+
+  private static java.lang.Object $deserializeLambda$(java.lang.invoke.SerializedLambda);
+    Code:
+       0: aload_0
+       1: invokedynamic #82,  0             // InvokeDynamic #2:lambdaDeserialize:(Ljava/lang/invoke/SerializedLambda;)Ljava/lang/Object;
+       6: areturn
+}

@@ -1,0 +1,538 @@
+================================================================================
+// Snippet: trait_sealed
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      sealed trait Result
+
+@Snapshot
+      case class Success(value: Int) extends Result
+
+@Snapshot
+      case class Failure(error: String) extends Result
+
+@Snapshot
+      def describe(r: Result): String =
+        r match
+          case Success(v) => s"Success: $v"
+          case Failure(e) => s"Failure: $e"
+
+@Snapshot
+      def run: String =
+        describe(Success(42)) + "; " + describe(Failure("oops"))
+
+================================================================================
+// Definition: Failure (javap)
+================================================================================
+
+Compiled from "trait_sealed.scala"
+public class Failure implements Result,scala.Product,java.io.Serializable {
+  private final java.lang.String error;
+
+  public static Failure apply(java.lang.String);
+    Code:
+       0: getstatic     #22                 // Field Failure$.MODULE$:LFailure$;
+       3: aload_0
+       4: invokevirtual #24                 // Method Failure$.apply:(Ljava/lang/String;)LFailure;
+       7: areturn
+
+  public static Failure fromProduct(scala.Product);
+    Code:
+       0: getstatic     #22                 // Field Failure$.MODULE$:LFailure$;
+       3: aload_0
+       4: invokevirtual #28                 // Method Failure$.fromProduct:(Lscala/Product;)LFailure;
+       7: areturn
+
+  public static Failure unapply(Failure);
+    Code:
+       0: getstatic     #22                 // Field Failure$.MODULE$:LFailure$;
+       3: aload_0
+       4: invokevirtual #32                 // Method Failure$.unapply:(LFailure;)LFailure;
+       7: areturn
+
+  public Failure(java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #36                 // Field error:Ljava/lang/String;
+       5: aload_0
+       6: invokespecial #39                 // Method java/lang/Object."<init>":()V
+       9: return
+
+  public scala.collection.Iterator productIterator();
+    Code:
+       0: aload_0
+       1: invokestatic  #47                 // InterfaceMethod scala/Product.productIterator$:(Lscala/Product;)Lscala/collection/Iterator;
+       4: areturn
+
+  public scala.collection.Iterator productElementNames();
+    Code:
+       0: aload_0
+       1: invokestatic  #51                 // InterfaceMethod scala/Product.productElementNames$:(Lscala/Product;)Lscala/collection/Iterator;
+       4: areturn
+
+  public int hashCode();
+    Code:
+       0: getstatic     #58                 // Field scala/util/hashing/MurmurHash3$.MODULE$:Lscala/util/hashing/MurmurHash3$;
+       3: aload_0
+       4: ldc           #59                 // int -1408943127
+       6: iconst_1
+       7: invokevirtual #63                 // Method scala/util/hashing/MurmurHash3$.productHash:(Lscala/Product;IZ)I
+      10: ireturn
+
+  public boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: if_acmpeq     73
+       5: aload_1
+       6: astore_2
+       7: aload_2
+       8: instanceof    #2                  // class Failure
+      11: ifeq          66
+      14: aload_2
+      15: checkcast     #2                  // class Failure
+      18: astore_3
+      19: aload_0
+      20: invokevirtual #69                 // Method error:()Ljava/lang/String;
+      23: aload_3
+      24: invokevirtual #69                 // Method error:()Ljava/lang/String;
+      27: astore        4
+      29: dup
+      30: ifnonnull     42
+      33: pop
+      34: aload         4
+      36: ifnull        50
+      39: goto          62
+      42: aload         4
+      44: invokevirtual #71                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      47: ifeq          62
+      50: aload_3
+      51: aload_0
+      52: invokevirtual #74                 // Method canEqual:(Ljava/lang/Object;)Z
+      55: ifeq          62
+      58: iconst_1
+      59: goto          63
+      62: iconst_0
+      63: goto          70
+      66: iconst_0
+      67: goto          70
+      70: ifeq          77
+      73: iconst_1
+      74: goto          78
+      77: iconst_0
+      78: ireturn
+
+  public java.lang.String toString();
+    Code:
+       0: getstatic     #83                 // Field scala/runtime/ScalaRunTime$.MODULE$:Lscala/runtime/ScalaRunTime$;
+       3: aload_0
+       4: invokevirtual #87                 // Method scala/runtime/ScalaRunTime$._toString:(Lscala/Product;)Ljava/lang/String;
+       7: areturn
+
+  public boolean canEqual(java.lang.Object);
+    Code:
+       0: aload_1
+       1: instanceof    #2                  // class Failure
+       4: ireturn
+
+  public int productArity();
+    Code:
+       0: iconst_1
+       1: ireturn
+
+  public java.lang.String productPrefix();
+    Code:
+       0: ldc           #91                 // String Failure
+       2: areturn
+
+  public java.lang.Object productElement(int);
+    Code:
+       0: iload_1
+       1: istore_2
+       2: iconst_0
+       3: iload_2
+       4: if_icmpne     12
+       7: aload_0
+       8: invokevirtual #97                 // Method _1:()Ljava/lang/String;
+      11: areturn
+      12: new           #99                 // class java/lang/IndexOutOfBoundsException
+      15: dup
+      16: iload_1
+      17: invokestatic  #105                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      20: invokevirtual #109                // Method java/lang/Integer.toString:()Ljava/lang/String;
+      23: invokespecial #111                // Method java/lang/IndexOutOfBoundsException."<init>":(Ljava/lang/String;)V
+      26: athrow
+
+  public java.lang.String productElementName(int);
+    Code:
+       0: iload_1
+       1: istore_2
+       2: iconst_0
+       3: iload_2
+       4: if_icmpne     10
+       7: ldc           #115                // String error
+       9: areturn
+      10: new           #99                 // class java/lang/IndexOutOfBoundsException
+      13: dup
+      14: iload_1
+      15: invokestatic  #105                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      18: invokevirtual #109                // Method java/lang/Integer.toString:()Ljava/lang/String;
+      21: invokespecial #111                // Method java/lang/IndexOutOfBoundsException."<init>":(Ljava/lang/String;)V
+      24: athrow
+
+  public java.lang.String error();
+    Code:
+       0: aload_0
+       1: getfield      #36                 // Field error:Ljava/lang/String;
+       4: areturn
+
+  public Failure copy(java.lang.String);
+    Code:
+       0: new           #2                  // class Failure
+       3: dup
+       4: aload_1
+       5: invokespecial #117                // Method "<init>":(Ljava/lang/String;)V
+       8: areturn
+
+  public java.lang.String copy$default$1();
+    Code:
+       0: aload_0
+       1: invokevirtual #69                 // Method error:()Ljava/lang/String;
+       4: areturn
+
+  public java.lang.String _1();
+    Code:
+       0: aload_0
+       1: invokevirtual #69                 // Method error:()Ljava/lang/String;
+       4: areturn
+}
+
+================================================================================
+// Definition: trait_sealed$package (javap)
+================================================================================
+
+Compiled from "trait_sealed.scala"
+public final class trait_sealed$package {
+  public static java.lang.String describe(Result);
+    Code:
+       0: getstatic     #14                 // Field trait_sealed$package$.MODULE$:Ltrait_sealed$package$;
+       3: aload_0
+       4: invokevirtual #16                 // Method trait_sealed$package$.describe:(LResult;)Ljava/lang/String;
+       7: areturn
+
+  public static java.lang.String run();
+    Code:
+       0: getstatic     #14                 // Field trait_sealed$package$.MODULE$:Ltrait_sealed$package$;
+       3: invokevirtual #20                 // Method trait_sealed$package$.run:()Ljava/lang/String;
+       6: areturn
+}
+
+================================================================================
+// Definition: Result (javap)
+================================================================================
+
+Compiled from "trait_sealed.scala"
+public interface Result {
+}
+
+================================================================================
+// Definition: Success (javap)
+================================================================================
+
+Compiled from "trait_sealed.scala"
+public class Success implements Result,scala.Product,java.io.Serializable {
+  private final int value;
+
+  public static Success apply(int);
+    Code:
+       0: getstatic     #22                 // Field Success$.MODULE$:LSuccess$;
+       3: iload_0
+       4: invokevirtual #24                 // Method Success$.apply:(I)LSuccess;
+       7: areturn
+
+  public static Success fromProduct(scala.Product);
+    Code:
+       0: getstatic     #22                 // Field Success$.MODULE$:LSuccess$;
+       3: aload_0
+       4: invokevirtual #28                 // Method Success$.fromProduct:(Lscala/Product;)LSuccess;
+       7: areturn
+
+  public static Success unapply(Success);
+    Code:
+       0: getstatic     #22                 // Field Success$.MODULE$:LSuccess$;
+       3: aload_0
+       4: invokevirtual #32                 // Method Success$.unapply:(LSuccess;)LSuccess;
+       7: areturn
+
+  public Success(int);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: putfield      #36                 // Field value:I
+       5: aload_0
+       6: invokespecial #39                 // Method java/lang/Object."<init>":()V
+       9: return
+
+  public scala.collection.Iterator productIterator();
+    Code:
+       0: aload_0
+       1: invokestatic  #47                 // InterfaceMethod scala/Product.productIterator$:(Lscala/Product;)Lscala/collection/Iterator;
+       4: areturn
+
+  public scala.collection.Iterator productElementNames();
+    Code:
+       0: aload_0
+       1: invokestatic  #51                 // InterfaceMethod scala/Product.productElementNames$:(Lscala/Product;)Lscala/collection/Iterator;
+       4: areturn
+
+  public int hashCode();
+    Code:
+       0: ldc           #54                 // int -889275714
+       2: istore_1
+       3: iload_1
+       4: ldc           #55                 // int -202516509
+       6: invokestatic  #61                 // Method scala/runtime/Statics.mix:(II)I
+       9: istore_1
+      10: iload_1
+      11: aload_0
+      12: invokevirtual #63                 // Method value:()I
+      15: invokestatic  #61                 // Method scala/runtime/Statics.mix:(II)I
+      18: istore_1
+      19: iload_1
+      20: iconst_1
+      21: invokestatic  #66                 // Method scala/runtime/Statics.finalizeHash:(II)I
+      24: ireturn
+
+  public boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: if_acmpeq     53
+       5: aload_1
+       6: astore_2
+       7: aload_2
+       8: instanceof    #2                  // class Success
+      11: ifeq          46
+      14: aload_2
+      15: checkcast     #2                  // class Success
+      18: astore_3
+      19: aload_0
+      20: invokevirtual #63                 // Method value:()I
+      23: aload_3
+      24: invokevirtual #63                 // Method value:()I
+      27: if_icmpne     42
+      30: aload_3
+      31: aload_0
+      32: invokevirtual #72                 // Method canEqual:(Ljava/lang/Object;)Z
+      35: ifeq          42
+      38: iconst_1
+      39: goto          43
+      42: iconst_0
+      43: goto          50
+      46: iconst_0
+      47: goto          50
+      50: ifeq          57
+      53: iconst_1
+      54: goto          58
+      57: iconst_0
+      58: ireturn
+
+  public java.lang.String toString();
+    Code:
+       0: getstatic     #80                 // Field scala/runtime/ScalaRunTime$.MODULE$:Lscala/runtime/ScalaRunTime$;
+       3: aload_0
+       4: invokevirtual #84                 // Method scala/runtime/ScalaRunTime$._toString:(Lscala/Product;)Ljava/lang/String;
+       7: areturn
+
+  public boolean canEqual(java.lang.Object);
+    Code:
+       0: aload_1
+       1: instanceof    #2                  // class Success
+       4: ireturn
+
+  public int productArity();
+    Code:
+       0: iconst_1
+       1: ireturn
+
+  public java.lang.String productPrefix();
+    Code:
+       0: ldc           #88                 // String Success
+       2: areturn
+
+  public java.lang.Object productElement(int);
+    Code:
+       0: iload_1
+       1: istore_2
+       2: iconst_0
+       3: iload_2
+       4: if_icmpne     14
+       7: aload_0
+       8: invokevirtual #94                 // Method _1:()I
+      11: goto          29
+      14: new           #96                 // class java/lang/IndexOutOfBoundsException
+      17: dup
+      18: iload_1
+      19: invokestatic  #102                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      22: invokevirtual #106                // Method java/lang/Integer.toString:()Ljava/lang/String;
+      25: invokespecial #109                // Method java/lang/IndexOutOfBoundsException."<init>":(Ljava/lang/String;)V
+      28: athrow
+      29: invokestatic  #102                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      32: areturn
+
+  public java.lang.String productElementName(int);
+    Code:
+       0: iload_1
+       1: istore_2
+       2: iconst_0
+       3: iload_2
+       4: if_icmpne     10
+       7: ldc           #112                // String value
+       9: areturn
+      10: new           #96                 // class java/lang/IndexOutOfBoundsException
+      13: dup
+      14: iload_1
+      15: invokestatic  #102                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      18: invokevirtual #106                // Method java/lang/Integer.toString:()Ljava/lang/String;
+      21: invokespecial #109                // Method java/lang/IndexOutOfBoundsException."<init>":(Ljava/lang/String;)V
+      24: athrow
+
+  public int value();
+    Code:
+       0: aload_0
+       1: getfield      #36                 // Field value:I
+       4: ireturn
+
+  public Success copy(int);
+    Code:
+       0: new           #2                  // class Success
+       3: dup
+       4: iload_1
+       5: invokespecial #115                // Method "<init>":(I)V
+       8: areturn
+
+  public int copy$default$1();
+    Code:
+       0: aload_0
+       1: invokevirtual #63                 // Method value:()I
+       4: ireturn
+
+  public int _1();
+    Code:
+       0: aload_0
+       1: invokevirtual #63                 // Method value:()I
+       4: ireturn
+}
+
+================================================================================
+// Definition: trait_sealed$package$ (javap)
+================================================================================
+
+Compiled from "trait_sealed.scala"
+public final class trait_sealed$package$ implements java.io.Serializable {
+  public static final trait_sealed$package$ MODULE$;
+
+  private trait_sealed$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class trait_sealed$package$
+       3: dup
+       4: invokespecial #16                 // Method "<init>":()V
+       7: putstatic     #18                 // Field MODULE$:Ltrait_sealed$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #22                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class trait_sealed$package$
+       6: invokespecial #25                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public java.lang.String describe(Result);
+    Code:
+       0: aload_1
+       1: astore_2
+       2: aload_2
+       3: instanceof    #31                 // class Success
+       6: ifeq          53
+       9: getstatic     #36                 // Field Success$.MODULE$:LSuccess$;
+      12: aload_2
+      13: checkcast     #31                 // class Success
+      16: invokevirtual #40                 // Method Success$.unapply:(LSuccess;)LSuccess;
+      19: astore_3
+      20: aload_3
+      21: invokevirtual #44                 // Method Success._1:()I
+      24: istore        4
+      26: iload         4
+      28: istore        5
+      30: new           #46                 // class java/lang/StringBuilder
+      33: dup
+      34: ldc           #47                 // int 9
+      36: invokespecial #50                 // Method java/lang/StringBuilder."<init>":(I)V
+      39: ldc           #52                 // String Success:
+      41: invokevirtual #56                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      44: iload         5
+      46: invokevirtual #59                 // Method java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+      49: invokevirtual #63                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      52: areturn
+      53: aload_2
+      54: instanceof    #65                 // class Failure
+      57: ifeq          106
+      60: getstatic     #70                 // Field Failure$.MODULE$:LFailure$;
+      63: aload_2
+      64: checkcast     #65                 // class Failure
+      67: invokevirtual #73                 // Method Failure$.unapply:(LFailure;)LFailure;
+      70: astore        6
+      72: aload         6
+      74: invokevirtual #75                 // Method Failure._1:()Ljava/lang/String;
+      77: astore        7
+      79: aload         7
+      81: astore        8
+      83: new           #46                 // class java/lang/StringBuilder
+      86: dup
+      87: ldc           #47                 // int 9
+      89: invokespecial #50                 // Method java/lang/StringBuilder."<init>":(I)V
+      92: ldc           #77                 // String Failure:
+      94: invokevirtual #56                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      97: aload         8
+      99: invokevirtual #56                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     102: invokevirtual #63                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     105: areturn
+     106: new           #79                 // class scala/MatchError
+     109: dup
+     110: aload_2
+     111: invokespecial #82                 // Method scala/MatchError."<init>":(Ljava/lang/Object;)V
+     114: athrow
+
+  public java.lang.String run();
+    Code:
+       0: new           #46                 // class java/lang/StringBuilder
+       3: dup
+       4: ldc           #91                 // int 2
+       6: invokespecial #50                 // Method java/lang/StringBuilder."<init>":(I)V
+       9: aload_0
+      10: getstatic     #36                 // Field Success$.MODULE$:LSuccess$;
+      13: bipush        42
+      15: invokevirtual #95                 // Method Success$.apply:(I)LSuccess;
+      18: invokevirtual #97                 // Method describe:(LResult;)Ljava/lang/String;
+      21: invokevirtual #56                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      24: ldc           #99                 // String ;
+      26: invokevirtual #56                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      29: aload_0
+      30: getstatic     #70                 // Field Failure$.MODULE$:LFailure$;
+      33: ldc           #101                // String oops
+      35: invokevirtual #104                // Method Failure$.apply:(Ljava/lang/String;)LFailure;
+      38: invokevirtual #97                 // Method describe:(LResult;)Ljava/lang/String;
+      41: invokevirtual #56                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      44: invokevirtual #63                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      47: areturn
+}

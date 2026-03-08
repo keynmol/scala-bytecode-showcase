@@ -1,0 +1,122 @@
+/*
+================================================================================
+Snippet: pattern_extractor
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      object Even:
+        def unapply(n: Int): Option[Int] =
+          if n % 2 == 0 then Some(n / 2) else None
+
+@Snapshot
+      def describeNumber(n: Int): String =
+        n match
+          case Even(half) => s"$n is even, half is $half"
+          case _ => s"$n is odd"
+
+@Snapshot
+      def run: String =
+        describeNumber(10) + "; " + describeNumber(7)
+
+*/
+
+// ================================================================================
+// Definition: Even (decompiled)
+// ================================================================================
+
+import Even.;
+import compiler.iface.Snapshot;
+import scala.Option;
+
+@Snapshot
+public final class Even {
+   public static Option<Object> unapply(int var0) {
+      return .MODULE$.unapply(var0);
+   }
+}
+
+// ================================================================================
+// Definition: pattern_extractor$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import pattern_extractor.package.;
+
+public final class pattern_extractor$package {
+   @Snapshot
+   public static String describeNumber(int var0) {
+      return .MODULE$.describeNumber(var0);
+   }
+
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: Even$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Option;
+import scala.Some.;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+
+@Snapshot
+public final class Even$ implements Serializable {
+   public static final Even$ MODULE$ = new Even$();
+
+   private Even$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(Even$.class);
+   }
+
+   public Option<Object> unapply(final int n) {
+      return (Option<Object>)(n % 2 == 0 ? .MODULE$.apply(BoxesRunTime.boxToInteger(n / 2)) : scala.None..MODULE$);
+   }
+}
+
+// ================================================================================
+// Definition: pattern_extractor$package$ (decompiled)
+// ================================================================================
+
+import Even.;
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Option;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class pattern_extractor$package$ implements Serializable {
+   public static final pattern_extractor$package$ MODULE$ = new pattern_extractor$package$();
+
+   private pattern_extractor$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(pattern_extractor$package$.class);
+   }
+
+   @Snapshot
+   public String describeNumber(final int n) {
+      Option var3 = .MODULE$.unapply(n);
+      if (!var3.isEmpty()) {
+         int var4 = BoxesRunTime.unboxToInt(var3.get());
+         return new StringBuilder(18).append(n).append(" is even, half is ").append(var4).toString();
+      } else {
+         return new StringBuilder(7).append(n).append(" is odd").toString();
+      }
+   }
+
+   @Snapshot
+   public String run() {
+      return new StringBuilder(2).append(this.describeNumber(10)).append("; ").append(this.describeNumber(7)).toString();
+   }
+}

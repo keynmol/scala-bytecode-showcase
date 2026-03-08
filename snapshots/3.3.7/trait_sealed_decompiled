@@ -1,0 +1,311 @@
+/*
+================================================================================
+Snippet: trait_sealed
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      sealed trait Result
+
+@Snapshot
+      case class Success(value: Int) extends Result
+
+@Snapshot
+      case class Failure(error: String) extends Result
+
+@Snapshot
+      def describe(r: Result): String =
+        r match
+          case Success(v) => s"Success: $v"
+          case Failure(e) => s"Failure: $e"
+
+@Snapshot
+      def run: String =
+        describe(Success(42)) + "; " + describe(Failure("oops"))
+
+*/
+
+// ================================================================================
+// Definition: Failure (decompiled)
+// ================================================================================
+
+import Failure.;
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Product;
+import scala.runtime.BoxesRunTime;
+
+@Snapshot
+public class Failure implements Result, Product, Serializable {
+   private final String error;
+
+   public static Failure apply(String var0) {
+      return .MODULE$.apply(var0);
+   }
+
+   public static Failure fromProduct(Product var0) {
+      return .MODULE$.fromProduct(var0);
+   }
+
+   public static Failure unapply(Failure var0) {
+      return .MODULE$.unapply(var0);
+   }
+
+   public Failure(final String error) {
+      this.error = error;
+   }
+
+   @Override
+   public int hashCode() {
+      return scala.util.hashing.MurmurHash3..MODULE$.productHash(this, -1408943127, true);
+   }
+
+   @Override
+   public boolean equals(final Object x$0) {
+      if (this != x$0) {
+         boolean var5;
+         if (!(x$0 instanceof Failure)) {
+            var5 = false;
+         } else {
+            Failure var3 = (Failure)x$0;
+            String var10000 = this.error();
+            String var4 = var3.error();
+            var5 = (var10000 == null ? var4 == null : var10000.equals(var4)) && var3.canEqual(this);
+         }
+
+         if (!var5) {
+            return false;
+         }
+      }
+
+      return true;
+   }
+
+   @Override
+   public String toString() {
+      return scala.runtime.ScalaRunTime..MODULE$._toString(this);
+   }
+
+   public boolean canEqual(final Object that) {
+      return that instanceof Failure;
+   }
+
+   public int productArity() {
+      return 1;
+   }
+
+   public String productPrefix() {
+      return "Failure";
+   }
+
+   public Object productElement(final int n) {
+      if (0 == n) {
+         return this._1();
+      } else {
+         throw new IndexOutOfBoundsException(BoxesRunTime.boxToInteger(n).toString());
+      }
+   }
+
+   public String productElementName(final int n) {
+      if (0 == n) {
+         return "error";
+      } else {
+         throw new IndexOutOfBoundsException(BoxesRunTime.boxToInteger(n).toString());
+      }
+   }
+
+   public String error() {
+      return this.error;
+   }
+
+   public Failure copy(final String error) {
+      return new Failure(error);
+   }
+
+   public String copy$default$1() {
+      return this.error();
+   }
+
+   public String _1() {
+      return this.error();
+   }
+}
+
+// ================================================================================
+// Definition: trait_sealed$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import trait_sealed.package.;
+
+public final class trait_sealed$package {
+   @Snapshot
+   public static String describe(Result var0) {
+      return .MODULE$.describe(var0);
+   }
+
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: Result (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+
+@Snapshot
+public interface Result {
+}
+
+// ================================================================================
+// Definition: Success (decompiled)
+// ================================================================================
+
+import Success.;
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Product;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.Statics;
+
+@Snapshot
+public class Success implements Result, Product, Serializable {
+   private final int value;
+
+   public static Success apply(int var0) {
+      return .MODULE$.apply(var0);
+   }
+
+   public static Success fromProduct(Product var0) {
+      return .MODULE$.fromProduct(var0);
+   }
+
+   public static Success unapply(Success var0) {
+      return .MODULE$.unapply(var0);
+   }
+
+   public Success(final int value) {
+      this.value = value;
+   }
+
+   @Override
+   public int hashCode() {
+      int var1 = -889275714;
+      var1 = Statics.mix(var1, -202516509);
+      var1 = Statics.mix(var1, this.value());
+      return Statics.finalizeHash(var1, 1);
+   }
+
+   @Override
+   public boolean equals(final Object x$0) {
+      if (this != x$0) {
+         boolean var10000;
+         if (x$0 instanceof Success) {
+            Success var3 = (Success)x$0;
+            var10000 = this.value() == var3.value() && var3.canEqual(this);
+         } else {
+            var10000 = false;
+         }
+
+         if (!var10000) {
+            return false;
+         }
+      }
+
+      return true;
+   }
+
+   @Override
+   public String toString() {
+      return scala.runtime.ScalaRunTime..MODULE$._toString(this);
+   }
+
+   public boolean canEqual(final Object that) {
+      return that instanceof Success;
+   }
+
+   public int productArity() {
+      return 1;
+   }
+
+   public String productPrefix() {
+      return "Success";
+   }
+
+   public Object productElement(final int n) {
+      if (0 == n) {
+         return BoxesRunTime.boxToInteger(this._1());
+      } else {
+         throw new IndexOutOfBoundsException(BoxesRunTime.boxToInteger(n).toString());
+      }
+   }
+
+   public String productElementName(final int n) {
+      if (0 == n) {
+         return "value";
+      } else {
+         throw new IndexOutOfBoundsException(BoxesRunTime.boxToInteger(n).toString());
+      }
+   }
+
+   public int value() {
+      return this.value;
+   }
+
+   public Success copy(final int value) {
+      return new Success(value);
+   }
+
+   public int copy$default$1() {
+      return this.value();
+   }
+
+   public int _1() {
+      return this.value();
+   }
+}
+
+// ================================================================================
+// Definition: trait_sealed$package$ (decompiled)
+// ================================================================================
+
+import Success.;
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.MatchError;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class trait_sealed$package$ implements Serializable {
+   public static final trait_sealed$package$ MODULE$ = new trait_sealed$package$();
+
+   private trait_sealed$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(trait_sealed$package$.class);
+   }
+
+   @Snapshot
+   public String describe(final Result r) {
+      if (r instanceof Success) {
+         Success var3 = .MODULE$.unapply((Success)r);
+         int var4 = var3._1();
+         return new StringBuilder(9).append("Success: ").append(var4).toString();
+      } else if (r instanceof Failure) {
+         Failure var6 = Failure..MODULE$.unapply((Failure)r);
+         String var7 = var6._1();
+         return new StringBuilder(9).append("Failure: ").append(var7).toString();
+      } else {
+         throw new MatchError(r);
+      }
+   }
+
+   @Snapshot
+   public String run() {
+      return new StringBuilder(2).append(this.describe(.MODULE$.apply(42))).append("; ").append(this.describe(Failure..MODULE$.apply("oops"))).toString();
+   }
+}

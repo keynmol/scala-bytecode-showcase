@@ -1,0 +1,85 @@
+/*
+================================================================================
+Snippet: pattern_guards
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def classify(n: Int): String =
+        n match
+          case x if x < 0 => "negative"
+          case x if x == 0 => "zero"
+          case x if x % 2 == 0 => "positive even"
+          case _ => "positive odd"
+
+@Snapshot
+      def run: String =
+        List(-5, 0, 4, 7).map(classify).mkString(", ")
+
+*/
+
+// ================================================================================
+// Definition: pattern_guards$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.collection.immutable.List;
+import scala.collection.immutable..colon.colon;
+import scala.collection.immutable.Nil.;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class pattern_guards$package$ implements Serializable {
+   public static final pattern_guards$package$ MODULE$ = new pattern_guards$package$();
+
+   private pattern_guards$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(pattern_guards$package$.class);
+   }
+
+   @Snapshot
+   public String classify(final int n) {
+      if (n < 0) {
+         return "negative";
+      } else if (n == 0) {
+         return "zero";
+      } else {
+         return n % 2 == 0 ? "positive even" : "positive odd";
+      }
+   }
+
+   @Snapshot
+   public String run() {
+      return ((List)(
+            new colon(
+               BoxesRunTime.boxToInteger(-5),
+               new colon(BoxesRunTime.boxToInteger(0), new colon(BoxesRunTime.boxToInteger(4), new colon(BoxesRunTime.boxToInteger(7), .MODULE$)))
+            )
+         ))
+         .map(n -> run$$anonfun$1(BoxesRunTime.unboxToInt(n)))
+         .mkString(", ");
+   }
+}
+
+// ================================================================================
+// Definition: pattern_guards$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import pattern_guards.package.;
+
+public final class pattern_guards$package {
+   @Snapshot
+   public static String classify(int var0) {
+      return .MODULE$.classify(var0);
+   }
+
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}

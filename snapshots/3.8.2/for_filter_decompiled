@@ -1,0 +1,85 @@
+/*
+================================================================================
+Snippet: for_filter
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def evens(xs: List[Int]): List[Int] =
+        for x <- xs if x % 2 == 0 yield x
+
+@Snapshot
+      def run: List[Int] =
+        evens(List(1, 2, 3, 4, 5, 6))
+
+*/
+
+// ================================================================================
+// Definition: for_filter$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.collection.immutable.List;
+import scala.collection.immutable..colon.colon;
+import scala.collection.immutable.Nil.;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+import scala.runtime.java8.JFunction1.mcZI.sp;
+
+public final class for_filter$package$ implements Serializable {
+   public static final for_filter$package$ MODULE$ = new for_filter$package$();
+
+   private for_filter$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(for_filter$package$.class);
+   }
+
+   @Snapshot
+   public List<Object> evens(final List<Object> xs) {
+      return (List<Object>)xs.withFilter((sp)x -> x % 2 == 0).map((scala.runtime.java8.JFunction1.mcII.sp)x -> x);
+   }
+
+   @Snapshot
+   public List<Object> run() {
+      return this.evens(
+         (List<Object>)(
+            (Object)(
+               new colon(
+                  BoxesRunTime.boxToInteger(1),
+                  new colon(
+                     BoxesRunTime.boxToInteger(2),
+                     new colon(
+                        BoxesRunTime.boxToInteger(3),
+                        new colon(BoxesRunTime.boxToInteger(4), new colon(BoxesRunTime.boxToInteger(5), new colon(BoxesRunTime.boxToInteger(6), .MODULE$)))
+                     )
+                  )
+               )
+            )
+         )
+      );
+   }
+}
+
+// ================================================================================
+// Definition: for_filter$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import for_filter.package.;
+import scala.collection.immutable.List;
+
+public final class for_filter$package {
+   @Snapshot
+   public static List<Object> evens(List<Object> var0) {
+      return .MODULE$.evens(var0);
+   }
+
+   @Snapshot
+   public static List<Object> run() {
+      return .MODULE$.run();
+   }
+}

@@ -1,0 +1,99 @@
+/*
+================================================================================
+Snippet: pattern_tuple
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def processPair(pair: (Int, String)): String =
+        pair match
+          case (0, s) => s"zero with $s"
+          case (n, "special") => s"$n is special"
+          case (n, s) => s"$n and $s"
+
+@Snapshot
+      def run: String =
+        List(
+          processPair((0, "hello")),
+          processPair((42, "special")),
+          processPair((7, "world"))
+        ).mkString("; ")
+
+*/
+
+// ================================================================================
+// Definition: pattern_tuple$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.MatchError;
+import scala.Tuple2;
+import scala.Tuple2.;
+import scala.collection.IterableOnceOps;
+import scala.collection.immutable..colon.colon;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class pattern_tuple$package$ implements Serializable {
+   public static final pattern_tuple$package$ MODULE$ = new pattern_tuple$package$();
+
+   private pattern_tuple$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(pattern_tuple$package$.class);
+   }
+
+   @Snapshot
+   public String processPair(final Tuple2<Object, String> pair) {
+      if (pair != null) {
+         int var3 = BoxesRunTime.unboxToInt(pair._1());
+         String var4 = (String)pair._2();
+         if (0 == var3) {
+            return new StringBuilder(10).append("zero with ").append(var4).toString();
+         } else {
+            return "special".equals(var4)
+               ? new StringBuilder(11).append(var3).append(" is special").toString()
+               : new StringBuilder(5).append(var3).append(" and ").append(var4).toString();
+         }
+      } else {
+         throw new MatchError(pair);
+      }
+   }
+
+   @Snapshot
+   public String run() {
+      return ((IterableOnceOps)(
+            new colon(
+               this.processPair(.MODULE$.apply(BoxesRunTime.boxToInteger(0), "hello")),
+               new colon(
+                  this.processPair(.MODULE$.apply(BoxesRunTime.boxToInteger(42), "special")),
+                  new colon(this.processPair(.MODULE$.apply(BoxesRunTime.boxToInteger(7), "world")), scala.collection.immutable.Nil..MODULE$)
+               )
+            )
+         ))
+         .mkString("; ");
+   }
+}
+
+// ================================================================================
+// Definition: pattern_tuple$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import pattern_tuple.package.;
+import scala.Tuple2;
+
+public final class pattern_tuple$package {
+   @Snapshot
+   public static String processPair(Tuple2<Object, String> var0) {
+      return .MODULE$.processPair(var0);
+   }
+
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}

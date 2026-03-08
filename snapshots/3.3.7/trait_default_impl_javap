@@ -1,0 +1,159 @@
+================================================================================
+// Snippet: trait_default_impl
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      trait Logger:
+        def log(msg: String): String = s"[LOG] $msg"
+        def warn(msg: String): String = s"[WARN] $msg"
+
+@Snapshot
+      class AppLogger extends Logger
+
+@Snapshot
+      def run: String =
+        val logger = AppLogger()
+        logger.log("Starting") + "; " + logger.warn("Low memory")
+
+================================================================================
+// Definition: trait_default_impl$package (javap)
+================================================================================
+
+Compiled from "trait_default_impl.scala"
+public final class trait_default_impl$package {
+  public static java.lang.String run();
+    Code:
+       0: getstatic     #14                 // Field trait_default_impl$package$.MODULE$:Ltrait_default_impl$package$;
+       3: invokevirtual #16                 // Method trait_default_impl$package$.run:()Ljava/lang/String;
+       6: areturn
+}
+
+================================================================================
+// Definition: Logger (javap)
+================================================================================
+
+Compiled from "trait_default_impl.scala"
+public interface Logger {
+  public static java.lang.String log$(Logger, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #14                 // InterfaceMethod log:(Ljava/lang/String;)Ljava/lang/String;
+       5: areturn
+
+  public default java.lang.String log(java.lang.String);
+    Code:
+       0: new           #18                 // class java/lang/StringBuilder
+       3: dup
+       4: ldc           #19                 // int 6
+       6: invokespecial #23                 // Method java/lang/StringBuilder."<init>":(I)V
+       9: ldc           #25                 // String [LOG]
+      11: invokevirtual #29                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      14: aload_1
+      15: invokevirtual #29                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      18: invokevirtual #33                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      21: areturn
+
+  public static java.lang.String warn$(Logger, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #38                 // InterfaceMethod warn:(Ljava/lang/String;)Ljava/lang/String;
+       5: areturn
+
+  public default java.lang.String warn(java.lang.String);
+    Code:
+       0: new           #18                 // class java/lang/StringBuilder
+       3: dup
+       4: ldc           #39                 // int 7
+       6: invokespecial #23                 // Method java/lang/StringBuilder."<init>":(I)V
+       9: ldc           #41                 // String [WARN]
+      11: invokevirtual #29                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      14: aload_1
+      15: invokevirtual #29                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      18: invokevirtual #33                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      21: areturn
+}
+
+================================================================================
+// Definition: trait_default_impl$package$ (javap)
+================================================================================
+
+Compiled from "trait_default_impl.scala"
+public final class trait_default_impl$package$ implements java.io.Serializable {
+  public static final trait_default_impl$package$ MODULE$;
+
+  private trait_default_impl$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class trait_default_impl$package$
+       3: dup
+       4: invokespecial #16                 // Method "<init>":()V
+       7: putstatic     #18                 // Field MODULE$:Ltrait_default_impl$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #22                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class trait_default_impl$package$
+       6: invokespecial #25                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public java.lang.String run();
+    Code:
+       0: new           #30                 // class AppLogger
+       3: dup
+       4: invokespecial #31                 // Method AppLogger."<init>":()V
+       7: astore_1
+       8: new           #33                 // class java/lang/StringBuilder
+      11: dup
+      12: ldc           #34                 // int 2
+      14: invokespecial #37                 // Method java/lang/StringBuilder."<init>":(I)V
+      17: aload_1
+      18: ldc           #39                 // String Starting
+      20: invokevirtual #43                 // Method AppLogger.log:(Ljava/lang/String;)Ljava/lang/String;
+      23: invokevirtual #47                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      26: ldc           #49                 // String ;
+      28: invokevirtual #47                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      31: aload_1
+      32: ldc           #51                 // String Low memory
+      34: invokevirtual #54                 // Method AppLogger.warn:(Ljava/lang/String;)Ljava/lang/String;
+      37: invokevirtual #47                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      40: invokevirtual #57                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      43: areturn
+}
+
+================================================================================
+// Definition: AppLogger (javap)
+================================================================================
+
+Compiled from "trait_default_impl.scala"
+public class AppLogger implements Logger {
+  public AppLogger();
+    Code:
+       0: aload_0
+       1: invokespecial #12                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public java.lang.String log(java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokestatic  #21                 // InterfaceMethod Logger.log$:(LLogger;Ljava/lang/String;)Ljava/lang/String;
+       5: areturn
+
+  public java.lang.String warn(java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokestatic  #26                 // InterfaceMethod Logger.warn$:(LLogger;Ljava/lang/String;)Ljava/lang/String;
+       5: areturn
+}

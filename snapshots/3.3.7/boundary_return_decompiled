@@ -1,0 +1,121 @@
+/*
+================================================================================
+Snippet: boundary_return
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      object BoundaryReturn:
+        import scala.util.boundary, boundary.break
+
+        def indexOf(xs: List[String], target: String): Int =
+          boundary:
+            for (x, i) <- xs.zipWithIndex do
+              if x == target then break(i)
+            -1
+
+        def run: List[Int] =
+          val list = List("a", "b", "c", "d")
+          List(
+            indexOf(list, "c"),
+            indexOf(list, "x")
+          )
+
+*/
+
+// ================================================================================
+// Definition: BoundaryReturn$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.MatchError;
+import scala.collection.IterableOps;
+import scala.collection.immutable.List;
+import scala.collection.immutable..colon.colon;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+import scala.runtime.function.JProcedure1;
+import scala.util.boundary.;
+import scala.util.boundary.Break;
+import scala.util.boundary.Label;
+
+@Snapshot
+public final class BoundaryReturn$ implements Serializable {
+   public static final BoundaryReturn$ MODULE$ = new BoundaryReturn$();
+
+   private BoundaryReturn$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(BoundaryReturn$.class);
+   }
+
+   public int indexOf(final List<String> xs, final String target) {
+      Label local = new Label();
+
+      int var10000;
+      try {
+         ((IterableOps)xs.zipWithIndex()).withFilter(x$1 -> {
+            if (x$1 != null) {
+               String x = (String)x$1._1();
+               int i = BoxesRunTime.unboxToInt(x$1._2());
+               return true;
+            } else {
+               return false;
+            }
+         }).foreach((JProcedure1)x$1 -> {
+            if (x$1 == null) {
+               throw new MatchError(x$1);
+            } else {
+               String x = (String)x$1._1();
+               int i = BoxesRunTime.unboxToInt(x$1._2());
+               if (x == null ? target == null : x.equals(target)) {
+                  throw .MODULE$.break(BoxesRunTime.boxToInteger(i), local);
+               }
+            }
+         });
+         var10000 = -1;
+      } catch (Break var5) {
+         if (var5.label() != local) {
+            throw var5;
+         }
+
+         var10000 = BoxesRunTime.unboxToInt(var5.value());
+      }
+
+      return var10000;
+   }
+
+   public List<Object> run() {
+      List list = (List)(new colon("a", new colon("b", new colon("c", new colon("d", scala.collection.immutable.Nil..MODULE$)))));
+      return (List<Object>)(
+         (Object)(
+            new colon(
+               BoxesRunTime.boxToInteger(this.indexOf(list, "c")),
+               new colon(BoxesRunTime.boxToInteger(this.indexOf(list, "x")), scala.collection.immutable.Nil..MODULE$)
+            )
+         )
+      );
+   }
+}
+
+// ================================================================================
+// Definition: BoundaryReturn (decompiled)
+// ================================================================================
+
+import BoundaryReturn.;
+import compiler.iface.Snapshot;
+import scala.collection.immutable.List;
+
+@Snapshot
+public final class BoundaryReturn {
+   public static int indexOf(List<String> var0, String var1) {
+      return .MODULE$.indexOf(var0, var1);
+   }
+
+   public static List<Object> run() {
+      return .MODULE$.run();
+   }
+}

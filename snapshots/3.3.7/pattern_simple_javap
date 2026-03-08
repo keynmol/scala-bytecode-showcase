@@ -1,0 +1,134 @@
+================================================================================
+// Snippet: pattern_simple
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def describe(x: Any): String =
+        x match
+          case 0 => "zero"
+          case i: Int => s"integer: $i"
+          case s: String => s"string: $s"
+          case _ => "unknown"
+
+@Snapshot
+      def run: String =
+        describe(42) + ", " + describe("hello")
+
+================================================================================
+// Definition: pattern_simple$package$ (javap)
+================================================================================
+
+Compiled from "pattern_simple.scala"
+public final class pattern_simple$package$ implements java.io.Serializable {
+  public static final pattern_simple$package$ MODULE$;
+
+  private pattern_simple$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class pattern_simple$package$
+       3: dup
+       4: invokespecial #16                 // Method "<init>":()V
+       7: putstatic     #18                 // Field MODULE$:Lpattern_simple$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #22                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class pattern_simple$package$
+       6: invokespecial #25                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public java.lang.String describe(java.lang.Object);
+    Code:
+       0: aload_1
+       1: astore_2
+       2: iconst_0
+       3: invokestatic  #35                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+       6: aload_2
+       7: invokestatic  #39                 // Method scala/runtime/BoxesRunTime.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      10: ifeq          16
+      13: ldc           #41                 // String zero
+      15: areturn
+      16: aload_2
+      17: instanceof    #43                 // class java/lang/Integer
+      20: ifeq          50
+      23: aload_2
+      24: invokestatic  #47                 // Method scala/runtime/BoxesRunTime.unboxToInt:(Ljava/lang/Object;)I
+      27: istore_3
+      28: new           #49                 // class java/lang/StringBuilder
+      31: dup
+      32: ldc           #50                 // int 9
+      34: invokespecial #53                 // Method java/lang/StringBuilder."<init>":(I)V
+      37: ldc           #55                 // String integer:
+      39: invokevirtual #59                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      42: iload_3
+      43: invokevirtual #62                 // Method java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+      46: invokevirtual #66                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      49: areturn
+      50: aload_2
+      51: instanceof    #68                 // class java/lang/String
+      54: ifeq          86
+      57: aload_2
+      58: checkcast     #68                 // class java/lang/String
+      61: astore        4
+      63: new           #49                 // class java/lang/StringBuilder
+      66: dup
+      67: ldc           #69                 // int 8
+      69: invokespecial #53                 // Method java/lang/StringBuilder."<init>":(I)V
+      72: ldc           #71                 // String string:
+      74: invokevirtual #59                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      77: aload         4
+      79: invokevirtual #59                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      82: invokevirtual #66                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      85: areturn
+      86: ldc           #73                 // String unknown
+      88: areturn
+
+  public java.lang.String run();
+    Code:
+       0: new           #49                 // class java/lang/StringBuilder
+       3: dup
+       4: ldc           #80                 // int 2
+       6: invokespecial #53                 // Method java/lang/StringBuilder."<init>":(I)V
+       9: aload_0
+      10: bipush        42
+      12: invokestatic  #35                 // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      15: invokevirtual #82                 // Method describe:(Ljava/lang/Object;)Ljava/lang/String;
+      18: invokevirtual #59                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      21: ldc           #84                 // String ,
+      23: invokevirtual #59                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      26: aload_0
+      27: ldc           #86                 // String hello
+      29: invokevirtual #82                 // Method describe:(Ljava/lang/Object;)Ljava/lang/String;
+      32: invokevirtual #59                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      35: invokevirtual #66                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      38: areturn
+}
+
+================================================================================
+// Definition: pattern_simple$package (javap)
+================================================================================
+
+Compiled from "pattern_simple.scala"
+public final class pattern_simple$package {
+  public static java.lang.String describe(java.lang.Object);
+    Code:
+       0: getstatic     #14                 // Field pattern_simple$package$.MODULE$:Lpattern_simple$package$;
+       3: aload_0
+       4: invokevirtual #16                 // Method pattern_simple$package$.describe:(Ljava/lang/Object;)Ljava/lang/String;
+       7: areturn
+
+  public static java.lang.String run();
+    Code:
+       0: getstatic     #14                 // Field pattern_simple$package$.MODULE$:Lpattern_simple$package$;
+       3: invokevirtual #20                 // Method pattern_simple$package$.run:()Ljava/lang/String;
+       6: areturn
+}

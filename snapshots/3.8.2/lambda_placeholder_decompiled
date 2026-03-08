@@ -1,0 +1,82 @@
+/*
+================================================================================
+Snippet: lambda_placeholder
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def process(xs: List[Int]): List[Int] =
+        xs.map(_ * 2).filter(_ > 5)
+
+@Snapshot
+      def run: List[Int] =
+        process(List(1, 2, 3, 4, 5))
+
+*/
+
+// ================================================================================
+// Definition: lambda_placeholder$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import lambda_placeholder.package.;
+import scala.collection.immutable.List;
+
+public final class lambda_placeholder$package {
+   @Snapshot
+   public static List<Object> process(List<Object> var0) {
+      return .MODULE$.process(var0);
+   }
+
+   @Snapshot
+   public static List<Object> run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: lambda_placeholder$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.collection.immutable.List;
+import scala.collection.immutable..colon.colon;
+import scala.collection.immutable.Nil.;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+import scala.runtime.java8.JFunction1.mcII.sp;
+
+public final class lambda_placeholder$package$ implements Serializable {
+   public static final lambda_placeholder$package$ MODULE$ = new lambda_placeholder$package$();
+
+   private lambda_placeholder$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(lambda_placeholder$package$.class);
+   }
+
+   @Snapshot
+   public List<Object> process(final List<Object> xs) {
+      return xs.map((sp)_$1 -> _$1 * 2).filter((scala.runtime.java8.JFunction1.mcZI.sp)_$2 -> _$2 > 5);
+   }
+
+   @Snapshot
+   public List<Object> run() {
+      return this.process(
+         (List<Object>)(
+            (Object)(
+               new colon(
+                  BoxesRunTime.boxToInteger(1),
+                  new colon(
+                     BoxesRunTime.boxToInteger(2),
+                     new colon(BoxesRunTime.boxToInteger(3), new colon(BoxesRunTime.boxToInteger(4), new colon(BoxesRunTime.boxToInteger(5), .MODULE$)))
+                  )
+               )
+            )
+         )
+      );
+   }
+}

@@ -1,0 +1,183 @@
+================================================================================
+// Snippet: trait_linearization
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      trait Base:
+        def value: String = "base"
+
+@Snapshot
+      trait A extends Base:
+        override def value: String = "A -> " + super.value
+
+@Snapshot
+      trait B extends Base:
+        override def value: String = "B -> " + super.value
+
+@Snapshot
+      class C extends A with B
+
+@Snapshot
+      def run: String =
+        C().value
+
+================================================================================
+// Definition: trait_linearization$package (javap)
+================================================================================
+
+Compiled from "trait_linearization.scala"
+public final class trait_linearization$package {
+  public static java.lang.String run();
+    Code:
+       0: getstatic     #14                 // Field trait_linearization$package$.MODULE$:Ltrait_linearization$package$;
+       3: invokevirtual #16                 // Method trait_linearization$package$.run:()Ljava/lang/String;
+       6: areturn
+}
+
+================================================================================
+// Definition: trait_linearization$package$ (javap)
+================================================================================
+
+Compiled from "trait_linearization.scala"
+public final class trait_linearization$package$ implements java.io.Serializable {
+  public static final trait_linearization$package$ MODULE$;
+
+  private trait_linearization$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class trait_linearization$package$
+       3: dup
+       4: invokespecial #16                 // Method "<init>":()V
+       7: putstatic     #18                 // Field MODULE$:Ltrait_linearization$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #22                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class trait_linearization$package$
+       6: invokespecial #25                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public java.lang.String run();
+    Code:
+       0: new           #30                 // class C
+       3: dup
+       4: invokespecial #31                 // Method C."<init>":()V
+       7: invokevirtual #34                 // Method C.value:()Ljava/lang/String;
+      10: areturn
+}
+
+================================================================================
+// Definition: B (javap)
+================================================================================
+
+Compiled from "trait_linearization.scala"
+public interface B extends Base {
+  public abstract java.lang.String B$$super$value();
+
+  public static java.lang.String value$(B);
+    Code:
+       0: aload_0
+       1: invokespecial #16                 // InterfaceMethod value:()Ljava/lang/String;
+       4: areturn
+
+  public default java.lang.String value();
+    Code:
+       0: new           #19                 // class java/lang/StringBuilder
+       3: dup
+       4: ldc           #20                 // int 5
+       6: invokespecial #24                 // Method java/lang/StringBuilder."<init>":(I)V
+       9: ldc           #26                 // String B ->
+      11: invokevirtual #30                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      14: aload_0
+      15: invokeinterface #32,  1           // InterfaceMethod B$$super$value:()Ljava/lang/String;
+      20: invokevirtual #30                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      23: invokevirtual #35                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      26: areturn
+}
+
+================================================================================
+// Definition: Base (javap)
+================================================================================
+
+Compiled from "trait_linearization.scala"
+public interface Base {
+  public static java.lang.String value$(Base);
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // InterfaceMethod value:()Ljava/lang/String;
+       4: areturn
+
+  public default java.lang.String value();
+    Code:
+       0: ldc           #16                 // String base
+       2: areturn
+}
+
+================================================================================
+// Definition: A (javap)
+================================================================================
+
+Compiled from "trait_linearization.scala"
+public interface A extends Base {
+  public abstract java.lang.String A$$super$value();
+
+  public static java.lang.String value$(A);
+    Code:
+       0: aload_0
+       1: invokespecial #16                 // InterfaceMethod value:()Ljava/lang/String;
+       4: areturn
+
+  public default java.lang.String value();
+    Code:
+       0: new           #19                 // class java/lang/StringBuilder
+       3: dup
+       4: ldc           #20                 // int 5
+       6: invokespecial #24                 // Method java/lang/StringBuilder."<init>":(I)V
+       9: ldc           #26                 // String A ->
+      11: invokevirtual #30                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      14: aload_0
+      15: invokeinterface #32,  1           // InterfaceMethod A$$super$value:()Ljava/lang/String;
+      20: invokevirtual #30                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      23: invokevirtual #35                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      26: areturn
+}
+
+================================================================================
+// Definition: C (javap)
+================================================================================
+
+Compiled from "trait_linearization.scala"
+public class C implements Base,A,B {
+  public C();
+    Code:
+       0: aload_0
+       1: invokespecial #16                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public java.lang.String value();
+    Code:
+       0: aload_0
+       1: invokestatic  #24                 // InterfaceMethod B.value$:(LB;)Ljava/lang/String;
+       4: areturn
+
+  public java.lang.String A$$super$value();
+    Code:
+       0: aload_0
+       1: invokestatic  #28                 // InterfaceMethod Base.value$:(LBase;)Ljava/lang/String;
+       4: areturn
+
+  public java.lang.String B$$super$value();
+    Code:
+       0: aload_0
+       1: invokestatic  #32                 // InterfaceMethod A.value$:(LA;)Ljava/lang/String;
+       4: areturn
+}

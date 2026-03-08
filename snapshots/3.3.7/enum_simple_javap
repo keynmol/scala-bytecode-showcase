@@ -1,0 +1,200 @@
+================================================================================
+// Snippet: enum_simple
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      enum Color:
+        case Red, Green, Blue
+
+@Snapshot
+      def describe(c: Color): String =
+        c match
+          case Color.Red => "hot"
+          case Color.Green => "natural"
+          case Color.Blue => "cool"
+
+@Snapshot
+      def run: String =
+        describe(Color.Red) + ", " + describe(Color.Blue)
+
+================================================================================
+// Definition: enum_simple$package$ (javap)
+================================================================================
+
+Compiled from "enum_simple.scala"
+public final class enum_simple$package$ implements java.io.Serializable {
+  public static final enum_simple$package$ MODULE$;
+
+  private enum_simple$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class enum_simple$package$
+       3: dup
+       4: invokespecial #16                 // Method "<init>":()V
+       7: putstatic     #18                 // Field MODULE$:Lenum_simple$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #22                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class enum_simple$package$
+       6: invokespecial #25                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public java.lang.String describe(Color);
+    Code:
+       0: aload_1
+       1: astore_2
+       2: getstatic     #35                 // Field Color$.Red:LColor;
+       5: aload_2
+       6: astore_3
+       7: dup
+       8: ifnonnull     19
+      11: pop
+      12: aload_3
+      13: ifnull        26
+      16: goto          29
+      19: aload_3
+      20: invokevirtual #39                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      23: ifeq          29
+      26: ldc           #41                 // String hot
+      28: areturn
+      29: getstatic     #44                 // Field Color$.Green:LColor;
+      32: aload_2
+      33: astore        4
+      35: dup
+      36: ifnonnull     48
+      39: pop
+      40: aload         4
+      42: ifnull        56
+      45: goto          59
+      48: aload         4
+      50: invokevirtual #39                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      53: ifeq          59
+      56: ldc           #46                 // String natural
+      58: areturn
+      59: getstatic     #49                 // Field Color$.Blue:LColor;
+      62: aload_2
+      63: astore        5
+      65: dup
+      66: ifnonnull     78
+      69: pop
+      70: aload         5
+      72: ifnull        86
+      75: goto          89
+      78: aload         5
+      80: invokevirtual #39                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      83: ifeq          89
+      86: ldc           #51                 // String cool
+      88: areturn
+      89: new           #53                 // class scala/MatchError
+      92: dup
+      93: aload_2
+      94: invokespecial #56                 // Method scala/MatchError."<init>":(Ljava/lang/Object;)V
+      97: athrow
+
+  public java.lang.String run();
+    Code:
+       0: new           #62                 // class java/lang/StringBuilder
+       3: dup
+       4: ldc           #63                 // int 2
+       6: invokespecial #66                 // Method java/lang/StringBuilder."<init>":(I)V
+       9: aload_0
+      10: getstatic     #35                 // Field Color$.Red:LColor;
+      13: invokevirtual #68                 // Method describe:(LColor;)Ljava/lang/String;
+      16: invokevirtual #72                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      19: ldc           #74                 // String ,
+      21: invokevirtual #72                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      24: aload_0
+      25: getstatic     #49                 // Field Color$.Blue:LColor;
+      28: invokevirtual #68                 // Method describe:(LColor;)Ljava/lang/String;
+      31: invokevirtual #72                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      34: invokevirtual #77                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      37: areturn
+}
+
+================================================================================
+// Definition: enum_simple$package (javap)
+================================================================================
+
+Compiled from "enum_simple.scala"
+public final class enum_simple$package {
+  public static java.lang.String describe(Color);
+    Code:
+       0: getstatic     #14                 // Field enum_simple$package$.MODULE$:Lenum_simple$package$;
+       3: aload_0
+       4: invokevirtual #16                 // Method enum_simple$package$.describe:(LColor;)Ljava/lang/String;
+       7: areturn
+
+  public static java.lang.String run();
+    Code:
+       0: getstatic     #14                 // Field enum_simple$package$.MODULE$:Lenum_simple$package$;
+       3: invokevirtual #20                 // Method enum_simple$package$.run:()Ljava/lang/String;
+       6: areturn
+}
+
+================================================================================
+// Definition: Color (javap)
+================================================================================
+
+Compiled from "enum_simple.scala"
+public abstract class Color implements scala.Product,scala.reflect.Enum {
+  public static Color fromOrdinal(int);
+    Code:
+       0: getstatic     #18                 // Field Color$.MODULE$:LColor$;
+       3: iload_0
+       4: invokevirtual #20                 // Method Color$.fromOrdinal:(I)LColor;
+       7: areturn
+
+  public static Color valueOf(java.lang.String);
+    Code:
+       0: getstatic     #18                 // Field Color$.MODULE$:LColor$;
+       3: aload_0
+       4: invokevirtual #24                 // Method Color$.valueOf:(Ljava/lang/String;)LColor;
+       7: areturn
+
+  public static Color[] values();
+    Code:
+       0: getstatic     #18                 // Field Color$.MODULE$:LColor$;
+       3: invokevirtual #28                 // Method Color$.values:()[LColor;
+       6: areturn
+
+  public Color();
+    Code:
+       0: aload_0
+       1: invokespecial #32                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public scala.collection.Iterator productIterator();
+    Code:
+       0: aload_0
+       1: invokestatic  #40                 // InterfaceMethod scala/Product.productIterator$:(Lscala/Product;)Lscala/collection/Iterator;
+       4: areturn
+
+  public java.lang.String productPrefix();
+    Code:
+       0: aload_0
+       1: invokestatic  #46                 // InterfaceMethod scala/Product.productPrefix$:(Lscala/Product;)Ljava/lang/String;
+       4: areturn
+
+  public java.lang.String productElementName(int);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: invokestatic  #53                 // InterfaceMethod scala/Product.productElementName$:(Lscala/Product;I)Ljava/lang/String;
+       5: areturn
+
+  public scala.collection.Iterator productElementNames();
+    Code:
+       0: aload_0
+       1: invokestatic  #58                 // InterfaceMethod scala/Product.productElementNames$:(Lscala/Product;)Lscala/collection/Iterator;
+       4: areturn
+}

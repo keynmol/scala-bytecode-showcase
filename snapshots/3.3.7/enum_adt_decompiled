@@ -1,0 +1,110 @@
+/*
+================================================================================
+Snippet: enum_adt
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      enum Expr:
+        case Num(value: Int)
+        case Add(left: Expr, right: Expr)
+        case Mul(left: Expr, right: Expr)
+
+@Snapshot
+      def eval(e: Expr): Int =
+        e match
+          case Expr.Num(v) => v
+          case Expr.Add(l, r) => eval(l) + eval(r)
+          case Expr.Mul(l, r) => eval(l) * eval(r)
+
+@Snapshot
+      def run: Int =
+        import Expr.*
+        eval(Add(Num(2), Mul(Num(3), Num(4))))
+
+*/
+
+// ================================================================================
+// Definition: Expr (decompiled)
+// ================================================================================
+
+import Expr.;
+import compiler.iface.Snapshot;
+import scala.Product;
+import scala.reflect.Enum;
+
+@Snapshot
+public enum Expr implements Product, Enum {
+   public static Expr fromOrdinal(int var0) {
+      return .MODULE$.fromOrdinal(var0);
+   }
+}
+
+// ================================================================================
+// Definition: enum_adt$package$ (decompiled)
+// ================================================================================
+
+import Expr.Add;
+import Expr.Mul;
+import Expr.Num;
+import Expr.Num.;
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.MatchError;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class enum_adt$package$ implements Serializable {
+   public static final enum_adt$package$ MODULE$ = new enum_adt$package$();
+
+   private enum_adt$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(enum_adt$package$.class);
+   }
+
+   @Snapshot
+   public int eval(final Expr e) {
+      if (e instanceof Num) {
+         Num var3 = .MODULE$.unapply((Num)e);
+         return var3._1();
+      } else if (e instanceof Add) {
+         Add var6 = Expr.Add..MODULE$.unapply((Add)e);
+         Expr var7 = var6._1();
+         Expr var8 = var6._2();
+         return this.eval(var7) + this.eval(var8);
+      } else if (e instanceof Mul) {
+         Mul var11 = Expr.Mul..MODULE$.unapply((Mul)e);
+         Expr var12 = var11._1();
+         Expr var13 = var11._2();
+         return this.eval(var12) * this.eval(var13);
+      } else {
+         throw new MatchError(e);
+      }
+   }
+
+   @Snapshot
+   public int run() {
+      return this.eval(Expr.Add..MODULE$.apply(.MODULE$.apply(2), Expr.Mul..MODULE$.apply(.MODULE$.apply(3), .MODULE$.apply(4))));
+   }
+}
+
+// ================================================================================
+// Definition: enum_adt$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import enum_adt.package.;
+
+public final class enum_adt$package {
+   @Snapshot
+   public static int eval(Expr var0) {
+      return .MODULE$.eval(var0);
+   }
+
+   @Snapshot
+   public static int run() {
+      return .MODULE$.run();
+   }
+}

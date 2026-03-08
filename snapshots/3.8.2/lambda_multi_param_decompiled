@@ -1,0 +1,67 @@
+/*
+================================================================================
+Snippet: lambda_multi_param
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def combine(f: (Int, Int) => Int, a: Int, b: Int): Int =
+        f(a, b)
+
+@Snapshot
+      def run: Int =
+        combine((x, y) => x * y + x + y, 3, 4)
+
+*/
+
+// ================================================================================
+// Definition: lambda_multi_param$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import lambda_multi_param.package.;
+import scala.Function2;
+
+public final class lambda_multi_param$package {
+   @Snapshot
+   public static int combine(Function2<Object, Object, Object> var0, int var1, int var2) {
+      return .MODULE$.combine(var0, var1, var2);
+   }
+
+   @Snapshot
+   public static int run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: lambda_multi_param$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Function2;
+import scala.runtime.ModuleSerializationProxy;
+import scala.runtime.java8.JFunction2.mcIII.sp;
+
+public final class lambda_multi_param$package$ implements Serializable {
+   public static final lambda_multi_param$package$ MODULE$ = new lambda_multi_param$package$();
+
+   private lambda_multi_param$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(lambda_multi_param$package$.class);
+   }
+
+   @Snapshot
+   public int combine(final Function2<Object, Object, Object> f, final int a, final int b) {
+      return f.apply$mcIII$sp(a, b);
+   }
+
+   @Snapshot
+   public int run() {
+      return this.combine((sp)(x, y) -> x * y + x + y, 3, 4);
+   }
+}

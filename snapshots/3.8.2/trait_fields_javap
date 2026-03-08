@@ -1,0 +1,167 @@
+================================================================================
+// Snippet: trait_fields
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      trait Counter:
+        var count: Int = 0
+        def increment(): Unit = count += 1
+        def current: Int = count
+
+@Snapshot
+      class ClickCounter extends Counter
+
+@Snapshot
+      def run: Int =
+        val counter = ClickCounter()
+        counter.increment()
+        counter.increment()
+        counter.current
+
+================================================================================
+// Definition: ClickCounter (javap)
+================================================================================
+
+Compiled from "trait_fields.scala"
+public class ClickCounter implements Counter {
+  private int count;
+
+  public ClickCounter();
+    Code:
+       0: aload_0
+       1: invokespecial #14                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: invokestatic  #18                 // InterfaceMethod Counter.$init$:(LCounter;)V
+       8: return
+
+  public int count();
+    Code:
+       0: aload_0
+       1: getfield      #23                 // Field count:I
+       4: ireturn
+
+  public void count_$eq(int);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: putfield      #23                 // Field count:I
+       5: return
+
+  public void increment();
+    Code:
+       0: aload_0
+       1: invokestatic  #30                 // InterfaceMethod Counter.increment$:(LCounter;)V
+       4: return
+
+  public int current();
+    Code:
+       0: aload_0
+       1: invokestatic  #35                 // InterfaceMethod Counter.current$:(LCounter;)I
+       4: ireturn
+}
+
+================================================================================
+// Definition: Counter (javap)
+================================================================================
+
+Compiled from "trait_fields.scala"
+public interface Counter {
+  public static void $init$(Counter);
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: invokeinterface #13,  2           // InterfaceMethod count_$eq:(I)V
+       7: return
+
+  public abstract int count();
+
+  public abstract void count_$eq(int);
+
+  public static void increment$(Counter);
+    Code:
+       0: aload_0
+       1: invokespecial #22                 // InterfaceMethod increment:()V
+       4: return
+
+  public default void increment();
+    Code:
+       0: aload_0
+       1: aload_0
+       2: invokeinterface #24,  1           // InterfaceMethod count:()I
+       7: iconst_1
+       8: iadd
+       9: invokeinterface #13,  2           // InterfaceMethod count_$eq:(I)V
+      14: return
+
+  public static int current$(Counter);
+    Code:
+       0: aload_0
+       1: invokespecial #30                 // InterfaceMethod current:()I
+       4: ireturn
+
+  public default int current();
+    Code:
+       0: aload_0
+       1: invokeinterface #24,  1           // InterfaceMethod count:()I
+       6: ireturn
+}
+
+================================================================================
+// Definition: trait_fields$package (javap)
+================================================================================
+
+Compiled from "trait_fields.scala"
+public final class trait_fields$package {
+  public static int run();
+    Code:
+       0: getstatic     #14                 // Field trait_fields$package$.MODULE$:Ltrait_fields$package$;
+       3: invokevirtual #16                 // Method trait_fields$package$.run:()I
+       6: ireturn
+}
+
+================================================================================
+// Definition: trait_fields$package$ (javap)
+================================================================================
+
+Compiled from "trait_fields.scala"
+public final class trait_fields$package$ implements java.io.Serializable {
+  public static final trait_fields$package$ MODULE$;
+
+  private trait_fields$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class trait_fields$package$
+       3: dup
+       4: invokespecial #16                 // Method "<init>":()V
+       7: putstatic     #18                 // Field MODULE$:Ltrait_fields$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #22                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class trait_fields$package$
+       6: invokespecial #25                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public int run();
+    Code:
+       0: new           #30                 // class ClickCounter
+       3: dup
+       4: invokespecial #31                 // Method ClickCounter."<init>":()V
+       7: astore_1
+       8: aload_1
+       9: invokevirtual #34                 // Method ClickCounter.increment:()V
+      12: aload_1
+      13: invokevirtual #34                 // Method ClickCounter.increment:()V
+      16: aload_1
+      17: invokevirtual #37                 // Method ClickCounter.current:()I
+      20: ireturn
+}

@@ -1,0 +1,197 @@
+/*
+================================================================================
+Snippet: case_class_copy
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      case class Person(name: String, age: Int)
+
+@Snapshot
+      def run: Person =
+        val original = Person("Alice", 30)
+        val older = original.copy(age = 31)
+        val renamed = original.copy(name = "Bob")
+        renamed
+
+*/
+
+// ================================================================================
+// Definition: Person (decompiled)
+// ================================================================================
+
+import Person.;
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Product;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.Statics;
+
+@Snapshot
+public class Person implements Product, Serializable {
+   private final String name;
+   private final int age;
+
+   public static Person apply(String var0, int var1) {
+      return .MODULE$.apply(var0, var1);
+   }
+
+   public static Person fromProduct(Product var0) {
+      return .MODULE$.fromProduct(var0);
+   }
+
+   public static Person unapply(Person var0) {
+      return .MODULE$.unapply(var0);
+   }
+
+   public Person(final String name, final int age) {
+      this.name = name;
+      this.age = age;
+   }
+
+   @Override
+   public int hashCode() {
+      int var1 = -889275714;
+      var1 = Statics.mix(var1, -1907849355);
+      var1 = Statics.mix(var1, Statics.anyHash(this.name()));
+      var1 = Statics.mix(var1, this.age());
+      return Statics.finalizeHash(var1, 2);
+   }
+
+   @Override
+   public boolean equals(final Object x$0) {
+      if (this != x$0) {
+         boolean var5;
+         if (!(x$0 instanceof Person)) {
+            var5 = false;
+         } else {
+            label38: {
+               Person var3 = (Person)x$0;
+               if (this.age() == var3.age()) {
+                  String var10000 = this.name();
+                  String var4 = var3.name();
+                  if ((var10000 == null ? var4 == null : var10000.equals(var4)) && var3.canEqual(this)) {
+                     var5 = true;
+                     break label38;
+                  }
+               }
+
+               var5 = false;
+            }
+         }
+
+         if (!var5) {
+            return false;
+         }
+      }
+
+      return true;
+   }
+
+   @Override
+   public String toString() {
+      return scala.runtime.ScalaRunTime..MODULE$._toString(this);
+   }
+
+   public boolean canEqual(final Object that) {
+      return that instanceof Person;
+   }
+
+   public int productArity() {
+      return 2;
+   }
+
+   public String productPrefix() {
+      return "Person";
+   }
+
+   public Object productElement(final int n) {
+      if (0 == n) {
+         return this._1();
+      } else if (1 == n) {
+         return BoxesRunTime.boxToInteger(this._2());
+      } else {
+         throw new IndexOutOfBoundsException(BoxesRunTime.boxToInteger(n).toString());
+      }
+   }
+
+   public String productElementName(final int n) {
+      if (0 == n) {
+         return "name";
+      } else if (1 == n) {
+         return "age";
+      } else {
+         throw new IndexOutOfBoundsException(BoxesRunTime.boxToInteger(n).toString());
+      }
+   }
+
+   public String name() {
+      return this.name;
+   }
+
+   public int age() {
+      return this.age;
+   }
+
+   public Person copy(final String name, final int age) {
+      return new Person(name, age);
+   }
+
+   public String copy$default$1() {
+      return this.name();
+   }
+
+   public int copy$default$2() {
+      return this.age();
+   }
+
+   public String _1() {
+      return this.name();
+   }
+
+   public int _2() {
+      return this.age();
+   }
+}
+
+// ================================================================================
+// Definition: case_class_copy$package$ (decompiled)
+// ================================================================================
+
+import Person.;
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class case_class_copy$package$ implements Serializable {
+   public static final case_class_copy$package$ MODULE$ = new case_class_copy$package$();
+
+   private case_class_copy$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(case_class_copy$package$.class);
+   }
+
+   @Snapshot
+   public Person run() {
+      Person original = .MODULE$.apply("Alice", 30);
+      Person older = original.copy(original.copy$default$1(), 31);
+      return original.copy("Bob", original.copy$default$2());
+   }
+}
+
+// ================================================================================
+// Definition: case_class_copy$package (decompiled)
+// ================================================================================
+
+import case_class_copy.package.;
+import compiler.iface.Snapshot;
+
+public final class case_class_copy$package {
+   @Snapshot
+   public static Person run() {
+      return .MODULE$.run();
+   }
+}

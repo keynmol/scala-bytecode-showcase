@@ -1,0 +1,118 @@
+/*
+================================================================================
+Snippet: boundary_pattern
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      object BoundaryPattern:
+        import scala.util.boundary, boundary.break
+
+        def findPair(xs: List[Int], target: Int): Option[(Int, Int)] =
+          boundary:
+            for i <- xs.indices do
+              for j <- (i + 1) until xs.length do
+                if xs(i) + xs(j) == target then
+                  break(Some((xs(i), xs(j))))
+            None
+
+        def run: Option[(Int, Int)] =
+          findPair(List(1, 4, 7, 2, 9, 3), 11)
+
+*/
+
+// ================================================================================
+// Definition: BoundaryPattern (decompiled)
+// ================================================================================
+
+import BoundaryPattern.;
+import compiler.iface.Snapshot;
+import scala.Option;
+import scala.Tuple2;
+import scala.collection.immutable.List;
+
+@Snapshot
+public final class BoundaryPattern {
+   public static Option<Tuple2<Object, Object>> findPair(List<Object> var0, int var1) {
+      return .MODULE$.findPair(var0, var1);
+   }
+
+   public static Option<Tuple2<Object, Object>> run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: BoundaryPattern$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Option;
+import scala.Tuple2;
+import scala.collection.immutable.List;
+import scala.collection.immutable..colon.colon;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+import scala.runtime.RichInt.;
+import scala.runtime.java8.JFunction1.mcVI.sp;
+import scala.util.boundary.Break;
+import scala.util.boundary.Label;
+
+@Snapshot
+public final class BoundaryPattern$ implements Serializable {
+   public static final BoundaryPattern$ MODULE$ = new BoundaryPattern$();
+
+   private BoundaryPattern$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(BoundaryPattern$.class);
+   }
+
+   public Option<Tuple2<Object, Object>> findPair(final List<Object> xs, final int target) {
+      Label local = new Label();
+
+      Object var10000;
+      try {
+         xs.indices().foreach((sp)i -> .MODULE$.until$extension(scala.Predef..MODULE$.intWrapper(i + 1), xs.length()).foreach((sp)j -> {
+               if (BoxesRunTime.unboxToInt(xs.apply(i)) + BoxesRunTime.unboxToInt(xs.apply(j)) == target) {
+                  throw scala.util.boundary..MODULE$.break(scala.Some..MODULE$.apply(scala.Tuple2..MODULE$.apply(xs.apply(i), xs.apply(j))), local);
+               }
+            }));
+         var10000 = scala.None..MODULE$;
+      } catch (Break var5) {
+         if (var5.label() != local) {
+            throw var5;
+         }
+
+         var10000 = (Option)var5.value();
+      }
+
+      return (Option<Tuple2<Object, Object>>)var10000;
+   }
+
+   public Option<Tuple2<Object, Object>> run() {
+      return this.findPair(
+         (List<Object>)(
+            (Object)(
+               new colon(
+                  BoxesRunTime.boxToInteger(1),
+                  new colon(
+                     BoxesRunTime.boxToInteger(4),
+                     new colon(
+                        BoxesRunTime.boxToInteger(7),
+                        new colon(
+                           BoxesRunTime.boxToInteger(2),
+                           new colon(BoxesRunTime.boxToInteger(9), new colon(BoxesRunTime.boxToInteger(3), scala.collection.immutable.Nil..MODULE$))
+                        )
+                     )
+                  )
+               )
+            )
+         ),
+         11
+      );
+   }
+}

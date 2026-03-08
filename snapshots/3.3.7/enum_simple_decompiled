@@ -1,0 +1,101 @@
+/*
+================================================================================
+Snippet: enum_simple
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      enum Color:
+        case Red, Green, Blue
+
+@Snapshot
+      def describe(c: Color): String =
+        c match
+          case Color.Red => "hot"
+          case Color.Green => "natural"
+          case Color.Blue => "cool"
+
+@Snapshot
+      def run: String =
+        describe(Color.Red) + ", " + describe(Color.Blue)
+
+*/
+
+// ================================================================================
+// Definition: enum_simple$package$ (decompiled)
+// ================================================================================
+
+import Color.;
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.MatchError;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class enum_simple$package$ implements Serializable {
+   public static final enum_simple$package$ MODULE$ = new enum_simple$package$();
+
+   private enum_simple$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(enum_simple$package$.class);
+   }
+
+   @Snapshot
+   public String describe(final Color c) {
+      if (.Red == null ? c != null : !.Red.equals(c)) {
+         if (.Green == null ? c != null : !.Green.equals(c)) {
+            if (.Blue == null ? c != null : !.Blue.equals(c)) {
+               throw new MatchError(c);
+            } else {
+               return "cool";
+            }
+         } else {
+            return "natural";
+         }
+      } else {
+         return "hot";
+      }
+   }
+
+   @Snapshot
+   public String run() {
+      return new StringBuilder(2).append(this.describe(.Red)).append(", ").append(this.describe(.Blue)).toString();
+   }
+}
+
+// ================================================================================
+// Definition: enum_simple$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import enum_simple.package.;
+
+public final class enum_simple$package {
+   @Snapshot
+   public static String describe(Color var0) {
+      return .MODULE$.describe(var0);
+   }
+
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: Color (decompiled)
+// ================================================================================
+
+import Color.;
+import compiler.iface.Snapshot;
+import scala.Product;
+import scala.reflect.Enum;
+
+@Snapshot
+public enum Color implements Product, Enum {
+   public static Color fromOrdinal(int var0) {
+      return .MODULE$.fromOrdinal(var0);
+   }
+}

@@ -1,0 +1,73 @@
+/*
+================================================================================
+Snippet: lambda_higher_order
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def compose[A, B, C](f: B => C, g: A => B): A => C =
+        x => f(g(x))
+
+@Snapshot
+      def run: Int =
+        val addOne = (x: Int) => x + 1
+        val double = (x: Int) => x * 2
+        val addOneThenDouble = compose(double, addOne)
+        addOneThenDouble(5)
+
+*/
+
+// ================================================================================
+// Definition: lambda_higher_order$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import lambda_higher_order.package.;
+import scala.Function1;
+
+public final class lambda_higher_order$package {
+   @Snapshot
+   public static <A, B, C> Function1<A, C> compose(Function1<B, C> var0, Function1<A, B> var1) {
+      return .MODULE$.compose(var0, var1);
+   }
+
+   @Snapshot
+   public static int run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: lambda_higher_order$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Function1;
+import scala.runtime.ModuleSerializationProxy;
+import scala.runtime.java8.JFunction1.mcII.sp;
+
+public final class lambda_higher_order$package$ implements Serializable {
+   public static final lambda_higher_order$package$ MODULE$ = new lambda_higher_order$package$();
+
+   private lambda_higher_order$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(lambda_higher_order$package$.class);
+   }
+
+   @Snapshot
+   public <A, B, C> Function1<A, C> compose(final Function1<B, C> f, final Function1<A, B> g) {
+      return x -> f.apply(g.apply(x));
+   }
+
+   @Snapshot
+   public int run() {
+      Function1 addOne = (sp)x -> x + 1;
+      Function1 double = (sp)x -> x * 2;
+      Function1 addOneThenDouble = this.compose(double, addOne);
+      return addOneThenDouble.apply$mcII$sp(5);
+   }
+}

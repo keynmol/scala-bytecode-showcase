@@ -1,0 +1,111 @@
+/*
+================================================================================
+Snippet: trait_mixin
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      trait Swimmer:
+        def swim: String = "swimming"
+
+@Snapshot
+      trait Flyer:
+        def fly: String = "flying"
+
+@Snapshot
+      class Duck extends Swimmer with Flyer:
+        def quack: String = "quack"
+
+@Snapshot
+      def run: String =
+        val duck = Duck()
+        s"${duck.swim}, ${duck.fly}, ${duck.quack}"
+
+*/
+
+// ================================================================================
+// Definition: trait_mixin$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class trait_mixin$package$ implements Serializable {
+   public static final trait_mixin$package$ MODULE$ = new trait_mixin$package$();
+
+   private trait_mixin$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(trait_mixin$package$.class);
+   }
+
+   @Snapshot
+   public String run() {
+      Duck duck = new Duck();
+      return new StringBuilder(4).append(duck.swim()).append(", ").append(duck.fly()).append(", ").append(duck.quack()).toString();
+   }
+}
+
+// ================================================================================
+// Definition: Duck (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+
+@Snapshot
+public class Duck implements Swimmer, Flyer {
+   public String quack() {
+      return "quack";
+   }
+}
+
+// ================================================================================
+// Definition: Swimmer (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+
+@Snapshot
+public interface Swimmer {
+   static String swim$(final Swimmer $this) {
+      return $this.swim();
+   }
+
+   default String swim() {
+      return "swimming";
+   }
+}
+
+// ================================================================================
+// Definition: trait_mixin$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import trait_mixin.package.;
+
+public final class trait_mixin$package {
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: Flyer (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+
+@Snapshot
+public interface Flyer {
+   static String fly$(final Flyer $this) {
+      return $this.fly();
+   }
+
+   default String fly() {
+      return "flying";
+   }
+}

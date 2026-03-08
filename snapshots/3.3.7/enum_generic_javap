@@ -1,0 +1,187 @@
+================================================================================
+// Snippet: enum_generic
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      enum Option[+T]:
+        case Some(value: T)
+        case None
+
+@Snapshot
+      def getOrElse[T](opt: Option[T], default: T): T =
+        opt match
+          case Option.Some(v) => v
+          case Option.None => default
+
+@Snapshot
+      def run: String =
+        val a = getOrElse(Option.Some("hello"), "default")
+        val b = getOrElse(Option.None, "fallback")
+        s"$a, $b"
+
+================================================================================
+// Definition: Option (javap)
+================================================================================
+
+Compiled from "enum_generic.scala"
+public abstract class Option<T> implements scala.reflect.Enum {
+  public static Option<?> fromOrdinal(int);
+    Code:
+       0: getstatic     #26                 // Field Option$.MODULE$:LOption$;
+       3: iload_0
+       4: invokevirtual #28                 // Method Option$.fromOrdinal:(I)LOption;
+       7: areturn
+
+  public Option();
+    Code:
+       0: aload_0
+       1: invokespecial #32                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public scala.collection.Iterator productIterator();
+    Code:
+       0: aload_0
+       1: invokestatic  #40                 // InterfaceMethod scala/Product.productIterator$:(Lscala/Product;)Lscala/collection/Iterator;
+       4: areturn
+
+  public java.lang.String productPrefix();
+    Code:
+       0: aload_0
+       1: invokestatic  #46                 // InterfaceMethod scala/Product.productPrefix$:(Lscala/Product;)Ljava/lang/String;
+       4: areturn
+
+  public java.lang.String productElementName(int);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: invokestatic  #53                 // InterfaceMethod scala/Product.productElementName$:(Lscala/Product;I)Ljava/lang/String;
+       5: areturn
+
+  public scala.collection.Iterator productElementNames();
+    Code:
+       0: aload_0
+       1: invokestatic  #58                 // InterfaceMethod scala/Product.productElementNames$:(Lscala/Product;)Lscala/collection/Iterator;
+       4: areturn
+}
+
+================================================================================
+// Definition: enum_generic$package$ (javap)
+================================================================================
+
+Compiled from "enum_generic.scala"
+public final class enum_generic$package$ implements java.io.Serializable {
+  public static final enum_generic$package$ MODULE$;
+
+  private enum_generic$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #21                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class enum_generic$package$
+       3: dup
+       4: invokespecial #24                 // Method "<init>":()V
+       7: putstatic     #26                 // Field MODULE$:Lenum_generic$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #30                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class enum_generic$package$
+       6: invokespecial #33                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public <T> T getOrElse(Option<T>, T);
+    Code:
+       0: aload_1
+       1: astore_3
+       2: aload_3
+       3: instanceof    #9                  // class Option$Some
+       6: ifeq          35
+       9: getstatic     #42                 // Field Option$Some$.MODULE$:LOption$Some$;
+      12: aload_3
+      13: checkcast     #9                  // class Option$Some
+      16: invokevirtual #46                 // Method Option$Some$.unapply:(LOption$Some;)LOption$Some;
+      19: astore        4
+      21: aload         4
+      23: invokevirtual #49                 // Method Option$Some._1:()Ljava/lang/Object;
+      26: astore        5
+      28: aload         5
+      30: astore        6
+      32: aload         6
+      34: areturn
+      35: getstatic     #55                 // Field Option$.None:LOption;
+      38: aload_3
+      39: astore        7
+      41: dup
+      42: ifnonnull     54
+      45: pop
+      46: aload         7
+      48: ifnull        62
+      51: goto          64
+      54: aload         7
+      56: invokevirtual #59                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      59: ifeq          64
+      62: aload_2
+      63: areturn
+      64: new           #61                 // class scala/MatchError
+      67: dup
+      68: aload_3
+      69: invokespecial #64                 // Method scala/MatchError."<init>":(Ljava/lang/Object;)V
+      72: athrow
+
+  public java.lang.String run();
+    Code:
+       0: aload_0
+       1: getstatic     #42                 // Field Option$Some$.MODULE$:LOption$Some$;
+       4: ldc           #70                 // String hello
+       6: invokevirtual #74                 // Method Option$Some$.apply:(Ljava/lang/Object;)LOption$Some;
+       9: ldc           #75                 // String default
+      11: invokevirtual #77                 // Method getOrElse:(LOption;Ljava/lang/Object;)Ljava/lang/Object;
+      14: checkcast     #79                 // class java/lang/String
+      17: astore_1
+      18: aload_0
+      19: getstatic     #55                 // Field Option$.None:LOption;
+      22: ldc           #81                 // String fallback
+      24: invokevirtual #77                 // Method getOrElse:(LOption;Ljava/lang/Object;)Ljava/lang/Object;
+      27: checkcast     #79                 // class java/lang/String
+      30: astore_2
+      31: new           #83                 // class java/lang/StringBuilder
+      34: dup
+      35: ldc           #84                 // int 2
+      37: invokespecial #87                 // Method java/lang/StringBuilder."<init>":(I)V
+      40: aload_1
+      41: invokevirtual #91                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      44: ldc           #93                 // String ,
+      46: invokevirtual #91                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      49: aload_2
+      50: invokevirtual #91                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      53: invokevirtual #96                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      56: areturn
+}
+
+================================================================================
+// Definition: enum_generic$package (javap)
+================================================================================
+
+Compiled from "enum_generic.scala"
+public final class enum_generic$package {
+  public static <T> T getOrElse(Option<T>, T);
+    Code:
+       0: getstatic     #15                 // Field enum_generic$package$.MODULE$:Lenum_generic$package$;
+       3: aload_0
+       4: aload_1
+       5: invokevirtual #17                 // Method enum_generic$package$.getOrElse:(LOption;Ljava/lang/Object;)Ljava/lang/Object;
+       8: areturn
+
+  public static java.lang.String run();
+    Code:
+       0: getstatic     #15                 // Field enum_generic$package$.MODULE$:Lenum_generic$package$;
+       3: invokevirtual #21                 // Method enum_generic$package$.run:()Ljava/lang/String;
+       6: areturn
+}

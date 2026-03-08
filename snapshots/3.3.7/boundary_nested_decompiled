@@ -1,0 +1,166 @@
+/*
+================================================================================
+Snippet: boundary_nested
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      object BoundaryNested:
+        import scala.util.boundary, boundary.break
+
+        def findInMatrix(matrix: List[List[Int]], target: Int): Option[(Int, Int)] =
+          boundary:
+            for (row, i) <- matrix.zipWithIndex do
+              boundary:
+                for (cell, j) <- row.zipWithIndex do
+                  if cell == target then break(Some((i, j)))
+            None
+
+        def run: Option[(Int, Int)] =
+          val matrix = List(
+            List(1, 2, 3),
+            List(4, 5, 6),
+            List(7, 8, 9)
+          )
+          findInMatrix(matrix, 5)
+
+*/
+
+// ================================================================================
+// Definition: BoundaryNested (decompiled)
+// ================================================================================
+
+import BoundaryNested.;
+import compiler.iface.Snapshot;
+import scala.Option;
+import scala.Tuple2;
+import scala.collection.immutable.List;
+
+@Snapshot
+public final class BoundaryNested {
+   public static Option<Tuple2<Object, Object>> findInMatrix(List<List<Object>> var0, int var1) {
+      return .MODULE$.findInMatrix(var0, var1);
+   }
+
+   public static Option<Tuple2<Object, Object>> run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: BoundaryNested$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.MatchError;
+import scala.Option;
+import scala.Tuple2;
+import scala.Tuple2.mcII.sp;
+import scala.collection.IterableOps;
+import scala.collection.immutable.List;
+import scala.collection.immutable..colon.colon;
+import scala.runtime.BoxedUnit;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+import scala.runtime.function.JProcedure1;
+import scala.util.boundary.;
+import scala.util.boundary.Break;
+import scala.util.boundary.Label;
+
+@Snapshot
+public final class BoundaryNested$ implements Serializable {
+   public static final BoundaryNested$ MODULE$ = new BoundaryNested$();
+
+   private BoundaryNested$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(BoundaryNested$.class);
+   }
+
+   public Option<Tuple2<Object, Object>> findInMatrix(final List<List<Object>> matrix, final int target) {
+      ((IterableOps)matrix.zipWithIndex()).withFilter(x$1 -> {
+         if (x$1 != null) {
+            List row = (List)x$1._1();
+            int i = BoxesRunTime.unboxToInt(x$1._2());
+            return true;
+         } else {
+            return false;
+         }
+      }).foreach(x$1 -> {
+         if (x$1 != null) {
+            List row = (List)x$1._1();
+            int i = BoxesRunTime.unboxToInt(x$1._2());
+            Label local = new Label();
+
+            Object var10000;
+            try {
+               ((IterableOps)row.zipWithIndex()).withFilter(x$1x -> {
+                  if (x$1x != null) {
+                     int cell = x$1x._1$mcI$sp();
+                     int j = x$1x._2$mcI$sp();
+                     return true;
+                  } else {
+                     return false;
+                  }
+               }).foreach((JProcedure1)x$1x -> {
+                  if (x$1x != null) {
+                     int cell = x$1x._1$mcI$sp();
+                     int j = x$1x._2$mcI$sp();
+                     if (cell == target) {
+                        throw .MODULE$.break(scala.Some..MODULE$.apply(new sp(i, j)), local);
+                     }
+                  } else {
+                     throw new MatchError(x$1x);
+                  }
+               });
+               var10000 = BoxedUnit.UNIT;
+            } catch (Break var7) {
+               if (var7.label() != local) {
+                  throw var7;
+               }
+
+               var10000 = var7.value();
+            }
+
+            return var10000;
+         } else {
+            throw new MatchError(x$1);
+         }
+      });
+      return scala.None..MODULE$;
+   }
+
+   public Option<Tuple2<Object, Object>> run() {
+      List matrix = (List)(
+         new colon(
+            (List)(
+               new colon(
+                  BoxesRunTime.boxToInteger(1),
+                  new colon(BoxesRunTime.boxToInteger(2), new colon(BoxesRunTime.boxToInteger(3), scala.collection.immutable.Nil..MODULE$))
+               )
+            ),
+            new colon(
+               (List)(
+                  new colon(
+                     BoxesRunTime.boxToInteger(4),
+                     new colon(BoxesRunTime.boxToInteger(5), new colon(BoxesRunTime.boxToInteger(6), scala.collection.immutable.Nil..MODULE$))
+                  )
+               ),
+               new colon(
+                  (List)(
+                     new colon(
+                        BoxesRunTime.boxToInteger(7),
+                        new colon(BoxesRunTime.boxToInteger(8), new colon(BoxesRunTime.boxToInteger(9), scala.collection.immutable.Nil..MODULE$))
+                     )
+                  ),
+                  scala.collection.immutable.Nil..MODULE$
+               )
+            )
+         )
+      );
+      return this.findInMatrix(matrix, 5);
+   }
+}

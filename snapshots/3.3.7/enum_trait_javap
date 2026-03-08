@@ -1,0 +1,206 @@
+================================================================================
+// Snippet: enum_trait
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      trait Describable:
+        def description: String
+
+@Snapshot
+      enum LogLevel extends Describable:
+        case Debug, Info, Warn, Error
+
+        def description: String = this match
+          case Debug => "Detailed debugging information"
+          case Info => "General information"
+          case Warn => "Warning message"
+          case Error => "Error condition"
+
+@Snapshot
+      def run: String =
+        LogLevel.Warn.description
+
+================================================================================
+// Definition: Describable (javap)
+================================================================================
+
+Compiled from "enum_trait.scala"
+public interface Describable {
+  public abstract java.lang.String description();
+}
+
+================================================================================
+// Definition: enum_trait$package$ (javap)
+================================================================================
+
+Compiled from "enum_trait.scala"
+public final class enum_trait$package$ implements java.io.Serializable {
+  public static final enum_trait$package$ MODULE$;
+
+  private enum_trait$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class enum_trait$package$
+       3: dup
+       4: invokespecial #16                 // Method "<init>":()V
+       7: putstatic     #18                 // Field MODULE$:Lenum_trait$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #22                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class enum_trait$package$
+       6: invokespecial #25                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public java.lang.String run();
+    Code:
+       0: getstatic     #34                 // Field LogLevel$.Warn:LLogLevel;
+       3: invokevirtual #39                 // Method LogLevel.description:()Ljava/lang/String;
+       6: areturn
+}
+
+================================================================================
+// Definition: enum_trait$package (javap)
+================================================================================
+
+Compiled from "enum_trait.scala"
+public final class enum_trait$package {
+  public static java.lang.String run();
+    Code:
+       0: getstatic     #14                 // Field enum_trait$package$.MODULE$:Lenum_trait$package$;
+       3: invokevirtual #16                 // Method enum_trait$package$.run:()Ljava/lang/String;
+       6: areturn
+}
+
+================================================================================
+// Definition: LogLevel (javap)
+================================================================================
+
+Compiled from "enum_trait.scala"
+public abstract class LogLevel implements Describable,scala.Product,scala.reflect.Enum {
+  public static LogLevel fromOrdinal(int);
+    Code:
+       0: getstatic     #20                 // Field LogLevel$.MODULE$:LLogLevel$;
+       3: iload_0
+       4: invokevirtual #22                 // Method LogLevel$.fromOrdinal:(I)LLogLevel;
+       7: areturn
+
+  public static LogLevel valueOf(java.lang.String);
+    Code:
+       0: getstatic     #20                 // Field LogLevel$.MODULE$:LLogLevel$;
+       3: aload_0
+       4: invokevirtual #26                 // Method LogLevel$.valueOf:(Ljava/lang/String;)LLogLevel;
+       7: areturn
+
+  public static LogLevel[] values();
+    Code:
+       0: getstatic     #20                 // Field LogLevel$.MODULE$:LLogLevel$;
+       3: invokevirtual #30                 // Method LogLevel$.values:()[LLogLevel;
+       6: areturn
+
+  public LogLevel();
+    Code:
+       0: aload_0
+       1: invokespecial #34                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public scala.collection.Iterator productIterator();
+    Code:
+       0: aload_0
+       1: invokestatic  #42                 // InterfaceMethod scala/Product.productIterator$:(Lscala/Product;)Lscala/collection/Iterator;
+       4: areturn
+
+  public java.lang.String productPrefix();
+    Code:
+       0: aload_0
+       1: invokestatic  #48                 // InterfaceMethod scala/Product.productPrefix$:(Lscala/Product;)Ljava/lang/String;
+       4: areturn
+
+  public java.lang.String productElementName(int);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: invokestatic  #55                 // InterfaceMethod scala/Product.productElementName$:(Lscala/Product;I)Ljava/lang/String;
+       5: areturn
+
+  public scala.collection.Iterator productElementNames();
+    Code:
+       0: aload_0
+       1: invokestatic  #60                 // InterfaceMethod scala/Product.productElementNames$:(Lscala/Product;)Lscala/collection/Iterator;
+       4: areturn
+
+  public java.lang.String description();
+    Code:
+       0: aload_0
+       1: astore_1
+       2: getstatic     #64                 // Field LogLevel$.Debug:LLogLevel;
+       5: aload_1
+       6: astore_2
+       7: dup
+       8: ifnonnull     19
+      11: pop
+      12: aload_2
+      13: ifnull        26
+      16: goto          29
+      19: aload_2
+      20: invokevirtual #68                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      23: ifeq          29
+      26: ldc           #70                 // String Detailed debugging information
+      28: areturn
+      29: getstatic     #73                 // Field LogLevel$.Info:LLogLevel;
+      32: aload_1
+      33: astore_3
+      34: dup
+      35: ifnonnull     46
+      38: pop
+      39: aload_3
+      40: ifnull        53
+      43: goto          56
+      46: aload_3
+      47: invokevirtual #68                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      50: ifeq          56
+      53: ldc           #75                 // String General information
+      55: areturn
+      56: getstatic     #78                 // Field LogLevel$.Warn:LLogLevel;
+      59: aload_1
+      60: astore        4
+      62: dup
+      63: ifnonnull     75
+      66: pop
+      67: aload         4
+      69: ifnull        83
+      72: goto          86
+      75: aload         4
+      77: invokevirtual #68                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      80: ifeq          86
+      83: ldc           #80                 // String Warning message
+      85: areturn
+      86: getstatic     #83                 // Field LogLevel$.Error:LLogLevel;
+      89: aload_1
+      90: astore        5
+      92: dup
+      93: ifnonnull     105
+      96: pop
+      97: aload         5
+      99: ifnull        113
+     102: goto          116
+     105: aload         5
+     107: invokevirtual #68                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+     110: ifeq          116
+     113: ldc           #85                 // String Error condition
+     115: areturn
+     116: new           #87                 // class scala/MatchError
+     119: dup
+     120: aload_1
+     121: invokespecial #90                 // Method scala/MatchError."<init>":(Ljava/lang/Object;)V
+     124: athrow
+}

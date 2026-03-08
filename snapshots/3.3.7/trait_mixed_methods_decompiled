@@ -1,0 +1,91 @@
+/*
+================================================================================
+Snippet: trait_mixed_methods
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      trait Formatter:
+        def prefix: String
+        def format(msg: String): String = s"$prefix: $msg"
+
+@Snapshot
+      class ErrorFormatter extends Formatter:
+        def prefix: String = "ERROR"
+
+@Snapshot
+      def run: String =
+        ErrorFormatter().format("Something went wrong")
+
+*/
+
+// ================================================================================
+// Definition: trait_mixed_methods$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import trait_mixed_methods.package.;
+
+public final class trait_mixed_methods$package {
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: Formatter (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+
+@Snapshot
+public interface Formatter {
+   String prefix();
+
+   static String format$(final Formatter $this, final String msg) {
+      return $this.format(msg);
+   }
+
+   default String format(final String msg) {
+      return new StringBuilder(2).append(this.prefix()).append(": ").append(msg).toString();
+   }
+}
+
+// ================================================================================
+// Definition: ErrorFormatter (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+
+@Snapshot
+public class ErrorFormatter implements Formatter {
+   public String prefix() {
+      return "ERROR";
+   }
+}
+
+// ================================================================================
+// Definition: trait_mixed_methods$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class trait_mixed_methods$package$ implements Serializable {
+   public static final trait_mixed_methods$package$ MODULE$ = new trait_mixed_methods$package$();
+
+   private trait_mixed_methods$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(trait_mixed_methods$package$.class);
+   }
+
+   @Snapshot
+   public String run() {
+      return new ErrorFormatter().format("Something went wrong");
+   }
+}

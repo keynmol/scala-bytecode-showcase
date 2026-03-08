@@ -1,0 +1,79 @@
+/*
+================================================================================
+Snippet: lambda_sam
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      trait Transformer:
+        def transform(x: Int): Int
+
+@Snapshot
+      def applyTransformer(t: Transformer, x: Int): Int =
+        t.transform(x)
+
+@Snapshot
+      def run: Int =
+        applyTransformer(x => x * 3, 7)
+
+*/
+
+// ================================================================================
+// Definition: Transformer (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+
+@Snapshot
+public interface Transformer {
+   int transform(final int x);
+}
+
+// ================================================================================
+// Definition: lambda_sam$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class lambda_sam$package$ implements Serializable {
+   public static final lambda_sam$package$ MODULE$ = new lambda_sam$package$();
+
+   private lambda_sam$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(lambda_sam$package$.class);
+   }
+
+   @Snapshot
+   public int applyTransformer(final Transformer t, final int x) {
+      return t.transform(x);
+   }
+
+   @Snapshot
+   public int run() {
+      return this.applyTransformer(x -> x * 3, 7);
+   }
+}
+
+// ================================================================================
+// Definition: lambda_sam$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import lambda_sam.package.;
+
+public final class lambda_sam$package {
+   @Snapshot
+   public static int applyTransformer(Transformer var0, int var1) {
+      return .MODULE$.applyTransformer(var0, var1);
+   }
+
+   @Snapshot
+   public static int run() {
+      return .MODULE$.run();
+   }
+}

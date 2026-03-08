@@ -1,0 +1,75 @@
+/*
+================================================================================
+Snippet: for_option
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def combine(a: Option[Int], b: Option[Int]): Option[Int] =
+        for
+          x <- a
+          y <- b
+        yield x + y
+
+@Snapshot
+      def run: String =
+        val r1 = combine(Some(1), Some(2))
+        val r2 = combine(Some(1), None)
+        s"$r1, $r2"
+
+*/
+
+// ================================================================================
+// Definition: for_option$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Option;
+import scala.Some.;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class for_option$package$ implements Serializable {
+   public static final for_option$package$ MODULE$ = new for_option$package$();
+
+   private for_option$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(for_option$package$.class);
+   }
+
+   @Snapshot
+   public Option<Object> combine(final Option<Object> a, final Option<Object> b) {
+      return a.flatMap(x -> combine$$anonfun$1(b, BoxesRunTime.unboxToInt(x)));
+   }
+
+   @Snapshot
+   public String run() {
+      Option r1 = this.combine(.MODULE$.apply(BoxesRunTime.boxToInteger(1)), .MODULE$.apply(BoxesRunTime.boxToInteger(2)));
+      Option r2 = this.combine(.MODULE$.apply(BoxesRunTime.boxToInteger(1)), scala.None..MODULE$);
+      return new StringBuilder(2).append(r1).append(", ").append(r2).toString();
+   }
+}
+
+// ================================================================================
+// Definition: for_option$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import for_option.package.;
+import scala.Option;
+
+public final class for_option$package {
+   @Snapshot
+   public static Option<Object> combine(Option<Object> var0, Option<Object> var1) {
+      return .MODULE$.combine(var0, var1);
+   }
+
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}

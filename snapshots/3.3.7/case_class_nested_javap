@@ -1,0 +1,544 @@
+================================================================================
+// Snippet: case_class_nested
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      case class Address(street: String, city: String)
+
+@Snapshot
+      case class Employee(name: String, address: Address)
+
+@Snapshot
+      def run: Employee =
+        Employee("John", Address("123 Main St", "Springfield"))
+
+================================================================================
+// Definition: Address (javap)
+================================================================================
+
+Compiled from "case_class_nested.scala"
+public class Address implements scala.Product,java.io.Serializable {
+  private final java.lang.String street;
+
+  private final java.lang.String city;
+
+  public static Address apply(java.lang.String, java.lang.String);
+    Code:
+       0: getstatic     #21                 // Field Address$.MODULE$:LAddress$;
+       3: aload_0
+       4: aload_1
+       5: invokevirtual #23                 // Method Address$.apply:(Ljava/lang/String;Ljava/lang/String;)LAddress;
+       8: areturn
+
+  public static Address fromProduct(scala.Product);
+    Code:
+       0: getstatic     #21                 // Field Address$.MODULE$:LAddress$;
+       3: aload_0
+       4: invokevirtual #27                 // Method Address$.fromProduct:(Lscala/Product;)LAddress;
+       7: areturn
+
+  public static Address unapply(Address);
+    Code:
+       0: getstatic     #21                 // Field Address$.MODULE$:LAddress$;
+       3: aload_0
+       4: invokevirtual #31                 // Method Address$.unapply:(LAddress;)LAddress;
+       7: areturn
+
+  public Address(java.lang.String, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #35                 // Field street:Ljava/lang/String;
+       5: aload_0
+       6: aload_2
+       7: putfield      #37                 // Field city:Ljava/lang/String;
+      10: aload_0
+      11: invokespecial #40                 // Method java/lang/Object."<init>":()V
+      14: return
+
+  public scala.collection.Iterator productIterator();
+    Code:
+       0: aload_0
+       1: invokestatic  #48                 // InterfaceMethod scala/Product.productIterator$:(Lscala/Product;)Lscala/collection/Iterator;
+       4: areturn
+
+  public scala.collection.Iterator productElementNames();
+    Code:
+       0: aload_0
+       1: invokestatic  #52                 // InterfaceMethod scala/Product.productElementNames$:(Lscala/Product;)Lscala/collection/Iterator;
+       4: areturn
+
+  public int hashCode();
+    Code:
+       0: getstatic     #59                 // Field scala/util/hashing/MurmurHash3$.MODULE$:Lscala/util/hashing/MurmurHash3$;
+       3: aload_0
+       4: ldc           #60                 // int -513741543
+       6: iconst_1
+       7: invokevirtual #64                 // Method scala/util/hashing/MurmurHash3$.productHash:(Lscala/Product;IZ)I
+      10: ireturn
+
+  public boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: if_acmpeq     104
+       5: aload_1
+       6: astore_2
+       7: aload_2
+       8: instanceof    #2                  // class Address
+      11: ifeq          97
+      14: aload_2
+      15: checkcast     #2                  // class Address
+      18: astore_3
+      19: aload_0
+      20: invokevirtual #70                 // Method street:()Ljava/lang/String;
+      23: aload_3
+      24: invokevirtual #70                 // Method street:()Ljava/lang/String;
+      27: astore        4
+      29: dup
+      30: ifnonnull     42
+      33: pop
+      34: aload         4
+      36: ifnull        50
+      39: goto          93
+      42: aload         4
+      44: invokevirtual #72                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      47: ifeq          93
+      50: aload_0
+      51: invokevirtual #74                 // Method city:()Ljava/lang/String;
+      54: aload_3
+      55: invokevirtual #74                 // Method city:()Ljava/lang/String;
+      58: astore        5
+      60: dup
+      61: ifnonnull     73
+      64: pop
+      65: aload         5
+      67: ifnull        81
+      70: goto          93
+      73: aload         5
+      75: invokevirtual #72                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      78: ifeq          93
+      81: aload_3
+      82: aload_0
+      83: invokevirtual #77                 // Method canEqual:(Ljava/lang/Object;)Z
+      86: ifeq          93
+      89: iconst_1
+      90: goto          94
+      93: iconst_0
+      94: goto          101
+      97: iconst_0
+      98: goto          101
+     101: ifeq          108
+     104: iconst_1
+     105: goto          109
+     108: iconst_0
+     109: ireturn
+
+  public java.lang.String toString();
+    Code:
+       0: getstatic     #86                 // Field scala/runtime/ScalaRunTime$.MODULE$:Lscala/runtime/ScalaRunTime$;
+       3: aload_0
+       4: invokevirtual #90                 // Method scala/runtime/ScalaRunTime$._toString:(Lscala/Product;)Ljava/lang/String;
+       7: areturn
+
+  public boolean canEqual(java.lang.Object);
+    Code:
+       0: aload_1
+       1: instanceof    #2                  // class Address
+       4: ireturn
+
+  public int productArity();
+    Code:
+       0: iconst_2
+       1: ireturn
+
+  public java.lang.String productPrefix();
+    Code:
+       0: ldc           #94                 // String Address
+       2: areturn
+
+  public java.lang.Object productElement(int);
+    Code:
+       0: iload_1
+       1: istore_2
+       2: iconst_0
+       3: iload_2
+       4: if_icmpne     12
+       7: aload_0
+       8: invokevirtual #100                // Method _1:()Ljava/lang/String;
+      11: areturn
+      12: iconst_1
+      13: iload_2
+      14: if_icmpne     22
+      17: aload_0
+      18: invokevirtual #103                // Method _2:()Ljava/lang/String;
+      21: areturn
+      22: new           #105                // class java/lang/IndexOutOfBoundsException
+      25: dup
+      26: iload_1
+      27: invokestatic  #111                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      30: invokevirtual #115                // Method java/lang/Integer.toString:()Ljava/lang/String;
+      33: invokespecial #118                // Method java/lang/IndexOutOfBoundsException."<init>":(Ljava/lang/String;)V
+      36: athrow
+
+  public java.lang.String productElementName(int);
+    Code:
+       0: iload_1
+       1: istore_2
+       2: iconst_0
+       3: iload_2
+       4: if_icmpne     10
+       7: ldc           #122                // String street
+       9: areturn
+      10: iconst_1
+      11: iload_2
+      12: if_icmpne     18
+      15: ldc           #123                // String city
+      17: areturn
+      18: new           #105                // class java/lang/IndexOutOfBoundsException
+      21: dup
+      22: iload_1
+      23: invokestatic  #111                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      26: invokevirtual #115                // Method java/lang/Integer.toString:()Ljava/lang/String;
+      29: invokespecial #118                // Method java/lang/IndexOutOfBoundsException."<init>":(Ljava/lang/String;)V
+      32: athrow
+
+  public java.lang.String street();
+    Code:
+       0: aload_0
+       1: getfield      #35                 // Field street:Ljava/lang/String;
+       4: areturn
+
+  public java.lang.String city();
+    Code:
+       0: aload_0
+       1: getfield      #37                 // Field city:Ljava/lang/String;
+       4: areturn
+
+  public Address copy(java.lang.String, java.lang.String);
+    Code:
+       0: new           #2                  // class Address
+       3: dup
+       4: aload_1
+       5: aload_2
+       6: invokespecial #126                // Method "<init>":(Ljava/lang/String;Ljava/lang/String;)V
+       9: areturn
+
+  public java.lang.String copy$default$1();
+    Code:
+       0: aload_0
+       1: invokevirtual #70                 // Method street:()Ljava/lang/String;
+       4: areturn
+
+  public java.lang.String copy$default$2();
+    Code:
+       0: aload_0
+       1: invokevirtual #74                 // Method city:()Ljava/lang/String;
+       4: areturn
+
+  public java.lang.String _1();
+    Code:
+       0: aload_0
+       1: invokevirtual #70                 // Method street:()Ljava/lang/String;
+       4: areturn
+
+  public java.lang.String _2();
+    Code:
+       0: aload_0
+       1: invokevirtual #74                 // Method city:()Ljava/lang/String;
+       4: areturn
+}
+
+================================================================================
+// Definition: case_class_nested$package (javap)
+================================================================================
+
+Compiled from "case_class_nested.scala"
+public final class case_class_nested$package {
+  public static Employee run();
+    Code:
+       0: getstatic     #14                 // Field case_class_nested$package$.MODULE$:Lcase_class_nested$package$;
+       3: invokevirtual #16                 // Method case_class_nested$package$.run:()LEmployee;
+       6: areturn
+}
+
+================================================================================
+// Definition: case_class_nested$package$ (javap)
+================================================================================
+
+Compiled from "case_class_nested.scala"
+public final class case_class_nested$package$ implements java.io.Serializable {
+  public static final case_class_nested$package$ MODULE$;
+
+  private case_class_nested$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class case_class_nested$package$
+       3: dup
+       4: invokespecial #16                 // Method "<init>":()V
+       7: putstatic     #18                 // Field MODULE$:Lcase_class_nested$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #22                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class case_class_nested$package$
+       6: invokespecial #25                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public Employee run();
+    Code:
+       0: getstatic     #33                 // Field Employee$.MODULE$:LEmployee$;
+       3: ldc           #35                 // String John
+       5: getstatic     #40                 // Field Address$.MODULE$:LAddress$;
+       8: ldc           #42                 // String 123 Main St
+      10: ldc           #44                 // String Springfield
+      12: invokevirtual #48                 // Method Address$.apply:(Ljava/lang/String;Ljava/lang/String;)LAddress;
+      15: invokevirtual #51                 // Method Employee$.apply:(Ljava/lang/String;LAddress;)LEmployee;
+      18: areturn
+}
+
+================================================================================
+// Definition: Employee (javap)
+================================================================================
+
+Compiled from "case_class_nested.scala"
+public class Employee implements scala.Product,java.io.Serializable {
+  private final java.lang.String name;
+
+  private final Address address;
+
+  public static Employee apply(java.lang.String, Address);
+    Code:
+       0: getstatic     #22                 // Field Employee$.MODULE$:LEmployee$;
+       3: aload_0
+       4: aload_1
+       5: invokevirtual #24                 // Method Employee$.apply:(Ljava/lang/String;LAddress;)LEmployee;
+       8: areturn
+
+  public static Employee fromProduct(scala.Product);
+    Code:
+       0: getstatic     #22                 // Field Employee$.MODULE$:LEmployee$;
+       3: aload_0
+       4: invokevirtual #28                 // Method Employee$.fromProduct:(Lscala/Product;)LEmployee;
+       7: areturn
+
+  public static Employee unapply(Employee);
+    Code:
+       0: getstatic     #22                 // Field Employee$.MODULE$:LEmployee$;
+       3: aload_0
+       4: invokevirtual #32                 // Method Employee$.unapply:(LEmployee;)LEmployee;
+       7: areturn
+
+  public Employee(java.lang.String, Address);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #36                 // Field name:Ljava/lang/String;
+       5: aload_0
+       6: aload_2
+       7: putfield      #38                 // Field address:LAddress;
+      10: aload_0
+      11: invokespecial #41                 // Method java/lang/Object."<init>":()V
+      14: return
+
+  public scala.collection.Iterator productIterator();
+    Code:
+       0: aload_0
+       1: invokestatic  #49                 // InterfaceMethod scala/Product.productIterator$:(Lscala/Product;)Lscala/collection/Iterator;
+       4: areturn
+
+  public scala.collection.Iterator productElementNames();
+    Code:
+       0: aload_0
+       1: invokestatic  #53                 // InterfaceMethod scala/Product.productElementNames$:(Lscala/Product;)Lscala/collection/Iterator;
+       4: areturn
+
+  public int hashCode();
+    Code:
+       0: getstatic     #60                 // Field scala/util/hashing/MurmurHash3$.MODULE$:Lscala/util/hashing/MurmurHash3$;
+       3: aload_0
+       4: ldc           #61                 // int 1591730427
+       6: iconst_1
+       7: invokevirtual #65                 // Method scala/util/hashing/MurmurHash3$.productHash:(Lscala/Product;IZ)I
+      10: ireturn
+
+  public boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: if_acmpeq     104
+       5: aload_1
+       6: astore_2
+       7: aload_2
+       8: instanceof    #2                  // class Employee
+      11: ifeq          97
+      14: aload_2
+      15: checkcast     #2                  // class Employee
+      18: astore_3
+      19: aload_0
+      20: invokevirtual #71                 // Method name:()Ljava/lang/String;
+      23: aload_3
+      24: invokevirtual #71                 // Method name:()Ljava/lang/String;
+      27: astore        4
+      29: dup
+      30: ifnonnull     42
+      33: pop
+      34: aload         4
+      36: ifnull        50
+      39: goto          93
+      42: aload         4
+      44: invokevirtual #73                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      47: ifeq          93
+      50: aload_0
+      51: invokevirtual #76                 // Method address:()LAddress;
+      54: aload_3
+      55: invokevirtual #76                 // Method address:()LAddress;
+      58: astore        5
+      60: dup
+      61: ifnonnull     73
+      64: pop
+      65: aload         5
+      67: ifnull        81
+      70: goto          93
+      73: aload         5
+      75: invokevirtual #73                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      78: ifeq          93
+      81: aload_3
+      82: aload_0
+      83: invokevirtual #79                 // Method canEqual:(Ljava/lang/Object;)Z
+      86: ifeq          93
+      89: iconst_1
+      90: goto          94
+      93: iconst_0
+      94: goto          101
+      97: iconst_0
+      98: goto          101
+     101: ifeq          108
+     104: iconst_1
+     105: goto          109
+     108: iconst_0
+     109: ireturn
+
+  public java.lang.String toString();
+    Code:
+       0: getstatic     #90                 // Field scala/runtime/ScalaRunTime$.MODULE$:Lscala/runtime/ScalaRunTime$;
+       3: aload_0
+       4: invokevirtual #94                 // Method scala/runtime/ScalaRunTime$._toString:(Lscala/Product;)Ljava/lang/String;
+       7: areturn
+
+  public boolean canEqual(java.lang.Object);
+    Code:
+       0: aload_1
+       1: instanceof    #2                  // class Employee
+       4: ireturn
+
+  public int productArity();
+    Code:
+       0: iconst_2
+       1: ireturn
+
+  public java.lang.String productPrefix();
+    Code:
+       0: ldc           #98                 // String Employee
+       2: areturn
+
+  public java.lang.Object productElement(int);
+    Code:
+       0: iload_1
+       1: istore_2
+       2: iconst_0
+       3: iload_2
+       4: if_icmpne     12
+       7: aload_0
+       8: invokevirtual #104                // Method _1:()Ljava/lang/String;
+      11: areturn
+      12: iconst_1
+      13: iload_2
+      14: if_icmpne     22
+      17: aload_0
+      18: invokevirtual #107                // Method _2:()LAddress;
+      21: areturn
+      22: new           #109                // class java/lang/IndexOutOfBoundsException
+      25: dup
+      26: iload_1
+      27: invokestatic  #115                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      30: invokevirtual #119                // Method java/lang/Integer.toString:()Ljava/lang/String;
+      33: invokespecial #122                // Method java/lang/IndexOutOfBoundsException."<init>":(Ljava/lang/String;)V
+      36: athrow
+
+  public java.lang.String productElementName(int);
+    Code:
+       0: iload_1
+       1: istore_2
+       2: iconst_0
+       3: iload_2
+       4: if_icmpne     10
+       7: ldc           #126                // String name
+       9: areturn
+      10: iconst_1
+      11: iload_2
+      12: if_icmpne     18
+      15: ldc           #127                // String address
+      17: areturn
+      18: new           #109                // class java/lang/IndexOutOfBoundsException
+      21: dup
+      22: iload_1
+      23: invokestatic  #115                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      26: invokevirtual #119                // Method java/lang/Integer.toString:()Ljava/lang/String;
+      29: invokespecial #122                // Method java/lang/IndexOutOfBoundsException."<init>":(Ljava/lang/String;)V
+      32: athrow
+
+  public java.lang.String name();
+    Code:
+       0: aload_0
+       1: getfield      #36                 // Field name:Ljava/lang/String;
+       4: areturn
+
+  public Address address();
+    Code:
+       0: aload_0
+       1: getfield      #38                 // Field address:LAddress;
+       4: areturn
+
+  public Employee copy(java.lang.String, Address);
+    Code:
+       0: new           #2                  // class Employee
+       3: dup
+       4: aload_1
+       5: aload_2
+       6: invokespecial #130                // Method "<init>":(Ljava/lang/String;LAddress;)V
+       9: areturn
+
+  public java.lang.String copy$default$1();
+    Code:
+       0: aload_0
+       1: invokevirtual #71                 // Method name:()Ljava/lang/String;
+       4: areturn
+
+  public Address copy$default$2();
+    Code:
+       0: aload_0
+       1: invokevirtual #76                 // Method address:()LAddress;
+       4: areturn
+
+  public java.lang.String _1();
+    Code:
+       0: aload_0
+       1: invokevirtual #71                 // Method name:()Ljava/lang/String;
+       4: areturn
+
+  public Address _2();
+    Code:
+       0: aload_0
+       1: invokevirtual #76                 // Method address:()LAddress;
+       4: areturn
+}

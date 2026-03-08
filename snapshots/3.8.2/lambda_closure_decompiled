@@ -1,0 +1,71 @@
+/*
+================================================================================
+Snippet: lambda_closure
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def makeAdder(n: Int): Int => Int =
+        x => x + n
+
+@Snapshot
+      def run: Int =
+        val add5 = makeAdder(5)
+        val add10 = makeAdder(10)
+        add5(3) + add10(3)
+
+*/
+
+// ================================================================================
+// Definition: lambda_closure$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Function1;
+import scala.runtime.ModuleSerializationProxy;
+import scala.runtime.java8.JFunction1.mcII.sp;
+
+public final class lambda_closure$package$ implements Serializable {
+   public static final lambda_closure$package$ MODULE$ = new lambda_closure$package$();
+
+   private lambda_closure$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(lambda_closure$package$.class);
+   }
+
+   @Snapshot
+   public Function1<Object, Object> makeAdder(final int n) {
+      return (sp)x -> x + n;
+   }
+
+   @Snapshot
+   public int run() {
+      Function1 add5 = this.makeAdder(5);
+      Function1 add10 = this.makeAdder(10);
+      return add5.apply$mcII$sp(3) + add10.apply$mcII$sp(3);
+   }
+}
+
+// ================================================================================
+// Definition: lambda_closure$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import lambda_closure.package.;
+import scala.Function1;
+
+public final class lambda_closure$package {
+   @Snapshot
+   public static Function1<Object, Object> makeAdder(int var0) {
+      return .MODULE$.makeAdder(var0);
+   }
+
+   @Snapshot
+   public static int run() {
+      return .MODULE$.run();
+   }
+}

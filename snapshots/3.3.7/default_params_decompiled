@@ -1,0 +1,88 @@
+/*
+================================================================================
+Snippet: default_params
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def configure(host: String, port: Int = 8080, secure: Boolean = false): String =
+        val protocol = if secure then "https" else "http"
+        s"$protocol://$host:$port"
+
+@Snapshot
+      def run: String =
+        val a = configure("localhost")
+        val b = configure("example.com", 443, true)
+        val c = configure("api.server", secure = true)
+        s"$a, $b, $c"
+
+*/
+
+// ================================================================================
+// Definition: default_params$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import default_params.package.;
+
+public final class default_params$package {
+   @Snapshot
+   public static String configure(String var0, int var1, boolean var2) {
+      return .MODULE$.configure(var0, var1, var2);
+   }
+
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+
+   public static int configure$default$2() {
+      return .MODULE$.configure$default$2();
+   }
+
+   public static boolean configure$default$3() {
+      return .MODULE$.configure$default$3();
+   }
+}
+
+// ================================================================================
+// Definition: default_params$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class default_params$package$ implements Serializable {
+   public static final default_params$package$ MODULE$ = new default_params$package$();
+
+   private default_params$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(default_params$package$.class);
+   }
+
+   @Snapshot
+   public String configure(final String host, final int port, final boolean secure) {
+      String protocol = secure ? "https" : "http";
+      return new StringBuilder(4).append(protocol).append("://").append(host).append(":").append(port).toString();
+   }
+
+   public int configure$default$2() {
+      return 8080;
+   }
+
+   public boolean configure$default$3() {
+      return false;
+   }
+
+   @Snapshot
+   public String run() {
+      String a = this.configure("localhost", this.configure$default$2(), this.configure$default$3());
+      String b = this.configure("example.com", 443, true);
+      String c = this.configure("api.server", this.configure$default$2(), true);
+      return new StringBuilder(4).append(a).append(", ").append(b).append(", ").append(c).toString();
+   }
+}

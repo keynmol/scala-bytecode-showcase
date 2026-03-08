@@ -1,0 +1,140 @@
+/*
+================================================================================
+Snippet: boundary_helper
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      object BoundaryHelper:
+        import scala.util.boundary, boundary.break, boundary.Label
+
+        def checkCondition(x: Int)(using Label[Option[String]]): Unit =
+          if x < 0 then break(Some(s"negative: $x"))
+          if x > 100 then break(Some(s"too large: $x"))
+
+        def validate(xs: List[Int]): Option[String] =
+          boundary:
+            for x <- xs do checkCondition(x)
+            None
+
+        def run: String =
+          val r1 = validate(List(1, 50, 99))
+          val r2 = validate(List(1, -5, 99))
+          val r3 = validate(List(1, 150, 99))
+          s"$r1, $r2, $r3"
+
+*/
+
+// ================================================================================
+// Definition: BoundaryHelper (decompiled)
+// ================================================================================
+
+import BoundaryHelper.;
+import compiler.iface.Snapshot;
+import scala.Option;
+import scala.collection.immutable.List;
+import scala.util.boundary.Label;
+
+@Snapshot
+public final class BoundaryHelper {
+   public static void checkCondition(int var0, Label<Option<String>> var1) {
+      .MODULE$.checkCondition(var0, var1);
+   }
+
+   public static String run() {
+      return .MODULE$.run();
+   }
+
+   public static Option<String> validate(List<Object> var0) {
+      return .MODULE$.validate(var0);
+   }
+}
+
+// ================================================================================
+// Definition: BoundaryHelper$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Option;
+import scala.collection.immutable.List;
+import scala.collection.immutable..colon.colon;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+import scala.runtime.java8.JFunction1.mcVI.sp;
+import scala.util.boundary.;
+import scala.util.boundary.Break;
+import scala.util.boundary.Label;
+
+@Snapshot
+public final class BoundaryHelper$ implements Serializable {
+   public static final BoundaryHelper$ MODULE$ = new BoundaryHelper$();
+
+   private BoundaryHelper$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(BoundaryHelper$.class);
+   }
+
+   public void checkCondition(final int x, final Label<Option<String>> x$2) {
+      if (x < 0) {
+         throw .MODULE$.break(scala.Some..MODULE$.apply(new StringBuilder(10).append("negative: ").append(x).toString()), x$2);
+      } else if (x > 100) {
+         throw .MODULE$.break(scala.Some..MODULE$.apply(new StringBuilder(11).append("too large: ").append(x).toString()), x$2);
+      }
+   }
+
+   public Option<String> validate(final List<Object> xs) {
+      Label local = new Label();
+
+      Object var10000;
+      try {
+         xs.foreach((sp)x -> MODULE$.checkCondition(x, local));
+         var10000 = scala.None..MODULE$;
+      } catch (Break var4) {
+         if (var4.label() != local) {
+            throw var4;
+         }
+
+         var10000 = (Option)var4.value();
+      }
+
+      return (Option<String>)var10000;
+   }
+
+   public String run() {
+      Option r1 = this.validate(
+         (List<Object>)(
+            (Object)(
+               new colon(
+                  BoxesRunTime.boxToInteger(1),
+                  new colon(BoxesRunTime.boxToInteger(50), new colon(BoxesRunTime.boxToInteger(99), scala.collection.immutable.Nil..MODULE$))
+               )
+            )
+         )
+      );
+      Option r2 = this.validate(
+         (List<Object>)(
+            (Object)(
+               new colon(
+                  BoxesRunTime.boxToInteger(1),
+                  new colon(BoxesRunTime.boxToInteger(-5), new colon(BoxesRunTime.boxToInteger(99), scala.collection.immutable.Nil..MODULE$))
+               )
+            )
+         )
+      );
+      Option r3 = this.validate(
+         (List<Object>)(
+            (Object)(
+               new colon(
+                  BoxesRunTime.boxToInteger(1),
+                  new colon(BoxesRunTime.boxToInteger(150), new colon(BoxesRunTime.boxToInteger(99), scala.collection.immutable.Nil..MODULE$))
+               )
+            )
+         )
+      );
+      return new StringBuilder(4).append(r1).append(", ").append(r2).append(", ").append(r3).toString();
+   }
+}

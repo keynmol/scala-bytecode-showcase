@@ -1,0 +1,126 @@
+/*
+================================================================================
+Snippet: enum_methods
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      enum Direction:
+        case North, East, South, West
+
+        def opposite: Direction = this match
+          case North => South
+          case South => North
+          case East => West
+          case West => East
+
+        def turnRight: Direction = this match
+          case North => East
+          case East => South
+          case South => West
+          case West => North
+
+@Snapshot
+      def run: String =
+        val d = Direction.North
+        s"$d opposite=${d.opposite} right=${d.turnRight}"
+
+*/
+
+// ================================================================================
+// Definition: enum_methods$package$ (decompiled)
+// ================================================================================
+
+import Direction.;
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class enum_methods$package$ implements Serializable {
+   public static final enum_methods$package$ MODULE$ = new enum_methods$package$();
+
+   private enum_methods$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(enum_methods$package$.class);
+   }
+
+   @Snapshot
+   public String run() {
+      Direction d = .North;
+      return new StringBuilder(17).append(d).append(" opposite=").append(d.opposite()).append(" right=").append(d.turnRight()).toString();
+   }
+}
+
+// ================================================================================
+// Definition: enum_methods$package (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import enum_methods.package.;
+
+public final class enum_methods$package {
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}
+
+// ================================================================================
+// Definition: Direction (decompiled)
+// ================================================================================
+
+import Direction.;
+import compiler.iface.Snapshot;
+import scala.MatchError;
+import scala.Product;
+import scala.reflect.Enum;
+
+@Snapshot
+public enum Direction implements Product, Enum {
+   public static Direction fromOrdinal(int var0) {
+      return .MODULE$.fromOrdinal(var0);
+   }
+
+   public Direction opposite() {
+      if (.North == null ? this != null : !.North.equals(this)) {
+         if (.South == null ? this != null : !.South.equals(this)) {
+            if (.East == null ? this != null : !.East.equals(this)) {
+               if (.West == null ? this != null : !.West.equals(this)) {
+                  throw new MatchError(this);
+               } else {
+                  return .East;
+               }
+            } else {
+               return .West;
+            }
+         } else {
+            return .North;
+         }
+      } else {
+         return .South;
+      }
+   }
+
+   public Direction turnRight() {
+      if (.North == null ? this != null : !.North.equals(this)) {
+         if (.East == null ? this != null : !.East.equals(this)) {
+            if (.South == null ? this != null : !.South.equals(this)) {
+               if (.West == null ? this != null : !.West.equals(this)) {
+                  throw new MatchError(this);
+               } else {
+                  return .North;
+               }
+            } else {
+               return .West;
+            }
+         } else {
+            return .South;
+         }
+      } else {
+         return .East;
+      }
+   }
+}
