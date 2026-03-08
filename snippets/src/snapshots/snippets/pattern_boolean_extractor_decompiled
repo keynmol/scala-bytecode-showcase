@@ -1,0 +1,106 @@
+================================================================================
+// Snippet: pattern_boolean_extractor
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      object Positive:
+        def unapply(n: Int): Boolean = n > 0
+
+@Snapshot
+      def check(n: Int): String =
+        n match
+          case Positive() => "positive"
+          case _ => "not positive"
+
+@Snapshot
+      def run: String =
+        check(5) + ", " + check(-3)
+
+================================================================================
+// Definition: pattern_boolean_extractor$package$ (decompiled)
+================================================================================
+
+import Positive.;
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class pattern_boolean_extractor$package$ implements Serializable {
+   public static final pattern_boolean_extractor$package$ MODULE$ = new pattern_boolean_extractor$package$();
+
+   private pattern_boolean_extractor$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(pattern_boolean_extractor$package$.class);
+   }
+
+   @Snapshot
+   public String check(final int n) {
+      return .MODULE$.unapply(n) ? "positive" : "not positive";
+   }
+
+   @Snapshot
+   public String run() {
+      return this.check(5) + ", " + this.check(-3);
+   }
+}
+
+================================================================================
+// Definition: pattern_boolean_extractor$package (decompiled)
+================================================================================
+
+import compiler.iface.Snapshot;
+import pattern_boolean_extractor.package.;
+
+public final class pattern_boolean_extractor$package {
+   @Snapshot
+   public static String check(int var0) {
+      return .MODULE$.check(var0);
+   }
+
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}
+
+================================================================================
+// Definition: Positive$ (decompiled)
+================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.runtime.ModuleSerializationProxy;
+
+@Snapshot
+public final class Positive$ implements Serializable {
+   public static final Positive$ MODULE$ = new Positive$();
+
+   private Positive$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(Positive$.class);
+   }
+
+   public boolean unapply(final int n) {
+      return n > 0;
+   }
+}
+
+================================================================================
+// Definition: Positive (decompiled)
+================================================================================
+
+import Positive.;
+import compiler.iface.Snapshot;
+
+@Snapshot
+public final class Positive {
+   public static boolean unapply(int var0) {
+      return .MODULE$.unapply(var0);
+   }
+}

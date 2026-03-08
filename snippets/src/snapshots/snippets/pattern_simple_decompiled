@@ -1,0 +1,73 @@
+================================================================================
+// Snippet: pattern_simple
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def describe(x: Any): String =
+        x match
+          case 0 => "zero"
+          case i: Int => s"integer: $i"
+          case s: String => s"string: $s"
+          case _ => "unknown"
+
+@Snapshot
+      def run: String =
+        describe(42) + ", " + describe("hello")
+
+================================================================================
+// Definition: pattern_simple$package$ (decompiled)
+================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class pattern_simple$package$ implements Serializable {
+   public static final pattern_simple$package$ MODULE$ = new pattern_simple$package$();
+
+   private pattern_simple$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(pattern_simple$package$.class);
+   }
+
+   @Snapshot
+   public String describe(final Object x) {
+      if (BoxesRunTime.equals(BoxesRunTime.boxToInteger(0), x)) {
+         return "zero";
+      } else if (x instanceof Integer) {
+         int var3 = BoxesRunTime.unboxToInt(x);
+         return "integer: " + var3;
+      } else {
+         return x instanceof String var5 ? "string: " + var5 : "unknown";
+      }
+   }
+
+   @Snapshot
+   public String run() {
+      return this.describe(BoxesRunTime.boxToInteger(42)) + ", " + this.describe("hello");
+   }
+}
+
+================================================================================
+// Definition: pattern_simple$package (decompiled)
+================================================================================
+
+import compiler.iface.Snapshot;
+import pattern_simple.package.;
+
+public final class pattern_simple$package {
+   @Snapshot
+   public static String describe(Object var0) {
+      return .MODULE$.describe(var0);
+   }
+
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}

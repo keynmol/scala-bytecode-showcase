@@ -1,0 +1,371 @@
+================================================================================
+// Snippet: pattern_nested
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      case class Address(city: String, zip: Int)
+
+@Snapshot
+      case class Person(name: String, address: Address)
+
+@Snapshot
+      def getCity(p: Person): String =
+        p match
+          case Person(_, Address(city, _)) => city
+
+@Snapshot
+      def run: String =
+        getCity(Person("Alice", Address("Boston", 12345)))
+
+================================================================================
+// Definition: Address (decompiled)
+================================================================================
+
+import Address.;
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Product;
+import scala.collection.Iterator;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.Statics;
+
+@Snapshot
+public class Address implements Product, Serializable {
+   private final String city;
+   private final int zip;
+
+   public static Address apply(String var0, int var1) {
+      return .MODULE$.apply(var0, var1);
+   }
+
+   public static Address fromProduct(Product var0) {
+      return .MODULE$.fromProduct(var0);
+   }
+
+   public static Address unapply(Address var0) {
+      return .MODULE$.unapply(var0);
+   }
+
+   public Address(final String city, final int zip) {
+      this.city = city;
+      this.zip = zip;
+   }
+
+   public Iterator<Object> productIterator() {
+      return Product.productIterator$(this);
+   }
+
+   public Iterator<String> productElementNames() {
+      return Product.productElementNames$(this);
+   }
+
+   @Override
+   public int hashCode() {
+      int var1 = -889275714;
+      var1 = Statics.mix(var1, 516961236);
+      var1 = Statics.mix(var1, Statics.anyHash(this.city()));
+      var1 = Statics.mix(var1, this.zip());
+      return Statics.finalizeHash(var1, 2);
+   }
+
+   @Override
+   public boolean equals(final Object x$0) {
+      if (this != x$0) {
+         boolean var6;
+         if (!(x$0 instanceof Address var3)) {
+            var6 = false;
+         } else {
+            label38: {
+               if (this.zip() == var3.zip()) {
+                  String var10000 = this.city();
+                  String var5 = var3.city();
+                  if ((var10000 == null ? var5 == null : var10000.equals(var5)) && var3.canEqual(this)) {
+                     var6 = true;
+                     break label38;
+                  }
+               }
+
+               var6 = false;
+            }
+         }
+
+         if (!var6) {
+            return false;
+         }
+      }
+
+      return true;
+   }
+
+   @Override
+   public String toString() {
+      return scala.runtime.ScalaRunTime..MODULE$._toString(this);
+   }
+
+   public boolean canEqual(final Object that) {
+      return that instanceof Address;
+   }
+
+   public int productArity() {
+      return 2;
+   }
+
+   public String productPrefix() {
+      return "Address";
+   }
+
+   public Object productElement(final int n) {
+      if (0 == n) {
+         return this._1();
+      } else if (1 == n) {
+         return BoxesRunTime.boxToInteger(this._2());
+      } else {
+         throw new IndexOutOfBoundsException(BoxesRunTime.boxToInteger(n).toString());
+      }
+   }
+
+   public String productElementName(final int n) {
+      if (0 == n) {
+         return "city";
+      } else if (1 == n) {
+         return "zip";
+      } else {
+         throw new IndexOutOfBoundsException(BoxesRunTime.boxToInteger(n).toString());
+      }
+   }
+
+   public String city() {
+      return this.city;
+   }
+
+   public int zip() {
+      return this.zip;
+   }
+
+   public Address copy(final String city, final int zip) {
+      return new Address(city, zip);
+   }
+
+   public String copy$default$1() {
+      return this.city();
+   }
+
+   public int copy$default$2() {
+      return this.zip();
+   }
+
+   public String _1() {
+      return this.city();
+   }
+
+   public int _2() {
+      return this.zip();
+   }
+}
+
+================================================================================
+// Definition: Person (decompiled)
+================================================================================
+
+import Person.;
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Product;
+import scala.collection.Iterator;
+import scala.runtime.BoxesRunTime;
+
+@Snapshot
+public class Person implements Product, Serializable {
+   private final String name;
+   private final Address address;
+
+   public static Person apply(String var0, Address var1) {
+      return .MODULE$.apply(var0, var1);
+   }
+
+   public static Person fromProduct(Product var0) {
+      return .MODULE$.fromProduct(var0);
+   }
+
+   public static Person unapply(Person var0) {
+      return .MODULE$.unapply(var0);
+   }
+
+   public Person(final String name, final Address address) {
+      this.name = name;
+      this.address = address;
+   }
+
+   public Iterator<Object> productIterator() {
+      return Product.productIterator$(this);
+   }
+
+   public Iterator<String> productElementNames() {
+      return Product.productElementNames$(this);
+   }
+
+   @Override
+   public int hashCode() {
+      return scala.util.hashing.MurmurHash3..MODULE$.productHash(this, 1890237178, true);
+   }
+
+   @Override
+   public boolean equals(final Object x$0) {
+      if (this != x$0) {
+         boolean var8;
+         if (!(x$0 instanceof Person var3)) {
+            var8 = false;
+         } else {
+            label49: {
+               String var10000 = this.name();
+               String var5 = var3.name();
+               if (var10000 == null ? var5 == null : var10000.equals(var5)) {
+                  Address var7 = this.address();
+                  Address var6 = var3.address();
+                  if ((var7 == null ? var6 == null : var7.equals(var6)) && var3.canEqual(this)) {
+                     var8 = true;
+                     break label49;
+                  }
+               }
+
+               var8 = false;
+            }
+         }
+
+         if (!var8) {
+            return false;
+         }
+      }
+
+      return true;
+   }
+
+   @Override
+   public String toString() {
+      return scala.runtime.ScalaRunTime..MODULE$._toString(this);
+   }
+
+   public boolean canEqual(final Object that) {
+      return that instanceof Person;
+   }
+
+   public int productArity() {
+      return 2;
+   }
+
+   public String productPrefix() {
+      return "Person";
+   }
+
+   public Object productElement(final int n) {
+      if (0 == n) {
+         return this._1();
+      } else if (1 == n) {
+         return this._2();
+      } else {
+         throw new IndexOutOfBoundsException(BoxesRunTime.boxToInteger(n).toString());
+      }
+   }
+
+   public String productElementName(final int n) {
+      if (0 == n) {
+         return "name";
+      } else if (1 == n) {
+         return "address";
+      } else {
+         throw new IndexOutOfBoundsException(BoxesRunTime.boxToInteger(n).toString());
+      }
+   }
+
+   public String name() {
+      return this.name;
+   }
+
+   public Address address() {
+      return this.address;
+   }
+
+   public Person copy(final String name, final Address address) {
+      return new Person(name, address);
+   }
+
+   public String copy$default$1() {
+      return this.name();
+   }
+
+   public Address copy$default$2() {
+      return this.address();
+   }
+
+   public String _1() {
+      return this.name();
+   }
+
+   public Address _2() {
+      return this.address();
+   }
+}
+
+================================================================================
+// Definition: pattern_nested$package (decompiled)
+================================================================================
+
+import compiler.iface.Snapshot;
+import pattern_nested.package.;
+
+public final class pattern_nested$package {
+   @Snapshot
+   public static String getCity(Person var0) {
+      return .MODULE$.getCity(var0);
+   }
+
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}
+
+================================================================================
+// Definition: pattern_nested$package$ (decompiled)
+================================================================================
+
+import Person.;
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.MatchError;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class pattern_nested$package$ implements Serializable {
+   public static final pattern_nested$package$ MODULE$ = new pattern_nested$package$();
+
+   private pattern_nested$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(pattern_nested$package$.class);
+   }
+
+   @Snapshot
+   public String getCity(final Person p) {
+      if (p != null) {
+         Person var3 = .MODULE$.unapply(p);
+         String var4 = var3._1();
+         Address var5 = var3._2();
+         if (var5 != null) {
+            Address var6 = Address..MODULE$.unapply(var5);
+            String var7 = var6._1();
+            int var8 = var6._2();
+            return var7;
+         }
+      }
+
+      throw new MatchError(p);
+   }
+
+   @Snapshot
+   public String run() {
+      return this.getCity(.MODULE$.apply("Alice", Address..MODULE$.apply("Boston", 12345)));
+   }
+}

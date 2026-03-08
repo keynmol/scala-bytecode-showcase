@@ -1,0 +1,201 @@
+================================================================================
+// Snippet: case_class_pattern
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      case class Rectangle(width: Int, height: Int)
+
+@Snapshot
+      def area(shape: Rectangle): Int =
+        shape match
+          case Rectangle(w, h) => w * h
+
+@Snapshot
+      def run: Int =
+        area(Rectangle(5, 10))
+
+================================================================================
+// Definition: case_class_pattern$package (decompiled)
+================================================================================
+
+import case_class_pattern.package.;
+import compiler.iface.Snapshot;
+
+public final class case_class_pattern$package {
+   @Snapshot
+   public static int area(Rectangle var0) {
+      return .MODULE$.area(var0);
+   }
+
+   @Snapshot
+   public static int run() {
+      return .MODULE$.run();
+   }
+}
+
+================================================================================
+// Definition: case_class_pattern$package$ (decompiled)
+================================================================================
+
+import Rectangle.;
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.MatchError;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class case_class_pattern$package$ implements Serializable {
+   public static final case_class_pattern$package$ MODULE$ = new case_class_pattern$package$();
+
+   private case_class_pattern$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(case_class_pattern$package$.class);
+   }
+
+   @Snapshot
+   public int area(final Rectangle shape) {
+      if (shape != null) {
+         Rectangle var3 = .MODULE$.unapply(shape);
+         int var4 = var3._1();
+         int var5 = var3._2();
+         return var4 * var5;
+      } else {
+         throw new MatchError(shape);
+      }
+   }
+
+   @Snapshot
+   public int run() {
+      return this.area(.MODULE$.apply(5, 10));
+   }
+}
+
+================================================================================
+// Definition: Rectangle (decompiled)
+================================================================================
+
+import Rectangle.;
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Product;
+import scala.collection.Iterator;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.Statics;
+
+@Snapshot
+public class Rectangle implements Product, Serializable {
+   private final int width;
+   private final int height;
+
+   public static Rectangle apply(int var0, int var1) {
+      return .MODULE$.apply(var0, var1);
+   }
+
+   public static Rectangle fromProduct(Product var0) {
+      return .MODULE$.fromProduct(var0);
+   }
+
+   public static Rectangle unapply(Rectangle var0) {
+      return .MODULE$.unapply(var0);
+   }
+
+   public Rectangle(final int width, final int height) {
+      this.width = width;
+      this.height = height;
+   }
+
+   public Iterator<Object> productIterator() {
+      return Product.productIterator$(this);
+   }
+
+   public Iterator<String> productElementNames() {
+      return Product.productElementNames$(this);
+   }
+
+   @Override
+   public int hashCode() {
+      int var1 = -889275714;
+      var1 = Statics.mix(var1, -1169699505);
+      var1 = Statics.mix(var1, this.width());
+      var1 = Statics.mix(var1, this.height());
+      return Statics.finalizeHash(var1, 2);
+   }
+
+   @Override
+   public boolean equals(final Object x$0) {
+      return this == x$0 || (x$0 instanceof Rectangle var3 ? this.width() == var3.width() && this.height() == var3.height() && var3.canEqual(this) : false);
+   }
+
+   @Override
+   public String toString() {
+      return scala.runtime.ScalaRunTime..MODULE$._toString(this);
+   }
+
+   public boolean canEqual(final Object that) {
+      return that instanceof Rectangle;
+   }
+
+   public int productArity() {
+      return 2;
+   }
+
+   public String productPrefix() {
+      return "Rectangle";
+   }
+
+   public Object productElement(final int n) {
+      int var10000;
+      if (0 == n) {
+         var10000 = this._1();
+      } else {
+         if (1 != n) {
+            throw new IndexOutOfBoundsException(BoxesRunTime.boxToInteger(n).toString());
+         }
+
+         var10000 = this._2();
+      }
+
+      return BoxesRunTime.boxToInteger(var10000);
+   }
+
+   public String productElementName(final int n) {
+      if (0 == n) {
+         return "width";
+      } else if (1 == n) {
+         return "height";
+      } else {
+         throw new IndexOutOfBoundsException(BoxesRunTime.boxToInteger(n).toString());
+      }
+   }
+
+   public int width() {
+      return this.width;
+   }
+
+   public int height() {
+      return this.height;
+   }
+
+   public Rectangle copy(final int width, final int height) {
+      return new Rectangle(width, height);
+   }
+
+   public int copy$default$1() {
+      return this.width();
+   }
+
+   public int copy$default$2() {
+      return this.height();
+   }
+
+   public int _1() {
+      return this.width();
+   }
+
+   public int _2() {
+      return this.height();
+   }
+}

@@ -1,0 +1,188 @@
+================================================================================
+// Snippet: pattern_sequence
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def describeList(xs: List[Int]): String =
+        xs match
+          case Nil => "empty"
+          case head :: Nil => s"single: $head"
+          case head :: tail => s"head: $head, tail length: ${tail.length}"
+
+@Snapshot
+      def run: String =
+        List(
+          describeList(Nil),
+          describeList(List(1)),
+          describeList(List(1, 2, 3))
+        ).mkString("; ")
+
+================================================================================
+// Definition: pattern_sequence$package$ (javap)
+================================================================================
+
+Compiled from "pattern_sequence.scala"
+public final class pattern_sequence$package$ implements java.io.Serializable {
+  public static final pattern_sequence$package$ MODULE$;
+
+  private pattern_sequence$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #18                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class pattern_sequence$package$
+       3: dup
+       4: invokespecial #21                 // Method "<init>":()V
+       7: putstatic     #23                 // Field MODULE$:Lpattern_sequence$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #27                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class pattern_sequence$package$
+       6: invokespecial #30                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public java.lang.String describeList(scala.collection.immutable.List<java.lang.Object>);
+    Code:
+       0: aload_1
+       1: astore_2
+       2: getstatic     #40                 // Field scala/package$.MODULE$:Lscala/package$;
+       5: invokevirtual #44                 // Method scala/package$.Nil:()Lscala/collection/immutable/Nil$;
+       8: aload_2
+       9: astore_3
+      10: dup
+      11: ifnonnull     22
+      14: pop
+      15: aload_3
+      16: ifnull        29
+      19: goto          32
+      22: aload_3
+      23: invokevirtual #48                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      26: ifeq          32
+      29: ldc           #50                 // String empty
+      31: areturn
+      32: aload_2
+      33: instanceof    #52                 // class scala/collection/immutable/$colon$colon
+      36: ifeq          126
+      39: aload_2
+      40: checkcast     #52                 // class scala/collection/immutable/$colon$colon
+      43: astore        4
+      45: aload         4
+      47: invokevirtual #55                 // Method scala/collection/immutable/$colon$colon.head:()Ljava/lang/Object;
+      50: invokestatic  #61                 // Method scala/runtime/BoxesRunTime.unboxToInt:(Ljava/lang/Object;)I
+      53: istore        5
+      55: aload         4
+      57: invokevirtual #65                 // Method scala/collection/immutable/$colon$colon.next:()Lscala/collection/immutable/List;
+      60: astore        6
+      62: iload         5
+      64: istore        7
+      66: getstatic     #40                 // Field scala/package$.MODULE$:Lscala/package$;
+      69: invokevirtual #44                 // Method scala/package$.Nil:()Lscala/collection/immutable/Nil$;
+      72: aload         6
+      74: astore        8
+      76: dup
+      77: ifnonnull     89
+      80: pop
+      81: aload         8
+      83: ifnull        97
+      86: goto          105
+      89: aload         8
+      91: invokevirtual #48                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      94: ifeq          105
+      97: iload         7
+      99: invokedynamic #77,  0             // InvokeDynamic #0:makeConcatWithConstants:(I)Ljava/lang/String;
+     104: areturn
+     105: iload         5
+     107: istore        9
+     109: aload         6
+     111: astore        10
+     113: iload         9
+     115: aload         10
+     117: invokevirtual #83                 // Method scala/collection/immutable/List.length:()I
+     120: invokedynamic #88,  0             // InvokeDynamic #1:makeConcatWithConstants:(II)Ljava/lang/String;
+     125: areturn
+     126: new           #90                 // class scala/MatchError
+     129: dup
+     130: aload_2
+     131: invokespecial #93                 // Method scala/MatchError."<init>":(Ljava/lang/Object;)V
+     134: athrow
+
+  public java.lang.String run();
+    Code:
+       0: new           #52                 // class scala/collection/immutable/$colon$colon
+       3: dup
+       4: aload_0
+       5: getstatic     #40                 // Field scala/package$.MODULE$:Lscala/package$;
+       8: invokevirtual #44                 // Method scala/package$.Nil:()Lscala/collection/immutable/Nil$;
+      11: invokevirtual #102                // Method describeList:(Lscala/collection/immutable/List;)Ljava/lang/String;
+      14: new           #52                 // class scala/collection/immutable/$colon$colon
+      17: dup
+      18: aload_0
+      19: new           #52                 // class scala/collection/immutable/$colon$colon
+      22: dup
+      23: iconst_1
+      24: invokestatic  #106                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      27: getstatic     #109                // Field scala/collection/immutable/Nil$.MODULE$:Lscala/collection/immutable/Nil$;
+      30: invokespecial #112                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      33: checkcast     #4                  // class java/lang/Object
+      36: checkcast     #79                 // class scala/collection/immutable/List
+      39: invokevirtual #102                // Method describeList:(Lscala/collection/immutable/List;)Ljava/lang/String;
+      42: new           #52                 // class scala/collection/immutable/$colon$colon
+      45: dup
+      46: aload_0
+      47: new           #52                 // class scala/collection/immutable/$colon$colon
+      50: dup
+      51: iconst_1
+      52: invokestatic  #106                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      55: new           #52                 // class scala/collection/immutable/$colon$colon
+      58: dup
+      59: iconst_2
+      60: invokestatic  #106                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      63: new           #52                 // class scala/collection/immutable/$colon$colon
+      66: dup
+      67: iconst_3
+      68: invokestatic  #106                // Method scala/runtime/BoxesRunTime.boxToInteger:(I)Ljava/lang/Integer;
+      71: getstatic     #109                // Field scala/collection/immutable/Nil$.MODULE$:Lscala/collection/immutable/Nil$;
+      74: invokespecial #112                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      77: invokespecial #112                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      80: invokespecial #112                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      83: checkcast     #4                  // class java/lang/Object
+      86: checkcast     #79                 // class scala/collection/immutable/List
+      89: invokevirtual #102                // Method describeList:(Lscala/collection/immutable/List;)Ljava/lang/String;
+      92: getstatic     #109                // Field scala/collection/immutable/Nil$.MODULE$:Lscala/collection/immutable/Nil$;
+      95: invokespecial #112                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+      98: invokespecial #112                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+     101: invokespecial #112                // Method scala/collection/immutable/$colon$colon."<init>":(Ljava/lang/Object;Lscala/collection/immutable/List;)V
+     104: checkcast     #4                  // class java/lang/Object
+     107: checkcast     #114                // class scala/collection/IterableOnceOps
+     110: ldc           #116                // String ;
+     112: invokeinterface #120,  2          // InterfaceMethod scala/collection/IterableOnceOps.mkString:(Ljava/lang/String;)Ljava/lang/String;
+     117: areturn
+}
+
+================================================================================
+// Definition: pattern_sequence$package (javap)
+================================================================================
+
+Compiled from "pattern_sequence.scala"
+public final class pattern_sequence$package {
+  public static java.lang.String describeList(scala.collection.immutable.List<java.lang.Object>);
+    Code:
+       0: getstatic     #15                 // Field pattern_sequence$package$.MODULE$:Lpattern_sequence$package$;
+       3: aload_0
+       4: invokevirtual #17                 // Method pattern_sequence$package$.describeList:(Lscala/collection/immutable/List;)Ljava/lang/String;
+       7: areturn
+
+  public static java.lang.String run();
+    Code:
+       0: getstatic     #15                 // Field pattern_sequence$package$.MODULE$:Lpattern_sequence$package$;
+       3: invokevirtual #21                 // Method pattern_sequence$package$.run:()Ljava/lang/String;
+       6: areturn
+}

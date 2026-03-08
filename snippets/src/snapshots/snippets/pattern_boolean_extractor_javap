@@ -1,0 +1,149 @@
+================================================================================
+// Snippet: pattern_boolean_extractor
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      object Positive:
+        def unapply(n: Int): Boolean = n > 0
+
+@Snapshot
+      def check(n: Int): String =
+        n match
+          case Positive() => "positive"
+          case _ => "not positive"
+
+@Snapshot
+      def run: String =
+        check(5) + ", " + check(-3)
+
+================================================================================
+// Definition: pattern_boolean_extractor$package$ (javap)
+================================================================================
+
+Compiled from "pattern_boolean_extractor.scala"
+public final class pattern_boolean_extractor$package$ implements java.io.Serializable {
+  public static final pattern_boolean_extractor$package$ MODULE$;
+
+  private pattern_boolean_extractor$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #18                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class pattern_boolean_extractor$package$
+       3: dup
+       4: invokespecial #21                 // Method "<init>":()V
+       7: putstatic     #23                 // Field MODULE$:Lpattern_boolean_extractor$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #27                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class pattern_boolean_extractor$package$
+       6: invokespecial #30                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public java.lang.String check(int);
+    Code:
+       0: iload_1
+       1: istore_2
+       2: getstatic     #39                 // Field Positive$.MODULE$:LPositive$;
+       5: iload_2
+       6: invokevirtual #43                 // Method Positive$.unapply:(I)Z
+       9: ifeq          15
+      12: ldc           #45                 // String positive
+      14: areturn
+      15: ldc           #47                 // String not positive
+      17: areturn
+
+  public java.lang.String run();
+    Code:
+       0: aload_0
+       1: iconst_5
+       2: invokevirtual #52                 // Method check:(I)Ljava/lang/String;
+       5: aload_0
+       6: bipush        -3
+       8: invokevirtual #52                 // Method check:(I)Ljava/lang/String;
+      11: invokedynamic #64,  0             // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      16: areturn
+}
+
+================================================================================
+// Definition: pattern_boolean_extractor$package (javap)
+================================================================================
+
+Compiled from "pattern_boolean_extractor.scala"
+public final class pattern_boolean_extractor$package {
+  public static java.lang.String check(int);
+    Code:
+       0: getstatic     #14                 // Field pattern_boolean_extractor$package$.MODULE$:Lpattern_boolean_extractor$package$;
+       3: iload_0
+       4: invokevirtual #16                 // Method pattern_boolean_extractor$package$.check:(I)Ljava/lang/String;
+       7: areturn
+
+  public static java.lang.String run();
+    Code:
+       0: getstatic     #14                 // Field pattern_boolean_extractor$package$.MODULE$:Lpattern_boolean_extractor$package$;
+       3: invokevirtual #20                 // Method pattern_boolean_extractor$package$.run:()Ljava/lang/String;
+       6: areturn
+}
+
+================================================================================
+// Definition: Positive$ (javap)
+================================================================================
+
+Compiled from "pattern_boolean_extractor.scala"
+public final class Positive$ implements java.io.Serializable {
+  public static final Positive$ MODULE$;
+
+  private Positive$();
+    Code:
+       0: aload_0
+       1: invokespecial #14                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class Positive$
+       3: dup
+       4: invokespecial #17                 // Method "<init>":()V
+       7: putstatic     #19                 // Field MODULE$:LPositive$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #23                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class Positive$
+       6: invokespecial #26                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public boolean unapply(int);
+    Code:
+       0: iload_1
+       1: iconst_0
+       2: if_icmple     9
+       5: iconst_1
+       6: goto          10
+       9: iconst_0
+      10: ireturn
+}
+
+================================================================================
+// Definition: Positive (javap)
+================================================================================
+
+Compiled from "pattern_boolean_extractor.scala"
+public final class Positive {
+  public static boolean unapply(int);
+    Code:
+       0: getstatic     #14                 // Field Positive$.MODULE$:LPositive$;
+       3: iload_0
+       4: invokevirtual #16                 // Method Positive$.unapply:(I)Z
+       7: ireturn
+}

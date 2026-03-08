@@ -1,0 +1,178 @@
+================================================================================
+// Snippet: case_class_simple
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      case class Point(x: Int, y: Int)
+
+@Snapshot
+      def run: Point =
+        Point(10, 20)
+
+================================================================================
+// Definition: case_class_simple$package (decompiled)
+================================================================================
+
+import case_class_simple.package.;
+import compiler.iface.Snapshot;
+
+public final class case_class_simple$package {
+   @Snapshot
+   public static Point run() {
+      return .MODULE$.run();
+   }
+}
+
+================================================================================
+// Definition: Point (decompiled)
+================================================================================
+
+import Point.;
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Product;
+import scala.collection.Iterator;
+import scala.runtime.BoxesRunTime;
+import scala.runtime.Statics;
+
+@Snapshot
+public class Point implements Product, Serializable {
+   private final int x;
+   private final int y;
+
+   public static Point apply(int var0, int var1) {
+      return .MODULE$.apply(var0, var1);
+   }
+
+   public static Point fromProduct(Product var0) {
+      return .MODULE$.fromProduct(var0);
+   }
+
+   public static Point unapply(Point var0) {
+      return .MODULE$.unapply(var0);
+   }
+
+   public Point(final int x, final int y) {
+      this.x = x;
+      this.y = y;
+   }
+
+   public Iterator<Object> productIterator() {
+      return Product.productIterator$(this);
+   }
+
+   public Iterator<String> productElementNames() {
+      return Product.productElementNames$(this);
+   }
+
+   @Override
+   public int hashCode() {
+      int var1 = -889275714;
+      var1 = Statics.mix(var1, 77292912);
+      var1 = Statics.mix(var1, this.x());
+      var1 = Statics.mix(var1, this.y());
+      return Statics.finalizeHash(var1, 2);
+   }
+
+   @Override
+   public boolean equals(final Object x$0) {
+      return this == x$0 || (x$0 instanceof Point var3 ? this.x() == var3.x() && this.y() == var3.y() && var3.canEqual(this) : false);
+   }
+
+   @Override
+   public String toString() {
+      return scala.runtime.ScalaRunTime..MODULE$._toString(this);
+   }
+
+   public boolean canEqual(final Object that) {
+      return that instanceof Point;
+   }
+
+   public int productArity() {
+      return 2;
+   }
+
+   public String productPrefix() {
+      return "Point";
+   }
+
+   public Object productElement(final int n) {
+      int var10000;
+      if (0 == n) {
+         var10000 = this._1();
+      } else {
+         if (1 != n) {
+            throw new IndexOutOfBoundsException(BoxesRunTime.boxToInteger(n).toString());
+         }
+
+         var10000 = this._2();
+      }
+
+      return BoxesRunTime.boxToInteger(var10000);
+   }
+
+   public String productElementName(final int n) {
+      if (0 == n) {
+         return "x";
+      } else if (1 == n) {
+         return "y";
+      } else {
+         throw new IndexOutOfBoundsException(BoxesRunTime.boxToInteger(n).toString());
+      }
+   }
+
+   public int x() {
+      return this.x;
+   }
+
+   public int y() {
+      return this.y;
+   }
+
+   public Point copy(final int x, final int y) {
+      return new Point(x, y);
+   }
+
+   public int copy$default$1() {
+      return this.x();
+   }
+
+   public int copy$default$2() {
+      return this.y();
+   }
+
+   public int _1() {
+      return this.x();
+   }
+
+   public int _2() {
+      return this.y();
+   }
+}
+
+================================================================================
+// Definition: case_class_simple$package$ (decompiled)
+================================================================================
+
+import Point.;
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class case_class_simple$package$ implements Serializable {
+   public static final case_class_simple$package$ MODULE$ = new case_class_simple$package$();
+
+   private case_class_simple$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(case_class_simple$package$.class);
+   }
+
+   @Snapshot
+   public Point run() {
+      return .MODULE$.apply(10, 20);
+   }
+}

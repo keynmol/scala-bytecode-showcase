@@ -1,0 +1,70 @@
+================================================================================
+// Snippet: pattern_or
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def isWeekend(day: String): Boolean =
+        day match
+          case "Saturday" | "Sunday" => true
+          case _ => false
+
+@Snapshot
+      def run: String =
+        List("Monday", "Saturday", "Sunday", "Friday")
+          .map(d => s"$d: ${isWeekend(d)}")
+          .mkString(", ")
+
+================================================================================
+// Definition: pattern_or$package (decompiled)
+================================================================================
+
+import compiler.iface.Snapshot;
+import pattern_or.package.;
+
+public final class pattern_or$package {
+   @Snapshot
+   public static boolean isWeekend(String var0) {
+      return .MODULE$.isWeekend(var0);
+   }
+
+   @Snapshot
+   public static String run() {
+      return .MODULE$.run();
+   }
+}
+
+================================================================================
+// Definition: pattern_or$package$ (decompiled)
+================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.collection.immutable.List;
+import scala.collection.immutable..colon.colon;
+import scala.collection.immutable.Nil.;
+import scala.runtime.ModuleSerializationProxy;
+
+public final class pattern_or$package$ implements Serializable {
+   public static final pattern_or$package$ MODULE$ = new pattern_or$package$();
+
+   private pattern_or$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(pattern_or$package$.class);
+   }
+
+   @Snapshot
+   public boolean isWeekend(final String day) {
+      return "Saturday".equals(day) || "Sunday".equals(day);
+   }
+
+   @Snapshot
+   public String run() {
+      return ((List)(new colon("Monday", new colon("Saturday", new colon("Sunday", new colon("Friday", .MODULE$))))))
+         .map(d -> d + ": " + MODULE$.isWeekend(d))
+         .mkString(", ");
+   }
+}
