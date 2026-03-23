@@ -1,0 +1,261 @@
+================================================================================
+// Snippet: boxing_function_call
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def sumSpecialised(f: Array[Float]): Float =
+        var sum = 0f
+        for s <- f do sum = s
+        sum
+      end sumSpecialised
+
+@Snapshot
+      def sumSpecialisedDumb(f: Array[Float]): Float =
+        var sum = 0f
+        for s <- f do sum = sum + s
+        sum
+      end sumSpecialisedDumb
+
+@Snapshot
+      def sumSpecialisedSuperDumb(f: Array[Float]): Float =
+        var sum = 0f
+        var i = 0
+        while i < f.length do
+          sum += f(i)
+          i += 1
+        sum
+      end sumSpecialisedSuperDumb
+
+@Snapshot
+      def sumGeneric[T](f: Array[T])(using n: Numeric[T]): T =
+        var sum = n.zero
+        for s <- f do sum = n.plus(sum, s)
+        sum
+      end sumGeneric
+
+@Snapshot
+      def run(): Unit =
+        val arr = Array[Float](1, 2, 3, 4)
+
+        sumSpecialised(arr)
+        sumGeneric(arr)
+      end run
+
+================================================================================
+// Definition: boxing_function_call$package (javap)
+================================================================================
+
+Compiled from "boxing_function_call.scala"
+public final class boxing_function_call$package {
+  public static void run();
+    Code:
+       0: getstatic     #14                 // Field boxing_function_call$package$.MODULE$:Lboxing_function_call$package$;
+       3: invokevirtual #16                 // Method boxing_function_call$package$.run:()V
+       6: return
+
+  public static <T> T sumGeneric(java.lang.Object, scala.math.Numeric<T>);
+    Code:
+       0: getstatic     #14                 // Field boxing_function_call$package$.MODULE$:Lboxing_function_call$package$;
+       3: aload_0
+       4: aload_1
+       5: invokevirtual #21                 // Method boxing_function_call$package$.sumGeneric:(Ljava/lang/Object;Lscala/math/Numeric;)Ljava/lang/Object;
+       8: areturn
+
+  public static float sumSpecialised(float[]);
+    Code:
+       0: getstatic     #14                 // Field boxing_function_call$package$.MODULE$:Lboxing_function_call$package$;
+       3: aload_0
+       4: invokevirtual #25                 // Method boxing_function_call$package$.sumSpecialised:([F)F
+       7: freturn
+
+  public static float sumSpecialisedDumb(float[]);
+    Code:
+       0: getstatic     #14                 // Field boxing_function_call$package$.MODULE$:Lboxing_function_call$package$;
+       3: aload_0
+       4: invokevirtual #28                 // Method boxing_function_call$package$.sumSpecialisedDumb:([F)F
+       7: freturn
+
+  public static float sumSpecialisedSuperDumb(float[]);
+    Code:
+       0: getstatic     #14                 // Field boxing_function_call$package$.MODULE$:Lboxing_function_call$package$;
+       3: aload_0
+       4: invokevirtual #31                 // Method boxing_function_call$package$.sumSpecialisedSuperDumb:([F)F
+       7: freturn
+}
+
+================================================================================
+// Definition: boxing_function_call$package$ (javap)
+================================================================================
+
+Compiled from "boxing_function_call.scala"
+public final class boxing_function_call$package$ implements java.io.Serializable {
+  public static final boxing_function_call$package$ MODULE$;
+
+  private boxing_function_call$package$();
+    Code:
+       0: aload_0
+       1: invokespecial #23                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static {};
+    Code:
+       0: new           #2                  // class boxing_function_call$package$
+       3: dup
+       4: invokespecial #26                 // Method "<init>":()V
+       7: putstatic     #28                 // Field MODULE$:Lboxing_function_call$package$;
+      10: return
+
+  private java.lang.Object writeReplace();
+    Code:
+       0: new           #32                 // class scala/runtime/ModuleSerializationProxy
+       3: dup
+       4: ldc           #2                  // class boxing_function_call$package$
+       6: invokespecial #35                 // Method scala/runtime/ModuleSerializationProxy."<init>":(Ljava/lang/Class;)V
+       9: areturn
+
+  public float sumSpecialised(float[]);
+    Code:
+       0: fconst_0
+       1: invokestatic  #45                 // Method scala/runtime/FloatRef.create:(F)Lscala/runtime/FloatRef;
+       4: astore_2
+       5: getstatic     #50                 // Field scala/Predef$.MODULE$:Lscala/Predef$;
+       8: aload_1
+       9: invokevirtual #54                 // Method scala/Predef$.floatArrayOps:([F)Ljava/lang/Object;
+      12: astore_3
+      13: getstatic     #59                 // Field scala/collection/ArrayOps$.MODULE$:Lscala/collection/ArrayOps$;
+      16: aload_3
+      17: aload_2
+      18: invokedynamic #78,  0             // InvokeDynamic #0:apply$mcVF$sp:(Lscala/runtime/FloatRef;)Lscala/runtime/java8/JFunction1$mcVF$sp;
+      23: invokevirtual #82                 // Method scala/collection/ArrayOps$.foreach$extension:(Ljava/lang/Object;Lscala/Function1;)V
+      26: aload_2
+      27: getfield      #86                 // Field scala/runtime/FloatRef.elem:F
+      30: freturn
+
+  public float sumSpecialisedDumb(float[]);
+    Code:
+       0: fconst_0
+       1: invokestatic  #45                 // Method scala/runtime/FloatRef.create:(F)Lscala/runtime/FloatRef;
+       4: astore_2
+       5: getstatic     #50                 // Field scala/Predef$.MODULE$:Lscala/Predef$;
+       8: aload_1
+       9: invokevirtual #54                 // Method scala/Predef$.floatArrayOps:([F)Ljava/lang/Object;
+      12: astore_3
+      13: getstatic     #59                 // Field scala/collection/ArrayOps$.MODULE$:Lscala/collection/ArrayOps$;
+      16: aload_3
+      17: aload_2
+      18: invokedynamic #95,  0             // InvokeDynamic #1:apply$mcVF$sp:(Lscala/runtime/FloatRef;)Lscala/runtime/java8/JFunction1$mcVF$sp;
+      23: invokevirtual #82                 // Method scala/collection/ArrayOps$.foreach$extension:(Ljava/lang/Object;Lscala/Function1;)V
+      26: aload_2
+      27: getfield      #86                 // Field scala/runtime/FloatRef.elem:F
+      30: freturn
+
+  public float sumSpecialisedSuperDumb(float[]);
+    Code:
+       0: fconst_0
+       1: fstore_2
+       2: iconst_0
+       3: istore_3
+       4: iload_3
+       5: aload_1
+       6: arraylength
+       7: if_icmpge     22
+      10: fload_2
+      11: aload_1
+      12: iload_3
+      13: faload
+      14: fadd
+      15: fstore_2
+      16: iinc          3, 1
+      19: goto          4
+      22: fload_2
+      23: freturn
+
+  public <T> T sumGeneric(java.lang.Object, scala.math.Numeric<T>);
+    Code:
+       0: aload_2
+       1: invokeinterface #105,  1          // InterfaceMethod scala/math/Numeric.zero:()Ljava/lang/Object;
+       6: invokestatic  #110                // Method scala/runtime/ObjectRef.create:(Ljava/lang/Object;)Lscala/runtime/ObjectRef;
+       9: astore_3
+      10: getstatic     #50                 // Field scala/Predef$.MODULE$:Lscala/Predef$;
+      13: aload_1
+      14: invokevirtual #114                // Method scala/Predef$.genericArrayOps:(Ljava/lang/Object;)Ljava/lang/Object;
+      17: astore        4
+      19: getstatic     #59                 // Field scala/collection/ArrayOps$.MODULE$:Lscala/collection/ArrayOps$;
+      22: aload         4
+      24: aload_3
+      25: aload_2
+      26: invokedynamic #125,  0            // InvokeDynamic #2:applyVoid:(Lscala/runtime/ObjectRef;Lscala/math/Numeric;)Lscala/runtime/function/JProcedure1;
+      31: invokevirtual #82                 // Method scala/collection/ArrayOps$.foreach$extension:(Ljava/lang/Object;Lscala/Function1;)V
+      34: aload_3
+      35: getfield      #128                // Field scala/runtime/ObjectRef.elem:Ljava/lang/Object;
+      38: areturn
+
+  public void run();
+    Code:
+       0: iconst_4
+       1: newarray       float
+       3: dup
+       4: iconst_0
+       5: fconst_1
+       6: fastore
+       7: dup
+       8: iconst_1
+       9: fconst_2
+      10: fastore
+      11: dup
+      12: iconst_2
+      13: ldc           #132                // float 3.0f
+      15: fastore
+      16: dup
+      17: iconst_3
+      18: ldc           #133                // float 4.0f
+      20: fastore
+      21: checkcast     #134                // class "[F"
+      24: astore_1
+      25: aload_0
+      26: aload_1
+      27: invokevirtual #136                // Method sumSpecialised:([F)F
+      30: pop
+      31: aload_0
+      32: aload_1
+      33: getstatic     #139                // Field scala/math/Numeric$FloatIsFractional$.MODULE$:Lscala/math/Numeric$FloatIsFractional$;
+      36: invokevirtual #141                // Method sumGeneric:(Ljava/lang/Object;Lscala/math/Numeric;)Ljava/lang/Object;
+      39: pop
+      40: return
+
+  private static final void sumSpecialised$$anonfun$1(scala.runtime.FloatRef, float);
+    Code:
+       0: aload_0
+       1: fload_1
+       2: putfield      #86                 // Field scala/runtime/FloatRef.elem:F
+       5: return
+
+  private static final void sumSpecialisedDumb$$anonfun$1(scala.runtime.FloatRef, float);
+    Code:
+       0: aload_0
+       1: aload_0
+       2: getfield      #86                 // Field scala/runtime/FloatRef.elem:F
+       5: fload_1
+       6: fadd
+       7: putfield      #86                 // Field scala/runtime/FloatRef.elem:F
+      10: return
+
+  private static final void sumGeneric$$anonfun$1(scala.runtime.ObjectRef, scala.math.Numeric, java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_0
+       3: getfield      #128                // Field scala/runtime/ObjectRef.elem:Ljava/lang/Object;
+       6: aload_2
+       7: invokeinterface #151,  3          // InterfaceMethod scala/math/Numeric.plus:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      12: putfield      #128                // Field scala/runtime/ObjectRef.elem:Ljava/lang/Object;
+      15: return
+
+  private static java.lang.Object $deserializeLambda$(java.lang.invoke.SerializedLambda);
+    Code:
+       0: aload_0
+       1: invokedynamic #163,  0            // InvokeDynamic #3:lambdaDeserialize:(Ljava/lang/invoke/SerializedLambda;)Ljava/lang/Object;
+       6: areturn
+}

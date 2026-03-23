@@ -1,0 +1,149 @@
+/*
+================================================================================
+Snippet: boxing_function_call
+================================================================================
+
+import compiler.iface.Snapshot
+
+@Snapshot
+      def sumSpecialised(f: Array[Float]): Float =
+        var sum = 0f
+        for s <- f do sum = s
+        sum
+      end sumSpecialised
+
+@Snapshot
+      def sumSpecialisedDumb(f: Array[Float]): Float =
+        var sum = 0f
+        for s <- f do sum = sum + s
+        sum
+      end sumSpecialisedDumb
+
+@Snapshot
+      def sumSpecialisedSuperDumb(f: Array[Float]): Float =
+        var sum = 0f
+        var i = 0
+        while i < f.length do
+          sum += f(i)
+          i += 1
+        sum
+      end sumSpecialisedSuperDumb
+
+@Snapshot
+      def sumGeneric[T](f: Array[T])(using n: Numeric[T]): T =
+        var sum = n.zero
+        for s <- f do sum = n.plus(sum, s)
+        sum
+      end sumGeneric
+
+@Snapshot
+      def run(): Unit =
+        val arr = Array[Float](1, 2, 3, 4)
+
+        sumSpecialised(arr)
+        sumGeneric(arr)
+      end run
+
+*/
+
+// ================================================================================
+// Definition: boxing_function_call$package (decompiled)
+// ================================================================================
+
+import boxing_function_call.package.;
+import compiler.iface.Snapshot;
+import scala.math.Numeric;
+
+public final class boxing_function_call$package {
+   @Snapshot
+   public static void run() {
+      .MODULE$.run();
+   }
+
+   @Snapshot
+   public static <T> T sumGeneric(Object var0, Numeric<T> var1) {
+      return (T).MODULE$.sumGeneric(var0, var1);
+   }
+
+   @Snapshot
+   public static float sumSpecialised(float[] var0) {
+      return .MODULE$.sumSpecialised(var0);
+   }
+
+   @Snapshot
+   public static float sumSpecialisedDumb(float[] var0) {
+      return .MODULE$.sumSpecialisedDumb(var0);
+   }
+
+   @Snapshot
+   public static float sumSpecialisedSuperDumb(float[] var0) {
+      return .MODULE$.sumSpecialisedSuperDumb(var0);
+   }
+}
+
+// ================================================================================
+// Definition: boxing_function_call$package$ (decompiled)
+// ================================================================================
+
+import compiler.iface.Snapshot;
+import java.io.Serializable;
+import scala.Predef.;
+import scala.math.Numeric;
+import scala.runtime.FloatRef;
+import scala.runtime.ModuleSerializationProxy;
+import scala.runtime.ObjectRef;
+import scala.runtime.function.JProcedure1;
+import scala.runtime.java8.JFunction1.mcVF.sp;
+
+public final class boxing_function_call$package$ implements Serializable {
+   public static final boxing_function_call$package$ MODULE$ = new boxing_function_call$package$();
+
+   private boxing_function_call$package$() {
+   }
+
+   private Object writeReplace() {
+      return new ModuleSerializationProxy(boxing_function_call$package$.class);
+   }
+
+   @Snapshot
+   public float sumSpecialised(final float[] f) {
+      FloatRef sum = FloatRef.create(0.0F);
+      Object var3 = .MODULE$.floatArrayOps(f);
+      scala.collection.ArrayOps..MODULE$.foreach$extension(var3, (sp)s -> sum.elem = s);
+      return sum.elem;
+   }
+
+   @Snapshot
+   public float sumSpecialisedDumb(final float[] f) {
+      FloatRef sum = FloatRef.create(0.0F);
+      Object var3 = .MODULE$.floatArrayOps(f);
+      scala.collection.ArrayOps..MODULE$.foreach$extension(var3, (sp)s -> sum.elem += s);
+      return sum.elem;
+   }
+
+   @Snapshot
+   public float sumSpecialisedSuperDumb(final float[] f) {
+      float sum = 0.0F;
+
+      for (int i = 0; i < f.length; i++) {
+         sum += f[i];
+      }
+
+      return sum;
+   }
+
+   @Snapshot
+   public <T> T sumGeneric(final Object f, final Numeric<T> n) {
+      ObjectRef sum = ObjectRef.create(n.zero());
+      Object var4 = .MODULE$.genericArrayOps(f);
+      scala.collection.ArrayOps..MODULE$.foreach$extension(var4, (JProcedure1)s -> sum.elem = n.plus(sum.elem, s));
+      return (T)sum.elem;
+   }
+
+   @Snapshot
+   public void run() {
+      float[] arr = new float[]{1.0F, 2.0F, 3.0F, 4.0F};
+      this.sumSpecialised(arr);
+      this.sumGeneric(arr, scala.math.Numeric.FloatIsFractional..MODULE$);
+   }
+}

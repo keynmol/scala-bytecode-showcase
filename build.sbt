@@ -34,6 +34,7 @@ lazy val snippets = projectMatrix
     snapshotsPackageName := "snapshots",
     snapshotsIntegrations += SnapshotIntegration.MUnit,
     snapshotsProjectIdentifier := scalaVersion.value,
+    snapshotsForceOverwrite := sys.env.get("CI").isEmpty,
     snapshotsLocation := (ThisBuild / baseDirectory).value / "snapshots",
     libraryDependencies ++= Seq(
       "org.scalameta" %% "munit" % "1.0.0" % Test,
@@ -51,7 +52,9 @@ lazy val root = project
     name := "snapshot-compiler-demo"
   )
 
-val snapshotDiff = inputKey[Unit]("Generate diff between two version snapshots: snapshotDiff <fromVersion> <toVersion> <kind>")
+val snapshotDiff = inputKey[Unit](
+  "Generate diff between two version snapshots: snapshotDiff <fromVersion> <toVersion> <kind>"
+)
 
 snapshotDiff := {
   import complete.DefaultParsers._
@@ -59,7 +62,9 @@ snapshotDiff := {
 
   val args = spaceDelimited("<arg>").parsed
   if (args.size != 3) {
-    sys.error("Usage: snapshotDiff <fromVersion> <toVersion> <kind (decompiled|javap)>")
+    sys.error(
+      "Usage: snapshotDiff <fromVersion> <toVersion> <kind (decompiled|javap)>"
+    )
   }
   val Seq(fromVersion, toVersion, kind) = args
   if (kind != "decompiled" && kind != "javap") {
@@ -76,13 +81,20 @@ snapshotDiff := {
   val outputFile = snapshotsDir / s"${fromVersion}_${toVersion}_$kind.diff"
 
   // Find matching files in the 'from' directory
-  val fromFiles = fromDir.listFiles().filter(_.getName.endsWith(s"_$kind")).sortBy(_.getName)
+  val fromFiles =
+    fromDir.listFiles().filter(_.getName.endsWith(s"_$kind")).sortBy(_.getName)
 
   val diffOutput = new StringBuilder
   for (fromFile <- fromFiles) {
     val toFile = toDir / fromFile.getName
     if (toFile.exists()) {
-      val cmd = Seq("git", "diff", "--no-index", fromFile.getAbsolutePath, toFile.getAbsolutePath)
+      val cmd = Seq(
+        "git",
+        "diff",
+        "--no-index",
+        fromFile.getAbsolutePath,
+        toFile.getAbsolutePath
+      )
       val output = new StringBuilder
       // git diff returns 1 when there are differences, so we ignore the exit code
       cmd.!(ProcessLogger(line => output.append(line + "\n"), _ => ()))
